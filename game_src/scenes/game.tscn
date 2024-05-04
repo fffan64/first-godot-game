@@ -1,11 +1,14 @@
-[gd_scene load_steps=20 format=3 uid="uid://c6ub1o3cqaqel"]
+[gd_scene load_steps=26 format=3 uid="uid://c6ub1o3cqaqel"]
 
 [ext_resource type="PackedScene" uid="uid://bl8sf65vlv8oa" path="res://scenes/player.tscn" id="1_45ikk"]
 [ext_resource type="Script" path="res://scripts/game_manager.gd" id="1_kbx16"]
 [ext_resource type="Texture2D" uid="uid://cemtlles5d4pj" path="res://assets/sprites/world_tileset.png" id="2_q24yn"]
 [ext_resource type="PackedScene" uid="uid://ceklj60lppjvx" path="res://scenes/platform.tscn" id="3_d01jd"]
+[ext_resource type="Texture2D" uid="uid://c3jg5lbn2aplx" path="res://assets/sprites/switch_button_b.png" id="3_gnu6u"]
 [ext_resource type="Texture2D" uid="uid://duvp2wd3hyme8" path="res://assets/sprites/shadedDark45.png" id="3_lrjrk"]
+[ext_resource type="Texture2D" uid="uid://ubqhbcvp6ksw" path="res://assets/sprites/shadedDark49.png" id="4_4d7g7"]
 [ext_resource type="PackedScene" uid="uid://f8jidg0u0521" path="res://scenes/coin.tscn" id="4_07ib0"]
+[ext_resource type="Texture2D" uid="uid://budxjd04a2wiu" path="res://assets/sprites/switch_button_home.png" id="4_ragg1"]
 [ext_resource type="PackedScene" uid="uid://ba78272pqwtmf" path="res://scenes/killzone.tscn" id="5_jucma"]
 [ext_resource type="PackedScene" uid="uid://deoi28hulwhgg" path="res://scenes/slime.tscn" id="6_uosvg"]
 [ext_resource type="FontFile" uid="uid://dam3qndfjagyb" path="res://assets/fonts/PixelOperator8.ttf" id="7_cyyb4"]
@@ -13,6 +16,8 @@
 [ext_resource type="PackedScene" uid="uid://dmr0fcamx7t56" path="res://addons/virtual_joystick/virtual_joystick_scene.tscn" id="10_keyp6"]
 [ext_resource type="Texture2D" uid="uid://x4xg4eq44yb" path="res://assets/sprites/switch_button_a.png" id="11_cisj5"]
 [ext_resource type="PackedScene" uid="uid://dryd3bbfh5boh" path="res://scenes/potion_blue.tscn" id="12_mvhip"]
+[ext_resource type="Shader" path="res://shaders/RETRO_VHS_OLD.gdshader" id="14_b25ii"]
+[ext_resource type="PackedScene" uid="uid://dnea1e8vwroq2" path="res://scenes/potion_red.tscn" id="15_45wnh"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kcb00"]
 texture = ExtResource("2_q24yn")
@@ -56,14 +61,17 @@ texture = ExtResource("2_q24yn")
 9:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 9:0/0/physics_layer_0/angular_velocity = 0.0
 9:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -5.875, 8, 0.875, -8, -1.625)
+9:0/0/physics_layer_0/polygon_0/one_way = true
 10:0/0 = 0
 10:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 10:0/0/physics_layer_0/angular_velocity = 0.0
 10:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -6, 8, -5.875, 8, 0.875, -8, 0.875)
+10:0/0/physics_layer_0/polygon_0/one_way = true
 11:0/0 = 0
 11:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 11:0/0/physics_layer_0/angular_velocity = 0.0
 11:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -5.875, 8, -8, 8, -1.25, -8, 0.625)
+11:0/0/physics_layer_0/polygon_0/one_way = true
 0:1/0 = 0
 0:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:1/0/physics_layer_0/angular_velocity = 0.0
@@ -104,14 +112,17 @@ texture = ExtResource("2_q24yn")
 9:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 9:1/0/physics_layer_0/angular_velocity = 0.0
 9:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -5.875, 8, 0.875, -8, -1.625)
+9:1/0/physics_layer_0/polygon_0/one_way = true
 10:1/0 = 0
 10:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 10:1/0/physics_layer_0/angular_velocity = 0.0
 10:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -5.875, 8, -5.75, 8, 0.75, -8, 0.875)
+10:1/0/physics_layer_0/polygon_0/one_way = true
 11:1/0 = 0
 11:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 11:1/0/physics_layer_0/angular_velocity = 0.0
 11:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -5.875, 8, -8, 8, -1.25, -8, 0.625)
+11:1/0/physics_layer_0/polygon_0/one_way = true
 0:2/0 = 0
 0:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:2/0/physics_layer_0/angular_velocity = 0.0
@@ -152,14 +163,17 @@ texture = ExtResource("2_q24yn")
 9:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 9:2/0/physics_layer_0/angular_velocity = 0.0
 9:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -5.875, 8, 0.875, -8, -1.625)
+9:2/0/physics_layer_0/polygon_0/one_way = true
 10:2/0 = 0
 10:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 10:2/0/physics_layer_0/angular_velocity = 0.0
 10:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -5.875, 8, -5.75, 8, 0.75, -8, 0.875)
+10:2/0/physics_layer_0/polygon_0/one_way = true
 11:2/0 = 0
 11:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 11:2/0/physics_layer_0/angular_velocity = 0.0
 11:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -5.875, 8, -8, 8, -1.25, -8, 0.625)
+11:2/0/physics_layer_0/polygon_0/one_way = true
 0:3/0 = 0
 0:3/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:3/0/physics_layer_0/angular_velocity = 0.0
@@ -458,6 +472,30 @@ _data = {
 "move": SubResource("Animation_1ampu")
 }
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g3a4y"]
+shader = ExtResource("14_b25ii")
+shader_parameter/overlay = true
+shader_parameter/scanlines_opacity = 0.4
+shader_parameter/scanlines_width = 0.25
+shader_parameter/grille_opacity = 0.3
+shader_parameter/resolution = Vector2(640, 480)
+shader_parameter/pixelate = false
+shader_parameter/roll = true
+shader_parameter/roll_speed = 8.0
+shader_parameter/roll_size = 15.0
+shader_parameter/roll_variation = 1.8
+shader_parameter/distort_intensity = 0.006
+shader_parameter/noise_opacity = 0.4
+shader_parameter/noise_speed = 5.0
+shader_parameter/static_noise_intensity = 0.06
+shader_parameter/aberration = 0.03
+shader_parameter/brightness = 1.4
+shader_parameter/discolor = true
+shader_parameter/warp_amount = 1.0
+shader_parameter/clip_warp = false
+shader_parameter/vignette_intensity = 0.4
+shader_parameter/vignette_opacity = 0.5
+
 [node name="Game" type="Node2D"]
 
 [node name="Control" type="Control" parent="."]
@@ -471,6 +509,7 @@ offset_bottom = 40.0
 [node name="UI" type="CanvasLayer" parent="Control/Test"]
 
 [node name="Virtual joystick left" parent="Control/Test/UI" instance=ExtResource("10_keyp6")]
+joystick_mode = 2
 visibility_mode = 1
 action_left = "move_left"
 action_right = "move_right"
@@ -488,9 +527,47 @@ grow_horizontal = 0
 grow_vertical = 0
 
 [node name="TouchScreenButton" type="TouchScreenButton" parent="Control/Test/UI/Jump button"]
-position = Vector2(-74, -81)
+position = Vector2(-105, -81)
 texture_normal = ExtResource("11_cisj5")
 action = "jump"
+visibility_mode = 1
+
+[node name="Dash button" type="Control" parent="Control/Test/UI"]
+layout_mode = 3
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -132.0
+offset_top = -127.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="Control/Test/UI/Dash button"]
+position = Vector2(-37, -217)
+texture_normal = ExtResource("3_gnu6u")
+action = "dash"
+visibility_mode = 1
+
+[node name="Home Button" type="Control" parent="Control/Test/UI"]
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -66.0
+offset_top = -127.0
+offset_right = 66.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="Control/Test/UI/Home Button"]
+position = Vector2(23, 22)
+scale = Vector2(0.640625, 0.640625)
+texture_normal = ExtResource("4_ragg1")
+action = "shaderVHS"
 visibility_mode = 1
 
 [node name="DoubleJump icon" type="Control" parent="Control/Test/UI"]
@@ -507,6 +584,21 @@ grow_horizontal = 0
 [node name="Sprite2D" type="Sprite2D" parent="Control/Test/UI/DoubleJump icon"]
 position = Vector2(-29, 69)
 texture = ExtResource("3_lrjrk")
+
+[node name="Dash icon" type="Control" parent="Control/Test/UI"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 40.0
+grow_horizontal = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="Control/Test/UI/Dash icon"]
+position = Vector2(-129, 69)
+texture = ExtResource("4_4d7g7")
 
 [node name="GameManager" type="Node" parent="."]
 unique_name_in_owner = true
@@ -649,3 +741,18 @@ position = Vector2(154, 16)
 
 [node name="Potion_Blue" parent="Potions" instance=ExtResource("12_mvhip")]
 position = Vector2(183, 88)
+
+[node name="Potion_Red" parent="Potions" instance=ExtResource("15_45wnh")]
+position = Vector2(247, -8)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="RETRO_VHS_POSTPROCESS_FX" type="ColorRect" parent="CanvasLayer"]
+unique_name_in_owner = true
+visible = false
+material = SubResource("ShaderMaterial_g3a4y")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

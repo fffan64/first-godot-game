@@ -1,9 +1,42 @@
-[gd_scene load_steps=28 format=3 uid="uid://bl8sf65vlv8oa"]
+[gd_scene load_steps=37 format=3 uid="uid://bl8sf65vlv8oa"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_bxcsj"]
 [ext_resource type="Texture2D" uid="uid://cajbwcjoy46i" path="res://assets/sprites/knight.png" id="1_x7wmx"]
 [ext_resource type="AudioStream" uid="uid://fqeage2wu7n4" path="res://assets/sounds/jump.wav" id="3_ls1pa"]
 [ext_resource type="AudioStream" uid="uid://b8u22da6yn0pn" path="res://assets/sounds/tap.wav" id="4_l58x2"]
+[ext_resource type="AudioStream" uid="uid://dqnwo8d1ljeel" path="res://assets/sounds/hurt.wav" id="4_wweeb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0qexi"]
+atlas = ExtResource("1_x7wmx")
+region = Rect2(0, 160, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xgk64"]
+atlas = ExtResource("1_x7wmx")
+region = Rect2(32, 160, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f2g54"]
+atlas = ExtResource("1_x7wmx")
+region = Rect2(64, 160, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5mhva"]
+atlas = ExtResource("1_x7wmx")
+region = Rect2(96, 160, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_71us2"]
+atlas = ExtResource("1_x7wmx")
+region = Rect2(128, 160, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_21snm"]
+atlas = ExtResource("1_x7wmx")
+region = Rect2(160, 160, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lr7qk"]
+atlas = ExtResource("1_x7wmx")
+region = Rect2(192, 160, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wnofp"]
+atlas = ExtResource("1_x7wmx")
+region = Rect2(224, 160, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0u4cg"]
 atlas = ExtResource("1_x7wmx")
@@ -91,6 +124,35 @@ region = Rect2(224, 96, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_bvmel"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0qexi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xgk64")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f2g54")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5mhva")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_71us2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_21snm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lr7qk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wnofp")
+}],
+"loop": true,
+"name": &"dash",
+"speed": 10.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_0u4cg")
@@ -181,8 +243,9 @@ script = ExtResource("1_bxcsj")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -12)
 sprite_frames = SubResource("SpriteFrames_bvmel")
-animation = &"jump"
+animation = &"dash"
 autoplay = "idle"
+speed_scale = 2.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -5)
@@ -192,6 +255,10 @@ shape = SubResource("CircleShape2D_k5iwu")
 stream = ExtResource("3_ls1pa")
 bus = &"SFX"
 
+[node name="DashSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_wweeb")
+bus = &"SFX"
+
 [node name="WalkSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_l58x2")
 bus = &"SFX"
@@ -199,4 +266,12 @@ bus = &"SFX"
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.2
 
+[node name="Dash_timer" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="Dash_timer_again" type="Timer" parent="."]
+wait_time = 1.2
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="Dash_timer" to="." method="_on_dash_timer_timeout"]
+[connection signal="timeout" from="Dash_timer_again" to="." method="_on_dash_timer_again_timeout"]

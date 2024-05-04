@@ -1,8 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://dryd3bbfh5boh"]
+[gd_scene load_steps=8 format=3 uid="uid://dnea1e8vwroq2"]
 
-[ext_resource type="Script" path="res://scripts/potion_blue.gd" id="1_3vjw0"]
-[ext_resource type="Texture2D" uid="uid://cemtlles5d4pj" path="res://assets/sprites/world_tileset.png" id="1_nsta8"]
-[ext_resource type="AudioStream" uid="uid://62fg44fy0cfy" path="res://assets/sounds/power_up.wav" id="2_ffe68"]
+[ext_resource type="Script" path="res://scripts/potion_red.gd" id="1_l3f24"]
+[ext_resource type="Texture2D" uid="uid://cemtlles5d4pj" path="res://assets/sprites/world_tileset.png" id="2_tbgap"]
+[ext_resource type="AudioStream" uid="uid://62fg44fy0cfy" path="res://assets/sounds/power_up.wav" id="3_34ifw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yjhl0"]
 size = Vector2(12, 16)
@@ -105,20 +105,20 @@ _data = {
 "pickup": SubResource("Animation_372dj")
 }
 
-[node name="Potion_Blue" type="Area2D"]
+[node name="Potion_Red" type="Area2D"]
 collision_mask = 2
-script = ExtResource("1_3vjw0")
+script = ExtResource("1_l3f24")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_nsta8")
+texture = ExtResource("2_tbgap")
 region_enabled = true
-region_rect = Rect2(0, 128, 16, 16)
+region_rect = Rect2(16, 128, 16, 16)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_yjhl0")
 
 [node name="PickupSound" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("2_ffe68")
+stream = ExtResource("3_34ifw")
 bus = &"SFX"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
