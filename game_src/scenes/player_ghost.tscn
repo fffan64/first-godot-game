@@ -1,126 +1,123 @@
-[gd_scene load_steps=38 format=3 uid="uid://bl8sf65vlv8oa"]
+[gd_scene load_steps=34 format=3 uid="uid://0303vj5ayet"]
 
-[ext_resource type="Script" path="res://scripts/player.gd" id="1_bxcsj"]
-[ext_resource type="Texture2D" uid="uid://cajbwcjoy46i" path="res://assets/sprites/knight.png" id="1_x7wmx"]
-[ext_resource type="PackedScene" uid="uid://0303vj5ayet" path="res://scenes/player_ghost.tscn" id="2_epedm"]
-[ext_resource type="AudioStream" uid="uid://fqeage2wu7n4" path="res://assets/sounds/jump.wav" id="3_ls1pa"]
-[ext_resource type="AudioStream" uid="uid://b8u22da6yn0pn" path="res://assets/sounds/tap.wav" id="4_l58x2"]
-[ext_resource type="AudioStream" uid="uid://dqnwo8d1ljeel" path="res://assets/sounds/hurt.wav" id="4_wweeb"]
+[ext_resource type="Script" path="res://scripts/player_ghost.gd" id="2_kwhvo"]
+[ext_resource type="Texture2D" uid="uid://cajbwcjoy46i" path="res://assets/sprites/knight.png" id="2_tcw7b"]
+[ext_resource type="PackedScene" uid="uid://bt173ki4us0yn" path="res://scenes/explosion_particles.tscn" id="3_r7o5f"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0qexi"]
-atlas = ExtResource("1_x7wmx")
+atlas = ExtResource("2_tcw7b")
 region = Rect2(0, 160, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xgk64"]
-atlas = ExtResource("1_x7wmx")
+atlas = ExtResource("2_tcw7b")
 region = Rect2(32, 160, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_f2g54"]
-atlas = ExtResource("1_x7wmx")
+atlas = ExtResource("2_tcw7b")
 region = Rect2(64, 160, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5mhva"]
-atlas = ExtResource("1_x7wmx")
+atlas = ExtResource("2_tcw7b")
 region = Rect2(96, 160, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_71us2"]
-atlas = ExtResource("1_x7wmx")
+atlas = ExtResource("2_tcw7b")
 region = Rect2(128, 160, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_21snm"]
-atlas = ExtResource("1_x7wmx")
+atlas = ExtResource("2_tcw7b")
 region = Rect2(160, 160, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lr7qk"]
-atlas = ExtResource("1_x7wmx")
+atlas = ExtResource("2_tcw7b")
 region = Rect2(192, 160, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wnofp"]
-atlas = ExtResource("1_x7wmx")
+atlas = ExtResource("2_tcw7b")
 region = Rect2(224, 160, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0u4cg"]
-atlas = ExtResource("1_x7wmx")
+atlas = ExtResource("2_tcw7b")
 region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_juiv0"]
-atlas = ExtResource("1_x7wmx")
+atlas = ExtResource("2_tcw7b")
 region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_i66jf"]
-atlas = ExtResource("1_x7wmx")
+atlas = ExtResource("2_tcw7b")
 region = Rect2(64, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tkvg0"]
-atlas = ExtResource("1_x7wmx")
+atlas = ExtResource("2_tcw7b")
 region = Rect2(96, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_oehnw"]
-atlas = ExtResource("1_x7wmx")
+atlas = ExtResource("2_tcw7b")
 region = Rect2(64, 160, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0hk67"]
-atlas = ExtResource("1_x7wmx")
+atlas = ExtResource("2_tcw7b")
 region = Rect2(0, 64, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4d7dm"]
-atlas = ExtResource("1_x7wmx")
+atlas = ExtResource("2_tcw7b")
 region = Rect2(32, 64, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3fnpf"]
-atlas = ExtResource("1_x7wmx")
+atlas = ExtResource("2_tcw7b")
 region = Rect2(64, 64, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_opmdp"]
-atlas = ExtResource("1_x7wmx")
+atlas = ExtResource("2_tcw7b")
 region = Rect2(96, 64, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gygjm"]
-atlas = ExtResource("1_x7wmx")
+atlas = ExtResource("2_tcw7b")
 region = Rect2(128, 64, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_d8ptr"]
-atlas = ExtResource("1_x7wmx")
+atlas = ExtResource("2_tcw7b")
 region = Rect2(160, 64, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_43u7l"]
-atlas = ExtResource("1_x7wmx")
+atlas = ExtResource("2_tcw7b")
 region = Rect2(192, 64, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hckj1"]
-atlas = ExtResource("1_x7wmx")
+atlas = ExtResource("2_tcw7b")
 region = Rect2(224, 64, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8ck5j"]
-atlas = ExtResource("1_x7wmx")
+atlas = ExtResource("2_tcw7b")
 region = Rect2(0, 96, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2f3m7"]
-atlas = ExtResource("1_x7wmx")
+atlas = ExtResource("2_tcw7b")
 region = Rect2(32, 96, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vw08y"]
-atlas = ExtResource("1_x7wmx")
+atlas = ExtResource("2_tcw7b")
 region = Rect2(64, 96, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_uyo0j"]
-atlas = ExtResource("1_x7wmx")
+atlas = ExtResource("2_tcw7b")
 region = Rect2(96, 96, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rclbe"]
-atlas = ExtResource("1_x7wmx")
+atlas = ExtResource("2_tcw7b")
 region = Rect2(128, 96, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kwmel"]
-atlas = ExtResource("1_x7wmx")
+atlas = ExtResource("2_tcw7b")
 region = Rect2(160, 96, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_aqowk"]
-atlas = ExtResource("1_x7wmx")
+atlas = ExtResource("2_tcw7b")
 region = Rect2(192, 96, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ws0o8"]
-atlas = ExtResource("1_x7wmx")
+atlas = ExtResource("2_tcw7b")
 region = Rect2(224, 96, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_bvmel"]
@@ -233,51 +230,15 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_k5iwu"]
-radius = 5.09902
-
-[node name="Player" type="CharacterBody2D"]
-z_index = 5
-collision_layer = 2
-script = ExtResource("1_bxcsj")
-ghost_node = ExtResource("2_epedm")
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="player_ghost" type="AnimatedSprite2D"]
+self_modulate = Color(0.552941, 0.552941, 0.552941, 1)
 position = Vector2(0, -12)
 sprite_frames = SubResource("SpriteFrames_bvmel")
-animation = &"dash"
+animation = &"run"
 autoplay = "idle"
+frame_progress = 0.751389
 speed_scale = 2.0
+offset = Vector2(0, -12)
+script = ExtResource("2_kwhvo")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -5)
-shape = SubResource("CircleShape2D_k5iwu")
-
-[node name="JumpSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("3_ls1pa")
-bus = &"SFX"
-
-[node name="DashSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("4_wweeb")
-bus = &"SFX"
-
-[node name="WalkSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("4_l58x2")
-bus = &"SFX"
-
-[node name="Timer" type="Timer" parent="."]
-wait_time = 0.2
-
-[node name="Dash_timer" type="Timer" parent="."]
-wait_time = 0.5
-
-[node name="Dash_timer_again" type="Timer" parent="."]
-wait_time = 1.2
-
-[node name="Ghost_timer" type="Timer" parent="."]
-wait_time = 0.05
-
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
-[connection signal="timeout" from="Dash_timer" to="." method="_on_dash_timer_timeout"]
-[connection signal="timeout" from="Dash_timer_again" to="." method="_on_dash_timer_again_timeout"]
-[connection signal="timeout" from="Ghost_timer" to="." method="_on_ghost_timer_timeout"]
+[node name="Explosion" parent="." instance=ExtResource("3_r7o5f")]

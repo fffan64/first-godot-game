@@ -28,6 +28,9 @@ var is_wall_sliding_right = false
 @onready var timer = $Timer
 @onready var retro_vhs_postprocess_fx = %RETRO_VHS_POSTPROCESS_FX
 
+@export var ghost_node: PackedScene
+@onready var ghost_timer = $Ghost_timer
+
 var canPlayWalkSound = true
 
 func _physics_process(delta):
@@ -58,13 +61,13 @@ func move(direction):
 	if is_wall_sliding_left:
 		if direction.x > 0:
 			velocity.x = velocityCalc
-		else:
-			velocity.x = move_toward(velocity.x, 0, SPEED)
+		#else:
+			#velocity.x = move_toward(velocity.x, 0, SPEED)
 	if is_wall_sliding_right:
 		if direction.x < 0:
 			velocity.x = velocityCalc
-		else:
-			velocity.x = move_toward(velocity.x, 0, SPEED)
+		#else:
+			#velocity.x = move_toward(velocity.x, 0, SPEED)
 	
 	if !is_wall_sliding_left and !is_wall_sliding_right:
 		if direction.x:
@@ -133,6 +136,7 @@ func dash(direction):
 		dash_sound.play()
 		$Dash_timer.start()
 		$Dash_timer_again.start()
+		ghost_timer.start()
 
 func animate(direction):
 	# Flip the Sprite
@@ -162,7 +166,12 @@ func animate(direction):
 func createJumpParticles(pos):
 	var inst = preload("res://scenes/explosion_particles.tscn").instantiate()
 	inst.position = pos
-	get_parent().add_child(inst)
+	get_tree().current_scene.add_child(inst)
+	
+func add_ghost():
+	var ghost = ghost_node.instantiate()
+	ghost.set_property(position, $AnimatedSprite2D.scale)
+	get_tree().current_scene.add_child(ghost)
 
 func others():
 	if Input.is_action_just_pressed("shaderVHS"):
@@ -173,7 +182,12 @@ func _on_timer_timeout():
 
 func _on_dash_timer_timeout():
 	dashing = false
+	ghost_timer.stop()
 
 
 func _on_dash_timer_again_timeout():
 	can_dash = true
+
+
+func _on_ghost_timer_timeout():
+	add_ghost()
