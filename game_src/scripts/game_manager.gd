@@ -19,3 +19,9 @@ func add_potion_blue():
 func add_potion_red():
 	dash_icon.visible = true
 	hasDash = true
+
+func spawn_item_pickup(scenePathArray: Array, pos):
+	var scene = load(scenePathArray.pick_random())
+	var sceneInstance = scene.instantiate()
+	sceneInstance.global_position = pos
+	get_tree().current_scene.add_child(sceneInstance)

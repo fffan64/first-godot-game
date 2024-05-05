@@ -169,8 +169,9 @@ func createJumpParticles(pos):
 	get_tree().current_scene.add_child(inst)
 	
 func add_ghost():
+	var direction = input()
 	var ghost = ghost_node.instantiate()
-	ghost.set_property(position, $AnimatedSprite2D.scale)
+	ghost.set_property(position, $AnimatedSprite2D.scale, direction)
 	get_tree().current_scene.add_child(ghost)
 
 func others():

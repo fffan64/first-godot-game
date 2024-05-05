@@ -2,10 +2,15 @@ extends AnimatedSprite2D
 
 func _ready():
 	ghosting()
-
-func set_property(tx_pos, tx_scale):
+	
+func set_property(tx_pos, tx_scale, direction):
 	position = tx_pos
 	scale = tx_scale
+	# Flip the Sprite
+	if direction.x > 0:
+		self.flip_h = false
+	elif direction.x < 0:
+		self.flip_h = true
 	
 func ghosting():
 	var tween_fade = get_tree().create_tween()

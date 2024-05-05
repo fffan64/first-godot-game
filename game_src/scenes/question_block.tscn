@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://46afebbpt8h8"]
+
+[ext_resource type="Texture2D" uid="uid://cemtlles5d4pj" path="res://assets/sprites/world_tileset.png" id="1_i1qp7"]
+[ext_resource type="Script" path="res://scripts/question_block.gd" id="1_stb4x"]
+[ext_resource type="AudioStream" uid="uid://fmeqd4efsjns" path="res://assets/sounds/block.wav" id="3_aoyyl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n3ody"]
+size = Vector2(12, 3)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xvjts"]
+size = Vector2(16, 13)
+
+[node name="QuestionBlock" type="Area2D"]
+collision_mask = 2
+script = ExtResource("1_stb4x")
+
+[node name="Trigger" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1.5)
+shape = SubResource("RectangleShape2D_n3ody")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -8)
+texture = ExtResource("1_i1qp7")
+hframes = 16
+vframes = 16
+frame = 32
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, -9.5)
+shape = SubResource("RectangleShape2D_xvjts")
+
+[node name="BlockSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_aoyyl")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
