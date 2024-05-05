@@ -1,0 +1,90 @@
+[gd_scene load_steps=8 format=3 uid="uid://bt173ki4us0yn"]
+
+[ext_resource type="Texture2D" uid="uid://bltp20ey1pf60" path="res://assets/sprites/smoke.png" id="1_dxw7p"]
+
+[sub_resource type="Curve" id="Curve_vm3jl"]
+_data = [Vector2(0.0054054, 0.846154), 0.0, 0.0, 0, 0, Vector2(1, 0), -4.32006, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_m33ec"]
+width = 2048
+curve = SubResource("Curve_vm3jl")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_k62hb"]
+lifetime_randomness = 0.57
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(1.655, 1.385, 1)
+direction = Vector3(0, -1, 0)
+initial_velocity_min = 37.73
+initial_velocity_max = 47.17
+angular_velocity_min = -97.92
+angular_velocity_max = 298.87
+gravity = Vector3(0, 98, 0)
+scale_min = 0.5
+scale_max = 0.5
+scale_curve = SubResource("CurveTexture_m33ec")
+
+[sub_resource type="Animation" id="Animation_27noi"]
+resource_name = "default"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_rpnp8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ifdqe"]
+_data = {
+"RESET": SubResource("Animation_rpnp8"),
+"default": SubResource("Animation_27noi")
+}
+
+[node name="Explosion" type="GPUParticles2D"]
+emitting = false
+process_material = SubResource("ParticleProcessMaterial_k62hb")
+texture = ExtResource("1_dxw7p")
+one_shot = true
+explosiveness = 0.9
+randomness = 0.5
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ifdqe")
+}
+autoplay = "default"
