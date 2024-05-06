@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://cveuyresxwj0r"]
+
+[ext_resource type="Texture2D" uid="uid://cemtlles5d4pj" path="res://assets/sprites/world_tileset.png" id="1_8b2dm"]
+[ext_resource type="Script" path="res://scripts/pipe_teleport.gd" id="1_mmy21"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5k56h"]
+size = Vector2(16, 4)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yvkux"]
+size = Vector2(16, 16)
+
+[node name="PipeTeleport" type="Area2D"]
+collision_mask = 2
+script = ExtResource("1_mmy21")
+
+[node name="Trigger" type="CollisionShape2D" parent="."]
+position = Vector2(0, -16)
+shape = SubResource("RectangleShape2D_5k56h")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_yvkux")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -8)
+texture = ExtResource("1_8b2dm")
+hframes = 16
+vframes = 16
+frame = 64
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

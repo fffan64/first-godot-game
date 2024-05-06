@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://c6ub1o3cqaqel"]
+[gd_scene load_steps=28 format=3 uid="uid://c6ub1o3cqaqel"]
 
 [ext_resource type="PackedScene" uid="uid://bl8sf65vlv8oa" path="res://scenes/player.tscn" id="1_45ikk"]
 [ext_resource type="Script" path="res://scripts/game_manager.gd" id="1_kbx16"]
@@ -19,6 +19,7 @@
 [ext_resource type="Shader" path="res://shaders/RETRO_VHS_OLD.gdshader" id="14_b25ii"]
 [ext_resource type="PackedScene" uid="uid://dnea1e8vwroq2" path="res://scenes/potion_red.tscn" id="15_45wnh"]
 [ext_resource type="PackedScene" uid="uid://46afebbpt8h8" path="res://scenes/question_block.tscn" id="19_k07dt"]
+[ext_resource type="PackedScene" uid="uid://cveuyresxwj0r" path="res://scenes/pipe_teleport.tscn" id="20_66x34"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kcb00"]
 texture = ExtResource("2_q24yn")
@@ -516,6 +517,8 @@ joystick_mode = 1
 visibility_mode = 2
 action_left = "move_left"
 action_right = "move_right"
+action_up = "move_up"
+action_down = "move_down"
 
 [node name="Jump button" type="Control" parent="Control/Test/UI"]
 layout_mode = 3
@@ -788,3 +791,13 @@ block_color = 2
 [node name="QuestionBlock4" parent="Blocks" instance=ExtResource("19_k07dt")]
 position = Vector2(-310, 80)
 block_color = 3
+
+[node name="Pipes" type="Node" parent="."]
+
+[node name="PipeTeleport" parent="Pipes" node_paths=PackedStringArray("pipeTeleportTo") instance=ExtResource("20_66x34")]
+position = Vector2(-273, 112)
+pipeTeleportTo = NodePath("../PipeTeleport2")
+
+[node name="PipeTeleport2" parent="Pipes" node_paths=PackedStringArray("pipeTeleportTo") instance=ExtResource("20_66x34")]
+position = Vector2(23, 96)
+pipeTeleportTo = NodePath("../PipeTeleport")
