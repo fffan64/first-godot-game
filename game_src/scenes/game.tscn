@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://c6ub1o3cqaqel"]
+[gd_scene load_steps=43 format=3 uid="uid://c6ub1o3cqaqel"]
 
 [ext_resource type="PackedScene" uid="uid://bl8sf65vlv8oa" path="res://scenes/player.tscn" id="1_45ikk"]
 [ext_resource type="Script" path="res://scripts/game_manager.gd" id="1_kbx16"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://budxjd04a2wiu" path="res://assets/sprites/switch_button_home.png" id="4_ragg1"]
 [ext_resource type="PackedScene" uid="uid://ba78272pqwtmf" path="res://scenes/killzone.tscn" id="5_jucma"]
 [ext_resource type="PackedScene" uid="uid://deoi28hulwhgg" path="res://scenes/slime.tscn" id="6_uosvg"]
+[ext_resource type="Texture2D" uid="uid://clslrwdb48pea" path="res://assets/sprites/coin.png" id="7_7nws8"]
 [ext_resource type="FontFile" uid="uid://dam3qndfjagyb" path="res://assets/fonts/PixelOperator8.ttf" id="7_cyyb4"]
 [ext_resource type="FontFile" uid="uid://dt2pcoy8ekg8e" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="9_0okyt"]
 [ext_resource type="PackedScene" uid="uid://dmr0fcamx7t56" path="res://addons/virtual_joystick/virtual_joystick_scene.tscn" id="10_keyp6"]
@@ -21,6 +22,98 @@
 [ext_resource type="PackedScene" uid="uid://46afebbpt8h8" path="res://scenes/question_block.tscn" id="19_k07dt"]
 [ext_resource type="PackedScene" uid="uid://cd18r4n8uer70" path="res://scenes/breakable_block.tscn" id="20_5mr3a"]
 [ext_resource type="PackedScene" uid="uid://cveuyresxwj0r" path="res://scenes/pipe_teleport.tscn" id="20_66x34"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5srhb"]
+atlas = ExtResource("7_7nws8")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mq4pw"]
+atlas = ExtResource("7_7nws8")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hhwox"]
+atlas = ExtResource("7_7nws8")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wgf0r"]
+atlas = ExtResource("7_7nws8")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fmrep"]
+atlas = ExtResource("7_7nws8")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7dydw"]
+atlas = ExtResource("7_7nws8")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hutca"]
+atlas = ExtResource("7_7nws8")
+region = Rect2(96, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i6dwu"]
+atlas = ExtResource("7_7nws8")
+region = Rect2(112, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mbmtx"]
+atlas = ExtResource("7_7nws8")
+region = Rect2(128, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r1iig"]
+atlas = ExtResource("7_7nws8")
+region = Rect2(144, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_alvgo"]
+atlas = ExtResource("7_7nws8")
+region = Rect2(160, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6kbqw"]
+atlas = ExtResource("7_7nws8")
+region = Rect2(176, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ppbag"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5srhb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mq4pw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hhwox")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wgf0r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fmrep")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7dydw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hutca")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i6dwu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mbmtx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r1iig")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_alvgo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6kbqw")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kcb00"]
 texture = ExtResource("2_q24yn")
@@ -612,6 +705,46 @@ grow_horizontal = 0
 [node name="Sprite2D" type="Sprite2D" parent="Control/Test/UI/Dash icon"]
 position = Vector2(-129, 69)
 texture = ExtResource("4_4d7g7")
+
+[node name="Coin Icon" type="Control" parent="Control/Test/UI"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(5.79607, 5.79607)
+
+[node name="CoinHUDSprite" type="AnimatedSprite2D" parent="Control/Test/UI/Coin Icon"]
+position = Vector2(7.82747, 8)
+sprite_frames = SubResource("SpriteFrames_ppbag")
+autoplay = "default"
+frame_progress = 0.00658497
+
+[node name="xHUDLabel" type="Label" parent="Control/Test/UI/Coin Icon"]
+layout_mode = 0
+offset_left = 14.6651
+offset_top = 3.62314
+offset_right = 48.6651
+offset_bottom = 11.6231
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("7_cyyb4")
+theme_override_font_sizes/font_size = 8
+text = "x"
+
+[node name="CoinHUDLabel" type="Label" parent="Control/Test/UI/Coin Icon"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 23.5528
+offset_top = 4.0
+offset_right = 57.5528
+offset_bottom = 12.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("7_cyyb4")
+theme_override_font_sizes/font_size = 8
+text = "9999"
 
 [node name="GameManager" type="Node" parent="."]
 unique_name_in_owner = true

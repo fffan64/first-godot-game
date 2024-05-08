@@ -2,14 +2,19 @@ extends Node
 
 var score = 0
 @onready var score_label = $ScoreLabel
+@onready var coin_hud_label = %CoinHUDLabel
 @onready var double_jump_icon = %"DoubleJump icon"
 @onready var dash_icon = %"Dash icon"
 
 var hasDoubleJump = false
 var hasDash = false
 
+func _ready():
+	coin_hud_label.text = str(score)
+
 func add_point():
 	score += 1
+	coin_hud_label.text = str(score)
 	score_label.text = "You collected " + str(score) + " coins."
 
 func add_potion_blue():
