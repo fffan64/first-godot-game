@@ -31,11 +31,21 @@ var GROUND_POUND_FALL_SPEED = 1000.0
 
 @onready var timer = $Timer
 @onready var retro_vhs_postprocess_fx = %RETRO_VHS_POSTPROCESS_FX
+@onready var debug_stats = %DebugStats
 
 @export var ghost_node: PackedScene
 @onready var ghost_timer = $Ghost_timer
 
 var canPlayWalkSound = true
+
+func _ready():
+	debug_stats.add_property(self, "velocity", "")
+	debug_stats.add_property(self, "is_on_floor", "")
+	debug_stats.add_property(self, "is_on_wall", "")
+	debug_stats.add_property(self, "dashing", "")
+	debug_stats.add_property(self, "is_wall_sliding_left", "")
+	debug_stats.add_property(self, "is_wall_sliding_right", "")
+	debug_stats.add_property(self, "is_ground_pound", "")
 
 func _physics_process(delta):
 	var input_dir: Vector2 = input()
@@ -52,7 +62,7 @@ func _physics_process(delta):
 	for i in get_slide_collision_count(): _collide(get_slide_collision(i))
 
 func _collide(collision: KinematicCollision2D):
-	if is_on_floor() and is_ground_pound:
+	if (is_on_floor() or is_on_wall()) and is_ground_pound:
 		$AnimationPlayer.play("GroundPoundLand")
 
 func input() -> Vector2:
@@ -69,6 +79,7 @@ func move(direction):
 		#velocity.y = -10
 	else:
 		velocityCalc = direction.x * SPEED
+	
 	
 	if is_wall_sliding_left:
 		if direction.x > 0:
@@ -124,6 +135,9 @@ func jump(delta):
 			createJumpParticles(position)
 
 func wall_slide(delta):
+	if is_ground_pound:
+		return
+		
 	if is_on_wall() and !is_on_floor():
 		if Input.is_action_pressed("move_left"):
 			is_wall_sliding_left = true

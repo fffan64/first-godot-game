@@ -1,6 +1,9 @@
 extends Node
 
 var score = 0
+
+@onready var ui = %UI
+@onready var debug_stats = %DebugStats
 @onready var score_label = $ScoreLabel
 @onready var coin_hud_label = %CoinHUDLabel
 @onready var double_jump_icon = %"DoubleJump icon"
@@ -10,7 +13,13 @@ var hasDoubleJump = false
 var hasDash = false
 
 func _ready():
+	ui.show()
 	coin_hud_label.text = str(score)
+
+func _process(delta):
+	if Input.is_action_just_pressed("debug_info"):
+		debug_stats.visible = !debug_stats.visible
+
 
 func add_point():
 	score += 1
