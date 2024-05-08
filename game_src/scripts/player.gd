@@ -20,11 +20,15 @@ var wall_slide_gravity = 50
 var is_wall_sliding_left = false
 var is_wall_sliding_right = false
 
+var is_ground_pound = false
+var GROUND_POUND_FALL_SPEED = 1000.0
+
 @onready var game_manager = %GameManager
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var jump_sound = $JumpSound
 @onready var walk_sound = $WalkSound
 @onready var dash_sound = $DashSound
+
 @onready var timer = $Timer
 @onready var retro_vhs_postprocess_fx = %RETRO_VHS_POSTPROCESS_FX
 
@@ -39,10 +43,17 @@ func _physics_process(delta):
 	others()
 	move(input_dir)
 	jump(delta)
+	ground_pound(delta)
 	wall_slide(delta)
 	dash(input_dir)
 	animate(input_dir)
+	
+	# Since there could be multiple collisions, we will need to loop through them
+	for i in get_slide_collision_count(): _collide(get_slide_collision(i))
 
+func _collide(collision: KinematicCollision2D):
+	if is_on_floor() and is_ground_pound:
+		$AnimationPlayer.play("GroundPoundLand")
 
 func input() -> Vector2:
 	var input_dir = Vector2.ZERO
@@ -80,7 +91,8 @@ func move(direction):
 func jump(delta):
 	# Add the gravity.
 	if not is_on_floor():
-		velocity.y += gravity * delta
+		if not is_ground_pound:
+			velocity.y += gravity * delta
 		
 	if is_on_floor():
 		jump_count = 0
@@ -139,6 +151,10 @@ func dash(direction):
 		$Dash_timer_again.start()
 		ghost_timer.start()
 
+func ground_pound(delta):
+	if Input.is_action_just_pressed("move_down") and not is_on_floor() and not is_ground_pound:
+		_start_ground_pound()
+
 func animate(direction):
 	# Flip the Sprite
 	if direction.x > 0:
@@ -165,6 +181,8 @@ func animate(direction):
 		
 
 func createJumpParticles(pos):
+	if not pos:
+		pos = self.position
 	var inst = preload("res://scenes/explosion_particles.tscn").instantiate()
 	inst.position = pos
 	get_tree().current_scene.add_child(inst)
@@ -193,3 +211,14 @@ func _on_dash_timer_again_timeout():
 
 func _on_ghost_timer_timeout():
 	add_ghost()
+
+func _start_ground_pound():
+	is_ground_pound = true
+	velocity = Vector2.ZERO
+	$AnimationPlayer.play("GroundPoundingIn")
+
+func _ground_pound_move():
+	velocity = Vector2(0, GROUND_POUND_FALL_SPEED)
+	
+func _end_ground_pound():
+	is_ground_pound = false
