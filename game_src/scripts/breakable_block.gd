@@ -20,6 +20,7 @@ func _ready():
 func _on_body_entered(body):
 	if not Engine.is_editor_hint():
 		$Trigger.queue_free()
+		$Area2D/TriggerTop.queue_free()
 		$Sprite2D.queue_free()
 		$StaticBody2D.queue_free()
 		destroy_block()
@@ -28,3 +29,13 @@ func destroy_block():
 	$BlockSound.play()
 	$AnimationPlayer.play("destroy")
 	
+
+
+func _on_area_2d_body_entered(body):
+	if not Engine.is_editor_hint():
+		if body.is_ground_pound:
+			$Area2D/TriggerTop.queue_free()
+			$Trigger.queue_free()
+			$Sprite2D.queue_free()
+			$StaticBody2D.queue_free()
+			destroy_block()

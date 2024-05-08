@@ -28,6 +28,7 @@ var GROUND_POUND_FALL_SPEED = 1000.0
 @onready var jump_sound = $JumpSound
 @onready var walk_sound = $WalkSound
 @onready var dash_sound = $DashSound
+@onready var sliding_sound = $SlidingSound
 
 @onready var timer = $Timer
 @onready var retro_vhs_postprocess_fx = %RETRO_VHS_POSTPROCESS_FX
@@ -154,6 +155,9 @@ func wall_slide(delta):
 	if is_wall_sliding_left or is_wall_sliding_right:
 		velocity.y += (wall_slide_gravity * delta)
 		velocity.y = min(velocity.y, wall_slide_gravity)
+		if not sliding_sound.playing:
+			sliding_sound.play()
+			createJumpParticles(position, 90 if is_wall_sliding_left else -90)
 
 func dash(direction):
 	# Dash
@@ -194,11 +198,13 @@ func animate(direction):
 		animated_sprite.play("jump")
 		
 
-func createJumpParticles(pos):
+func createJumpParticles(pos, rot = null):
 	if not pos:
 		pos = self.position
 	var inst = preload("res://scenes/explosion_particles.tscn").instantiate()
 	inst.position = pos
+	if rot:
+		inst.rotation_degrees = rot
 	get_tree().current_scene.add_child(inst)
 	
 func add_ghost():

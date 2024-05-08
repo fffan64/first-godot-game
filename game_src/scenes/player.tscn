@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://bl8sf65vlv8oa"]
+[gd_scene load_steps=44 format=3 uid="uid://bl8sf65vlv8oa"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_bxcsj"]
 [ext_resource type="Texture2D" uid="uid://cajbwcjoy46i" path="res://assets/sprites/knight.png" id="1_x7wmx"]
@@ -7,6 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://b8u22da6yn0pn" path="res://assets/sounds/tap.wav" id="4_l58x2"]
 [ext_resource type="AudioStream" uid="uid://dqnwo8d1ljeel" path="res://assets/sounds/hurt.wav" id="4_wweeb"]
 [ext_resource type="AudioStream" uid="uid://0hoicmtpmwew" path="res://assets/sounds/ground_pound.wav" id="7_r46ec"]
+[ext_resource type="AudioStream" uid="uid://c8mu2cnqudd0u" path="res://assets/sounds/click.wav" id="8_l0t5c"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0qexi"]
 atlas = ExtResource("1_x7wmx")
@@ -276,7 +277,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.4),
 "transitions": PackedFloat32Array(1, 1),
 "values": [{
-"args": [null],
+"args": [null, null],
 "method": &"createJumpParticles"
 }, {
 "args": [],
@@ -436,6 +437,10 @@ wait_time = 0.05
 libraries = {
 "": SubResource("AnimationLibrary_1bxad")
 }
+
+[node name="SlidingSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_l0t5c")
+bus = &"SFX"
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="Dash_timer" to="." method="_on_dash_timer_timeout"]

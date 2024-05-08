@@ -19,6 +19,8 @@ func _ready():
 func _process(delta):
 	if Input.is_action_just_pressed("debug_info"):
 		debug_stats.visible = !debug_stats.visible
+	if Input.is_action_just_pressed("reload_scene"):
+		get_tree().reload_current_scene()
 
 
 func add_point():
