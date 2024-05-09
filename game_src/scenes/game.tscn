@@ -1,7 +1,8 @@
-[gd_scene load_steps=47 format=3 uid="uid://c6ub1o3cqaqel"]
+[gd_scene load_steps=48 format=3 uid="uid://c6ub1o3cqaqel"]
 
 [ext_resource type="PackedScene" uid="uid://bl8sf65vlv8oa" path="res://scenes/player.tscn" id="1_45ikk"]
 [ext_resource type="Script" path="res://scripts/game_manager.gd" id="1_kbx16"]
+[ext_resource type="Script" path="res://scripts/game.gd" id="1_p0emq"]
 [ext_resource type="Texture2D" uid="uid://cemtlles5d4pj" path="res://assets/sprites/world_tileset.png" id="2_q24yn"]
 [ext_resource type="PackedScene" uid="uid://ceklj60lppjvx" path="res://scenes/platform.tscn" id="3_d01jd"]
 [ext_resource type="Texture2D" uid="uid://c3jg5lbn2aplx" path="res://assets/sprites/switch_button_b.png" id="3_gnu6u"]
@@ -607,6 +608,7 @@ shader_parameter/vignette_intensity = 0.4
 shader_parameter/vignette_opacity = 0.5
 
 [node name="Game" type="Node2D"]
+script = ExtResource("1_p0emq")
 
 [node name="UI" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
