@@ -960,6 +960,7 @@ block_color = 3
 
 [node name="BreakableBlock" parent="Blocks" instance=ExtResource("20_5mr3a")]
 position = Vector2(-421, 76)
+block_color = 1
 
 [node name="BreakableBlock3" parent="Blocks" instance=ExtResource("20_5mr3a")]
 position = Vector2(-404, 76)

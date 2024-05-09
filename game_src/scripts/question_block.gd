@@ -1,4 +1,3 @@
-@tool
 extends Area2D
 
 enum State {UNBUMPED, BUMPED}
@@ -7,24 +6,27 @@ var original_position: Vector2
 @onready var game_manager = %GameManager
 
 enum BlockColor {BROWN, LIGHT_BROWN, LIGHT_RED, GREY}
-@export var block_color: BlockColor
+@export var block_color: BlockColor = BlockColor.BROWN:
+	set(mod_value):
+		block_color = mod_value
+		match block_color:
+			BlockColor.BROWN:
+				$Sprite2D.frame = 32
+			BlockColor.LIGHT_BROWN:
+				$Sprite2D.frame = 35
+			BlockColor.LIGHT_RED:
+				$Sprite2D.frame = 36
+			BlockColor.GREY:
+				$Sprite2D.frame = 39
+			_:
+				$Sprite2D.frame = 32
 
 func _ready():
-	if block_color == BlockColor.BROWN:
-		$Sprite2D.frame = 32
-	elif block_color == BlockColor.LIGHT_BROWN:
-		$Sprite2D.frame = 35
-	elif block_color == BlockColor.LIGHT_RED:
-		$Sprite2D.frame = 36
-	elif block_color == BlockColor.GREY:
-		$Sprite2D.frame = 39
-	else:
-		$Sprite2D.frame = 32
+	
 	original_position = position
 	
 func _on_body_entered(body):
-	if not Engine.is_editor_hint():
-		$Trigger.queue_free()
+	$Trigger.queue_free()
 	bump_block()
 		
 func bump_block():
