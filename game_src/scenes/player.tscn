@@ -398,7 +398,7 @@ ghost_node = ExtResource("2_epedm")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -12)
 sprite_frames = SubResource("SpriteFrames_bvmel")
-animation = &"dash"
+animation = &"idle"
 autoplay = "idle"
 speed_scale = 2.0
 
