@@ -1,5 +1,7 @@
 extends Area2D
 
+var enemy_on_top = null
+
 enum BlockColor {BROWN, LIGHT_BROWN, LIGHT_RED, GREY}
 @export var block_color: BlockColor = BlockColor.BROWN:
 	set(mod_value):
@@ -22,6 +24,8 @@ func _on_body_entered(body):
 	$Sprite2D.queue_free()
 	$StaticBody2D.queue_free()
 	destroy_block()
+	if enemy_on_top:
+		enemy_on_top.die()
 		
 func destroy_block():
 	$BlockSound.play()
@@ -30,9 +34,18 @@ func destroy_block():
 
 
 func _on_area_2d_body_entered(body):
-	if body.is_ground_pound:
-		$Area2D/TriggerTop.queue_free()
-		$Trigger.queue_free()
-		$Sprite2D.queue_free()
-		$StaticBody2D.queue_free()
-		destroy_block()
+	if body is Slime_Simple:
+		enemy_on_top = body
+	
+	if body is Player:
+		if body.is_ground_pound:
+			$Area2D/TriggerTop.queue_free()
+			$Trigger.queue_free()
+			$Sprite2D.queue_free()
+			$StaticBody2D.queue_free()
+			destroy_block()
+
+
+func _on_area_2d_body_exited(body):
+	if body is Slime_Simple:
+		enemy_on_top = null

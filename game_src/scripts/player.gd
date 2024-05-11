@@ -23,12 +23,15 @@ var is_wall_sliding_right = false
 var is_ground_pound = false
 var GROUND_POUND_FALL_SPEED = 1000.0
 
+
 @onready var game_manager = %GameManager
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var jump_sound = $JumpSound
 @onready var walk_sound = $WalkSound
 @onready var dash_sound = $DashSound
 @onready var sliding_sound = $SlidingSound
+@onready var animation_player = $AnimationPlayer
+@onready var dead_sound = $DeadSound
 
 @onready var timer = $Timer
 @onready var retro_vhs_postprocess_fx = %RETRO_VHS_POSTPROCESS_FX
@@ -63,8 +66,9 @@ func _physics_process(delta):
 	for i in get_slide_collision_count(): _collide(get_slide_collision(i))
 
 func _collide(collision: KinematicCollision2D):
-	if (is_on_floor() or is_on_wall()) and is_ground_pound:
-		$AnimationPlayer.play("GroundPoundLand")
+	#print_debug(collision.get_collider().name)
+	if (is_on_floor() or is_on_wall() or collision.get_collider() is Slime_Simple) and is_ground_pound:
+		animation_player.play("GroundPoundLand")
 
 func input() -> Vector2:
 	var input_dir = Vector2.ZERO
@@ -235,7 +239,7 @@ func _on_ghost_timer_timeout():
 func _start_ground_pound():
 	is_ground_pound = true
 	velocity = Vector2.ZERO
-	$AnimationPlayer.play("GroundPoundingIn")
+	animation_player.play("GroundPoundingIn")
 
 func _ground_pound_move():
 	velocity = Vector2(0, GROUND_POUND_FALL_SPEED)
@@ -246,3 +250,7 @@ func _end_ground_pound():
 func spring(power: float, direction: float) -> void:
 	velocity.x = velocity.x - cos(direction) * power
 	velocity.y = -sin(direction) * power
+
+func die():
+	dead_sound.play()
+	get_node("CollisionShape2D").queue_free()
