@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://c6ub1o3cqaqel"]
+[gd_scene load_steps=50 format=3 uid="uid://c6ub1o3cqaqel"]
 
 [ext_resource type="PackedScene" uid="uid://bl8sf65vlv8oa" path="res://scenes/player.tscn" id="1_45ikk"]
 [ext_resource type="Script" path="res://scripts/game_manager.gd" id="1_kbx16"]
@@ -25,6 +25,7 @@
 [ext_resource type="PackedScene" uid="uid://cd18r4n8uer70" path="res://scenes/breakable_block.tscn" id="20_5mr3a"]
 [ext_resource type="PackedScene" uid="uid://cveuyresxwj0r" path="res://scenes/pipe_teleport.tscn" id="20_66x34"]
 [ext_resource type="PackedScene" uid="uid://2aee78wbmhfb" path="res://scenes/moving_platform.tscn" id="24_edbvl"]
+[ext_resource type="PackedScene" uid="uid://dsyakl5yoxx8d" path="res://scenes/slime_simple.tscn" id="27_blnba"]
 [ext_resource type="PackedScene" uid="uid://cos1138ylowtd" path="res://scenes/spring_mushroom.tscn" id="27_pie3o"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5srhb"]
@@ -918,6 +919,12 @@ position = Vector2(581, 96)
 [node name="Slime2" parent="Slimes" instance=ExtResource("6_uosvg")]
 position = Vector2(154, 16)
 
+[node name="Slime3" parent="Slimes" instance=ExtResource("27_blnba")]
+position = Vector2(-354, 64)
+
+[node name="Slime4" parent="Slimes" instance=ExtResource("27_blnba")]
+position = Vector2(-438, 37)
+
 [node name="Potions" type="Node" parent="."]
 
 [node name="Potion_Blue" parent="Potions" instance=ExtResource("12_mvhip")]
@@ -927,10 +934,10 @@ position = Vector2(183, 88)
 position = Vector2(247, -8)
 
 [node name="Potion_Blue2" parent="Potions" instance=ExtResource("12_mvhip")]
-position = Vector2(-455, 102)
+position = Vector2(-457, 104)
 
 [node name="Potion_Red2" parent="Potions" instance=ExtResource("15_45wnh")]
-position = Vector2(-471, 105)
+position = Vector2(-471, 104)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

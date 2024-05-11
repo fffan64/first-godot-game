@@ -109,7 +109,8 @@ func _ready():
 	if !Engine.is_editor_hint():
 		if sprites == null:
 			return
-		is_playing.connect(on_playing)
+		if (!is_playing.is_connected(on_playing)):
+			is_playing.connect(on_playing)
 
 #		fps = sprites.get_animation_speed(animation)
 #		refresh_rate = sprites.get_frame_duration(animation, frame)
