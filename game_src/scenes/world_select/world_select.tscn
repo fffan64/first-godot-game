@@ -1,8 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://ctqw23nwrtrnv"]
+[gd_scene load_steps=11 format=3 uid="uid://ctqw23nwrtrnv"]
 
 [ext_resource type="Script" path="res://scripts/world_select.gd" id="1_mhxpq"]
 [ext_resource type="PackedScene" uid="uid://b7xv5el5incc" path="res://scenes/world_select/world_icon.tscn" id="1_mu24f"]
-[ext_resource type="PackedScene" uid="uid://d2lev4hrwxw3u" path="res://scenes/world_select/level_select.tscn" id="3_po0g0"]
 [ext_resource type="PackedScene" uid="uid://dcyy4clc45qd4" path="res://scenes/world_select/level_select_2.tscn" id="4_8tes3"]
 [ext_resource type="Texture2D" uid="uid://cajbwcjoy46i" path="res://assets/sprites/knight.png" id="5_ifq1d"]
 [ext_resource type="Script" path="res://scripts/animated_texture_rect.gd" id="6_xqe6l"]
@@ -57,7 +56,6 @@ offset_left = 108.0
 offset_top = 433.0
 offset_right = 172.0
 offset_bottom = 497.0
-level_select_packed = ExtResource("3_po0g0")
 
 [node name="WorldIcon2" parent="." instance=ExtResource("1_mu24f")]
 offset_left = 307.0
@@ -73,7 +71,6 @@ offset_top = 430.0
 offset_right = 570.0
 offset_bottom = 494.0
 world_index = 3
-level_select_packed = ExtResource("3_po0g0")
 
 [node name="WorldIcon4" parent="." instance=ExtResource("1_mu24f")]
 offset_left = 773.0
@@ -81,7 +78,6 @@ offset_top = 307.0
 offset_right = 837.0
 offset_bottom = 371.0
 world_index = 4
-level_select_packed = ExtResource("3_po0g0")
 
 [node name="WorldIcon5" parent="." instance=ExtResource("1_mu24f")]
 offset_left = 990.0
@@ -89,13 +85,14 @@ offset_top = 423.0
 offset_right = 1054.0
 offset_bottom = 487.0
 world_index = 5
-level_select_packed = ExtResource("3_po0g0")
 
 [node name="PlayerIcon" type="TextureRect" parent="."]
 layout_mode = 0
 offset_right = 64.0
 offset_bottom = 64.0
+scale = Vector2(2, 2)
 pivot_offset = Vector2(32, 32)
+mouse_filter = 2
 texture = SubResource("AtlasTexture_w6hob")
 expand_mode = 2
 script = ExtResource("6_xqe6l")

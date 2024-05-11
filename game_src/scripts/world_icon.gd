@@ -6,6 +6,7 @@ extends Control
 @onready var level_select_scene: LevelSelect = level_select_packed.instantiate()
 
 func _ready():
+	process_mode = Node.PROCESS_MODE_DISABLED
 	$Label.text = "World " + str(world_index)
 
 

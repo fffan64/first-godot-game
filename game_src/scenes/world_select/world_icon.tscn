@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://b7xv5el5incc"]
+[gd_scene load_steps=7 format=3 uid="uid://b7xv5el5incc"]
 
 [ext_resource type="Script" path="res://scripts/world_icon.gd" id="1_4h7ba"]
 [ext_resource type="FontFile" uid="uid://dam3qndfjagyb" path="res://assets/fonts/PixelOperator8.ttf" id="1_rvssp"]
+[ext_resource type="PackedScene" uid="uid://d2lev4hrwxw3u" path="res://scenes/world_select/level_select.tscn" id="2_evr1k"]
 
 [sub_resource type="Gradient" id="Gradient_2lrwr"]
 offsets = PackedFloat32Array(0)
@@ -11,18 +12,22 @@ colors = PackedColorArray(0, 0, 0, 1)
 gradient = SubResource("Gradient_2lrwr")
 width = 64
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o4dfr"]
+
 [node name="WorldIcon" type="Control"]
+process_mode = 4
 layout_mode = 3
 anchors_preset = 0
 offset_right = 64.0
 offset_bottom = 64.0
 pivot_offset = Vector2(32, 32)
 script = ExtResource("1_4h7ba")
+level_select_packed = ExtResource("2_evr1k")
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 0
 offset_top = -23.0
-offset_right = 40.0
+offset_right = 92.0
 theme_override_fonts/font = ExtResource("1_rvssp")
 theme_override_font_sizes/font_size = 16
 text = "World 1"
@@ -31,4 +36,18 @@ text = "World 1"
 layout_mode = 0
 offset_right = 64.0
 offset_bottom = 64.0
+mouse_filter = 2
 texture = SubResource("GradientTexture1D_myu55")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 0
+offset_right = 64.0
+offset_bottom = 64.0
+
+[node name="Button" type="TouchScreenButton" parent="Control"]
+position = Vector2(32, 32)
+scale = Vector2(6, 6)
+shape = SubResource("RectangleShape2D_o4dfr")
+action = "jump"
+visibility_mode = 1

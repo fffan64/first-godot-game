@@ -28,6 +28,9 @@ func _exit_tree():
 	playing = false
 	paused = false
 
+func _enter_tree():
+	_ready()
+
 func _get_property_list():
 	var properties = []
 

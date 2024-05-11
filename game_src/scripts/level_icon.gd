@@ -10,6 +10,7 @@ class_name LevelIcon
 @export var next_level_right: LevelIcon
 
 func _ready():
+	process_mode = Node.PROCESS_MODE_DISABLED
 	$Label.text = "Level " + str(level_name)
 
 

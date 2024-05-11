@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://bu5yetb4nw650"]
+[gd_scene load_steps=6 format=3 uid="uid://bu5yetb4nw650"]
 
 [ext_resource type="Script" path="res://scripts/level_icon.gd" id="1_7k1qq"]
 [ext_resource type="FontFile" uid="uid://dam3qndfjagyb" path="res://assets/fonts/PixelOperator8.ttf" id="2_rwiul"]
@@ -11,7 +11,10 @@ colors = PackedColorArray(0, 0, 0, 1)
 gradient = SubResource("Gradient_2lrwr")
 width = 64
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fyfsy"]
+
 [node name="LevelIcon" type="Control"]
+process_mode = 4
 layout_mode = 3
 anchors_preset = 0
 offset_left = 132.0
@@ -27,10 +30,23 @@ offset_top = -23.0
 offset_right = 40.0
 theme_override_fonts/font = ExtResource("2_rwiul")
 theme_override_font_sizes/font_size = 16
-text = "World 1"
+text = "Level 1"
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 0
 offset_right = 64.0
 offset_bottom = 64.0
+mouse_filter = 2
 texture = SubResource("GradientTexture1D_myu55")
+
+[node name="Control" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Button" type="TouchScreenButton" parent="Control"]
+position = Vector2(32, 32)
+scale = Vector2(6, 6)
+shape = SubResource("RectangleShape2D_fyfsy")
+action = "jump"
+visibility_mode = 1
