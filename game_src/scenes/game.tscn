@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://c6ub1o3cqaqel"]
+[gd_scene load_steps=49 format=3 uid="uid://c6ub1o3cqaqel"]
 
 [ext_resource type="PackedScene" uid="uid://bl8sf65vlv8oa" path="res://scenes/player.tscn" id="1_45ikk"]
 [ext_resource type="Script" path="res://scripts/game_manager.gd" id="1_kbx16"]
@@ -11,7 +11,6 @@
 [ext_resource type="PackedScene" uid="uid://f8jidg0u0521" path="res://scenes/coin.tscn" id="4_07ib0"]
 [ext_resource type="Texture2D" uid="uid://budxjd04a2wiu" path="res://assets/sprites/switch_button_home.png" id="4_ragg1"]
 [ext_resource type="PackedScene" uid="uid://ba78272pqwtmf" path="res://scenes/killzone.tscn" id="5_jucma"]
-[ext_resource type="PackedScene" uid="uid://deoi28hulwhgg" path="res://scenes/slime.tscn" id="6_uosvg"]
 [ext_resource type="Texture2D" uid="uid://clslrwdb48pea" path="res://assets/sprites/coin.png" id="7_7nws8"]
 [ext_resource type="FontFile" uid="uid://dam3qndfjagyb" path="res://assets/fonts/PixelOperator8.ttf" id="7_cyyb4"]
 [ext_resource type="FontFile" uid="uid://dt2pcoy8ekg8e" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="9_0okyt"]
@@ -913,14 +912,18 @@ text = "Great job!"
 
 [node name="Slimes" type="Node" parent="."]
 
-[node name="Slime" parent="Slimes" instance=ExtResource("6_uosvg")]
-position = Vector2(581, 96)
-
-[node name="Slime2" parent="Slimes" instance=ExtResource("6_uosvg")]
-position = Vector2(154, 16)
-
 [node name="Slime3" parent="Slimes" instance=ExtResource("27_blnba")]
 position = Vector2(-354, 64)
+
+[node name="Slime" parent="Slimes" instance=ExtResource("27_blnba")]
+position = Vector2(152, 10)
+
+[node name="Slime2" parent="Slimes" instance=ExtResource("27_blnba")]
+position = Vector2(570, 89)
+
+[node name="Slime5" parent="Slimes" instance=ExtResource("27_blnba")]
+position = Vector2(574, -85)
+check_edge = false
 
 [node name="Slime4" parent="Slimes" instance=ExtResource("27_blnba")]
 position = Vector2(-438, 37)

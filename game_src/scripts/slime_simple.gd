@@ -8,6 +8,8 @@ var facing_right = true
 @onready var ray_cast_down = $RayCastDown
 @onready var animated_sprite = $AnimatedSprite2D
 
+@export var check_edge = true
+
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
@@ -21,8 +23,9 @@ func _physics_process(delta):
 	if ray_cast_right.is_colliding():
 		flip()
 
-	if !ray_cast_down.is_colliding() and is_on_floor():
-		flip()
+	if check_edge:
+		if !ray_cast_down.is_colliding() and is_on_floor():
+			flip()
 	
 	velocity.x = SPEED
 	move_and_slide()

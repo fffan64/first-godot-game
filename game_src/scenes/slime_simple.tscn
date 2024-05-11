@@ -219,4 +219,7 @@ libraries = {
 "": SubResource("AnimationLibrary_k7yyc")
 }
 
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+position = Vector2(1, -9)
+
 [connection signal="body_entered" from="DestroyZone" to="DestroyZone" method="_on_body_entered"]
