@@ -1,0 +1,78 @@
+[gd_scene load_steps=7 format=3 uid="uid://cp7ot5mns3ukl"]
+
+[ext_resource type="Script" path="res://scripts/spring.gd" id="1_p8byp"]
+[ext_resource type="Texture2D" uid="uid://dusy0kp5xb73g" path="res://assets/sprites/spring.png" id="2_155e4"]
+
+[sub_resource type="Animation" id="Animation_qkclu"]
+resource_name = "Idle"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_c3pbq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_hdqi1"]
+resource_name = "Spring"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 29]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_08eaf"]
+_data = {
+"Idle": SubResource("Animation_qkclu"),
+"RESET": SubResource("Animation_c3pbq"),
+"Spring": SubResource("Animation_hdqi1")
+}
+
+[node name="Spring" type="Area2D"]
+scale = Vector2(0.2, 0.2)
+collision_mask = 2
+script = ExtResource("1_p8byp")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_155e4")
+hframes = 6
+vframes = 6
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-48, 24, -48, 64, 48, 64, 48, 24, 40, 8, -40, 8)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_08eaf")
+}
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

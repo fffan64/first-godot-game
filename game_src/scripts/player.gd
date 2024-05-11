@@ -1,5 +1,5 @@
+class_name Player
 extends CharacterBody2D
-
 
 const SPEED = 130.0
 const JUMP_VELOCITY = -300.0
@@ -242,3 +242,7 @@ func _ground_pound_move():
 	
 func _end_ground_pound():
 	is_ground_pound = false
+
+func spring(power: float, direction: float) -> void:
+	velocity.x = velocity.x - cos(direction) * power
+	velocity.y = -sin(direction) * power

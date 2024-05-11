@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://c6ub1o3cqaqel"]
+[gd_scene load_steps=49 format=3 uid="uid://c6ub1o3cqaqel"]
 
 [ext_resource type="PackedScene" uid="uid://bl8sf65vlv8oa" path="res://scenes/player.tscn" id="1_45ikk"]
 [ext_resource type="Script" path="res://scripts/game_manager.gd" id="1_kbx16"]
@@ -25,6 +25,7 @@
 [ext_resource type="PackedScene" uid="uid://cd18r4n8uer70" path="res://scenes/breakable_block.tscn" id="20_5mr3a"]
 [ext_resource type="PackedScene" uid="uid://cveuyresxwj0r" path="res://scenes/pipe_teleport.tscn" id="20_66x34"]
 [ext_resource type="PackedScene" uid="uid://2aee78wbmhfb" path="res://scenes/moving_platform.tscn" id="24_edbvl"]
+[ext_resource type="PackedScene" uid="uid://cos1138ylowtd" path="res://scenes/spring_mushroom.tscn" id="27_pie3o"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5srhb"]
 atlas = ExtResource("7_7nws8")
@@ -980,3 +981,15 @@ pipeTeleportTo = NodePath("../PipeTeleport2")
 [node name="PipeTeleport2" parent="Pipes" node_paths=PackedStringArray("pipeTeleportTo") instance=ExtResource("20_66x34")]
 position = Vector2(23, 96)
 pipeTeleportTo = NodePath("../PipeTeleport")
+
+[node name="Springs" type="Node" parent="."]
+
+[node name="Spring" parent="Springs" instance=ExtResource("27_pie3o")]
+position = Vector2(-377, 104)
+spring_color = 1
+
+[node name="Spring2" parent="Springs" instance=ExtResource("27_pie3o")]
+position = Vector2(-378, -8)
+rotation = 3.14159
+spring_power = 800
+spring_color = 3

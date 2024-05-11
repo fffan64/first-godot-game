@@ -1,0 +1,109 @@
+[gd_scene load_steps=8 format=3 uid="uid://cos1138ylowtd"]
+
+[ext_resource type="Script" path="res://scripts/spring.gd" id="1_f4l4r"]
+[ext_resource type="Texture2D" uid="uid://cemtlles5d4pj" path="res://assets/sprites/world_tileset.png" id="2_had87"]
+[ext_resource type="AudioStream" uid="uid://dgj1joy8v1tme" path="res://assets/sounds/spring.wav" id="3_7csa4"]
+
+[sub_resource type="Animation" id="Animation_qkclu"]
+resource_name = "Idle"
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_c3pbq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_hdqi1"]
+resource_name = "Spring"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 6), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.75, 0.25), Vector2(1, 1)]
+}
+tracks/2/type = "audio"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("SpringSound")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("3_7csa4")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/2/use_blend = true
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_08eaf"]
+_data = {
+"Idle": SubResource("Animation_qkclu"),
+"RESET": SubResource("Animation_c3pbq"),
+"Spring": SubResource("Animation_hdqi1")
+}
+
+[node name="Spring" type="Area2D"]
+collision_mask = 2
+script = ExtResource("1_f4l4r")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_had87")
+region_enabled = true
+region_rect = Rect2(112, 80, 16, 16)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-8, -4, -8, 8, 8, 8, 8, -4, 3, -8, -3, -8)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_08eaf")
+}
+speed_scale = 2.0
+
+[node name="SpringSound" type="AudioStreamPlayer2D" parent="."]
+bus = &"SFX"
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
