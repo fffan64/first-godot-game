@@ -21,6 +21,11 @@ Global="*res://scripts/global.gd"
 Music="*res://scenes/music.tscn"
 Functions="*res://scripts/functions.gd"
 
+[display]
+
+window/stretch/mode="viewport"
+window/stretch/aspect="expand"
+
 [input]
 
 jump={

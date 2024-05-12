@@ -1,6 +1,8 @@
 extends Control
 
-@onready var worlds: Array = [$WorldIcon, $WorldIcon2, $WorldIcon3, $WorldIcon4, $WorldIcon5]
+var parameters: Dictionary # This needs to be here so the scene can receive parameters
+
+@onready var worlds: Array = [$"1", $"2", $"3", $"4", $"5"]
 var current_world: int = 0
 var move_tween: Tween
 
@@ -75,6 +77,7 @@ func _input(event):
 	
 	if event.is_action_pressed("jump"):
 		if worlds[current_world].level_select_scene:
+			Global.current_world_name = worlds[current_world].name
 			worlds[current_world].level_select_scene.parent_world_select = self
 			get_tree().root.add_child(worlds[current_world].level_select_scene)
 			get_tree().current_scene = worlds[current_world].level_select_scene

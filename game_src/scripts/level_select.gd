@@ -92,6 +92,7 @@ func _input(event):
 		
 	if event.is_action_pressed("jump"):
 		if current_level.next_scene_path:
+			Global.current_level_name = current_level.name
 			Functions.load_screen_to_scene(current_level.next_scene_path)
 
 func tween_icon():

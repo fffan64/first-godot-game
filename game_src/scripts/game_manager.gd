@@ -16,7 +16,7 @@ func _ready():
 	if Global.hasDash:
 		dash_icon.visible = true
 		
-	if (Global.Level1.checkpoint != null):
+	if (Global.completion_level.world1.level1.checkpoint != null):
 		%Player.global_position = $CheckPoint1.global_position
 	else:
 		%Player.global_position = $StartLevel.global_position

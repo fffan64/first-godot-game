@@ -13,22 +13,22 @@ func _ready():
 	process_mode = Node.PROCESS_MODE_DISABLED
 	$Label.text = "Level " + str(level_name)
 	
-	
-	var level_dict = Global.get("Level" + str(level_name))
-	if level_dict:
-		if level_dict.cleared:
-			var gradient_data := {
-				0.0: Color.WHITE,
-			}
-			var gradient := Gradient.new()
-			gradient.offsets = gradient_data.keys()
-			gradient.colors = gradient_data.values()
+	if Global.completion_level:
+		if Global.completion_level.get("world" + str(Global.current_world_name)):
+			if Global.completion_level.get("world" + str(Global.current_world_name)).get("level" + str(level_name)):
+				if Global.completion_level.get("world" + str(Global.current_world_name)).get("level" + str(level_name)).cleared:
+					var gradient_data := {
+						0.0: Color.WHITE,
+					}
+					var gradient := Gradient.new()
+					gradient.offsets = gradient_data.keys()
+					gradient.colors = gradient_data.values()
 
-			var gradient_texture := GradientTexture1D.new()
-			gradient_texture.width = 64
-			gradient_texture.gradient = gradient
+					var gradient_texture := GradientTexture1D.new()
+					gradient_texture.width = 64
+					gradient_texture.gradient = gradient
 
-			$TextureRect.texture = gradient_texture
+					$TextureRect.texture = gradient_texture
 		
 
 
