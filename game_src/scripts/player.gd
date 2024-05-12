@@ -23,7 +23,6 @@ var is_wall_sliding_right = false
 var is_ground_pound = false
 var GROUND_POUND_FALL_SPEED = 1000.0
 
-
 @onready var game_manager = %GameManager
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var jump_sound = $JumpSound
@@ -114,7 +113,7 @@ func jump(delta):
 		jump_count = 0
 
 	# Handle jump.
-	if game_manager.hasDoubleJump == true:
+	if Global.hasDoubleJump == true:
 		max_jumps = 2
 	else:
 		max_jumps = 1
@@ -165,7 +164,7 @@ func wall_slide(delta):
 
 func dash(direction):
 	# Dash
-	if game_manager.hasDash and Input.is_action_just_pressed("dash") and can_dash and direction.x != 0:
+	if Global.hasDash and Input.is_action_just_pressed("dash") and can_dash and direction.x != 0:
 		dashing = true
 		can_dash = false
 		dash_sound.play()

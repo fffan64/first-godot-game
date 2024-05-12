@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://c6ub1o3cqaqel"]
+[gd_scene load_steps=52 format=3 uid="uid://c6ub1o3cqaqel"]
 
 [ext_resource type="PackedScene" uid="uid://bl8sf65vlv8oa" path="res://scenes/player.tscn" id="1_45ikk"]
 [ext_resource type="Script" path="res://scripts/game_manager.gd" id="1_kbx16"]
@@ -19,6 +19,8 @@
 [ext_resource type="Texture2D" uid="uid://x4xg4eq44yb" path="res://assets/sprites/switch_button_a.png" id="11_cisj5"]
 [ext_resource type="PackedScene" uid="uid://dryd3bbfh5boh" path="res://scenes/potion_blue.tscn" id="12_mvhip"]
 [ext_resource type="Shader" path="res://shaders/RETRO_VHS_OLD.gdshader" id="14_b25ii"]
+[ext_resource type="Script" path="res://scripts/end_level.gd" id="14_rcpmv"]
+[ext_resource type="Script" path="res://scripts/checkpoint.gd" id="14_w2q4r"]
 [ext_resource type="PackedScene" uid="uid://dnea1e8vwroq2" path="res://scenes/potion_red.tscn" id="15_45wnh"]
 [ext_resource type="PackedScene" uid="uid://46afebbpt8h8" path="res://scenes/question_block.tscn" id="19_k07dt"]
 [ext_resource type="PackedScene" uid="uid://cd18r4n8uer70" path="res://scenes/breakable_block.tscn" id="20_5mr3a"]
@@ -26,6 +28,30 @@
 [ext_resource type="PackedScene" uid="uid://2aee78wbmhfb" path="res://scenes/moving_platform.tscn" id="24_edbvl"]
 [ext_resource type="PackedScene" uid="uid://dsyakl5yoxx8d" path="res://scenes/slime_simple.tscn" id="27_blnba"]
 [ext_resource type="PackedScene" uid="uid://cos1138ylowtd" path="res://scenes/spring_mushroom.tscn" id="27_pie3o"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g3a4y"]
+shader = ExtResource("14_b25ii")
+shader_parameter/overlay = true
+shader_parameter/scanlines_opacity = 0.4
+shader_parameter/scanlines_width = 0.25
+shader_parameter/grille_opacity = 0.3
+shader_parameter/resolution = Vector2(640, 480)
+shader_parameter/pixelate = false
+shader_parameter/roll = true
+shader_parameter/roll_speed = 8.0
+shader_parameter/roll_size = 15.0
+shader_parameter/roll_variation = 1.8
+shader_parameter/distort_intensity = 0.006
+shader_parameter/noise_opacity = 0.4
+shader_parameter/noise_speed = 5.0
+shader_parameter/static_noise_intensity = 0.06
+shader_parameter/aberration = 0.03
+shader_parameter/brightness = 1.4
+shader_parameter/discolor = true
+shader_parameter/warp_amount = 1.0
+shader_parameter/clip_warp = false
+shader_parameter/vignette_intensity = 0.4
+shader_parameter/vignette_opacity = 0.5
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5srhb"]
 atlas = ExtResource("7_7nws8")
@@ -118,6 +144,9 @@ animations = [{
 "name": &"default",
 "speed": 10.0
 }]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_20qbe"]
+size = Vector2(20, 253)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kcb00"]
 texture = ExtResource("2_q24yn")
@@ -584,32 +613,20 @@ _data = {
 }
 point_count = 2
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_g3a4y"]
-shader = ExtResource("14_b25ii")
-shader_parameter/overlay = true
-shader_parameter/scanlines_opacity = 0.4
-shader_parameter/scanlines_width = 0.25
-shader_parameter/grille_opacity = 0.3
-shader_parameter/resolution = Vector2(640, 480)
-shader_parameter/pixelate = false
-shader_parameter/roll = true
-shader_parameter/roll_speed = 8.0
-shader_parameter/roll_size = 15.0
-shader_parameter/roll_variation = 1.8
-shader_parameter/distort_intensity = 0.006
-shader_parameter/noise_opacity = 0.4
-shader_parameter/noise_speed = 5.0
-shader_parameter/static_noise_intensity = 0.06
-shader_parameter/aberration = 0.03
-shader_parameter/brightness = 1.4
-shader_parameter/discolor = true
-shader_parameter/warp_amount = 1.0
-shader_parameter/clip_warp = false
-shader_parameter/vignette_intensity = 0.4
-shader_parameter/vignette_opacity = 0.5
-
 [node name="Game" type="Node2D"]
 script = ExtResource("1_p0emq")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="RETRO_VHS_POSTPROCESS_FX" type="ColorRect" parent="CanvasLayer"]
+unique_name_in_owner = true
+visible = false
+material = SubResource("ShaderMaterial_g3a4y")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="UI" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
@@ -785,6 +802,55 @@ text = "You collected X coins!"
 horizontal_alignment = 1
 autowrap_mode = 2
 
+[node name="StartLevel" type="Area2D" parent="GameManager"]
+position = Vector2(-466, 98)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GameManager/StartLevel"]
+position = Vector2(0, -18)
+shape = SubResource("RectangleShape2D_20qbe")
+debug_color = Color(0.775213, 0.142654, 1, 0.42)
+
+[node name="Sprite2D" type="Sprite2D" parent="GameManager/StartLevel"]
+position = Vector2(0, 6)
+texture = ExtResource("2_q24yn")
+hframes = 16
+vframes = 16
+frame = 56
+
+[node name="EndLevel" type="Area2D" parent="GameManager"]
+position = Vector2(1224, -14)
+collision_mask = 2
+script = ExtResource("14_rcpmv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GameManager/EndLevel"]
+position = Vector2(0, -111.5)
+shape = SubResource("RectangleShape2D_20qbe")
+debug_color = Color(0.775213, 0.142654, 1, 0.42)
+
+[node name="Sprite2D" type="Sprite2D" parent="GameManager/EndLevel"]
+position = Vector2(0, 6)
+texture = ExtResource("2_q24yn")
+hframes = 16
+vframes = 16
+frame = 56
+
+[node name="CheckPoint1" type="Area2D" parent="GameManager"]
+position = Vector2(662, -95)
+collision_mask = 2
+script = ExtResource("14_w2q4r")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GameManager/CheckPoint1"]
+position = Vector2(1, -63)
+shape = SubResource("RectangleShape2D_20qbe")
+debug_color = Color(0.775213, 0.142654, 1, 0.42)
+
+[node name="Sprite2D" type="Sprite2D" parent="GameManager/CheckPoint1"]
+position = Vector2(0, 6)
+texture = ExtResource("2_q24yn")
+hframes = 16
+vframes = 16
+frame = 56
+
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2(-1, 0)
 tile_set = SubResource("TileSet_mcury")
@@ -795,7 +861,8 @@ layer_1/name = "Mid"
 layer_1/tile_data = PackedInt32Array(262147, 0, 0, 262148, 0, 0, 393217, 0, 0, 393218, 0, 0, 393221, 393216, 0, 393222, 458752, 1, 393223, 393216, 0, 393227, 393216, 0, 393228, 393216, 0, 393231, 458752, 1, 393232, 393216, 0, 458753, 0, 1, 524289, 0, 1, 524290, 65536, 1, 458754, 0, 1, 524291, 0, 1, 524292, 0, 1, 458756, 65536, 0, 393220, 0, 1, 327684, 0, 1, 327683, 0, 1, 393219, 0, 1, 458755, 0, 1, 458757, 393216, 1, 458758, 524288, 0, 458759, 393216, 1, 524295, 393216, 1, 524294, 393216, 1, 524293, 393216, 1, 458763, 393216, 1, 458764, 393216, 1, 524300, 393216, 1, 524299, 393216, 1, 458767, 393216, 1, 458768, 524288, 1, 524304, 393216, 1, 524303, 393216, 1, 65542, 0, 1, 65543, 65536, 0, 65544, 0, 1, 7, 0, 1, 8, 0, 1, 131081, 0, 1, 131082, 0, 1, 131085, 0, 1, 131086, 65536, 1, 131087, 0, 1, 131088, 0, 1, 65550, 0, 1, 65551, 0, 1, 6, 0, 0, -65529, 0, 0, -65528, 0, 0, 65545, 0, 0, 65546, 0, 0, 65549, 0, 0, 14, 0, 0, 15, 0, 0, 65552, 0, 0, 393224, 589824, 0, 393225, 655360, 0, 393226, 720896, 0, 65547, 589824, 0, 65548, 720896, 0, 131089, 262144, 0, 131090, 262144, 0, 131091, 262144, 0, 196625, 262144, 1, 196626, 262144, 1, 196627, 262144, 1, 262163, 262144, 1, 262164, 262144, 1, 327700, 262144, 1, 327682, 65536, 0, 327701, 262144, 1, 327702, 262144, 1, 327703, 262144, 1, 393238, 262144, 1, 393239, 262144, 1, 458775, 327680, 0, 524311, 262144, 1, 524310, 262144, 1, 458774, 262144, 1, 262165, 327680, 1, 196628, 327680, 0, 262166, 262144, 0, 262167, 262144, 0, 10, 0, 5, -65526, 0, 4, -131062, 0, 4, -196598, 0, 3, 65554, 524288, 6, 65555, 327680, 5, 19, 327680, 4, -65517, 327680, 3, 196629, 327680, 7, 393249, 0, 1, 458785, 0, 1, 524321, 0, 1, 393250, 0, 1, 458786, 65536, 1, 524322, 0, 1, 262177, 0, 0, 327713, 65536, 1, 262178, 0, 0, 327714, 0, 1, 393251, 0, 1, 458787, 0, 1, 524323, 0, 1, 393252, 0, 1, 458788, 0, 1, 524324, 0, 1, 262187, 0, 0, 262188, 0, 0, 393253, 65536, 0, 393254, 0, 1, 393255, 0, 1, 393256, 0, 1, 393257, 0, 1, 393258, 0, 1, 393259, 0, 1, 393260, 0, 1, 327723, 0, 1, 327724, 0, 1, 458796, 0, 1, 458795, 0, 1, 524331, 0, 1, 524330, 0, 1, 524329, 0, 1, 524328, 0, 1, 524327, 0, 1, 524326, 0, 1, 524325, 0, 1, 458789, 0, 1, 458790, 0, 1, 458791, 0, 1, 458792, 0, 1, 458793, 0, 1, 458794, 0, 1, 524332, 0, 1, 327722, 65536, 1, 327717, 196608, 8, 262181, 196608, 7, 131109, 131072, 4, 131118, 131072, 0, 196654, 196608, 1, 131119, 131072, 1, 131120, 131072, 1, 196655, 131072, 1, 65584, 131072, 1, 65583, 196608, 0, 47, 131072, 2, 48, 131072, 0, 49, 589824, 1, 50, 655360, 1, 51, 655360, 1, 52, 655360, 1, 53, 655360, 1, 54, 720896, 1, 55, 131072, 0, 56, 131072, 0, 65591, 131072, 1, 65592, 131072, 1, 131128, 196608, 0, -65481, 393216, 5, -131017, 393216, 4, -196553, 393216, 3, 65582, 65536, 5, 327719, 65536, 4, 327720, 131072, 8, 262184, 196608, 7, 196648, 196608, 8, 65576, 131072, 4, -131027, 262144, 1, -196563, 262144, 0, -327639, 262144, 0, -327640, 262144, 0, -327641, 262144, 0, -196564, 262144, 0, -262101, 327680, 1, -327638, 262144, 0, -131028, 327680, 0, -131029, 262144, 1, -196565, 262144, 1, -196566, 262144, 1, -262102, 262144, 1, -262103, 262144, 1, -262104, 262144, 1, -262105, 327680, 1, -196567, 262144, 1, -393175, 262144, 8, -393172, 327680, 3, -327636, 327680, 4, -262100, 327680, 5, -327642, 262144, 0, -327643, 262144, 0, -327644, 262144, 0, -327645, 262144, 0, -327646, 262144, 0, -262106, 327680, 0, -262107, 262144, 1, -262108, 262144, 1, -262109, 262144, 1, -196573, 262144, 1, -196574, 262144, 1, -196575, 262144, 1, -262111, 262144, 1, -262110, 327680, 0, -327647, 262144, 1, -458719, 262144, 1, -393183, 262144, 1, -524255, 327680, 0, -589791, 327680, 1, -524256, 262144, 1, -458720, 262144, 1, -393184, 262144, 1, -262112, 262144, 1, -327648, 327680, 1, 57, 131072, 0, 58, 131072, 0, 59, 131072, 0, 65593, 131072, 1, 65594, 131072, 1, 65595, 196608, 1, 131131, 131072, 1, 196667, 131072, 1, 131129, 131072, 1, 131130, 131072, 1, 131132, 131072, 1, 65596, 131072, 1, 65597, 131072, 1, 65598, 196608, 0, 65599, 131072, 1, -65476, 131072, 0, -65474, 131072, 0, -131008, 131072, 0, -196542, 131072, 0, -262076, 131072, 0, -327610, 131072, 0, -262072, 131072, 0, -130998, 131072, 0, 76, 131072, 0, 60, 131072, 1, 62, 196608, 0, 64, 196608, 1, -65472, 131072, 1, 66, 131072, 1, -65470, 131072, 1, -131006, 131072, 1, 68, 131072, 1, -65468, 131072, 1, -131004, 196608, 1, -196540, 131072, 1, 70, 131072, 1, -65466, 131072, 1, -131002, 131072, 1, -196538, 131072, 1, -262074, 196608, 1, 72, 131072, 1, -65464, 196608, 0, -131000, 131072, 1, -196536, 131072, 1, 74, 131072, 1, -65462, 131072, 1, 65600, 131072, 1, 65601, 131072, 1, 65602, 131072, 1, 65603, 131072, 1, 65604, 131072, 1, 65605, 131072, 1, 65606, 196608, 1, 65607, 131072, 1, 65608, 131072, 1, 65609, 131072, 1, 65610, 131072, 1, 65611, 196608, 0, 65612, 131072, 1, 131148, 131072, 1, 131147, 131072, 1, 131146, 131072, 1, 131145, 196608, 1, 131144, 131072, 1, 131143, 131072, 1, 131142, 196608, 0, 131141, 131072, 1, 131140, 131072, 1, 131139, 131072, 1, 131138, 131072, 1, 131137, 196608, 0, 131136, 196608, 1, 131135, 131072, 1, 131134, 131072, 1, 131133, 131072, 1, 196668, 196608, 0, 196669, 131072, 1, 196670, 131072, 1, 196671, 131072, 1, 196672, 131072, 1, 196673, 131072, 1, 196674, 131072, 1, 196675, 131072, 1, 196676, 196608, 1, 196677, 131072, 1, 196678, 131072, 1, 196679, 131072, 1, 196680, 131072, 1, 196681, 131072, 1, 196682, 131072, 1, 196683, 131072, 1, 196684, 196608, 0, 524257, 0, 0, 524258, 0, 0, 524259, 0, 0, 524260, 0, 0, 524261, 0, 0, 524262, 0, 0, 524263, 0, 0, 524264, 0, 0, 524265, 0, 0, 524266, 0, 0, 524267, 0, 0, 524268, 0, 0, 524269, 0, 0, 524270, 0, 0, 524271, 0, 0, 458721, 0, 0, 393185, 0, 0, 327649, 0, 0, 262113, 0, 0, 196577, 0, 0, 131042, 0, 0, 65506, 0, 0, 65505, 0, 0, -31, 0, 0, 131041, 0, 0, -65553, 0, 0, -17, 0, 0, 65519, 0, 0, 131056, 0, 0, 196592, 0, 0, 262128, 0, 0, 327664, 0, 0, 393200, 0, 0, 458736, 0, 0, 524272, 0, 0, -65567, 0, 0, -65566, 0, 0, -65565, 0, 0, -65564, 0, 0, -65563, 0, 0, -65562, 0, 0, -65561, 0, 0, -65560, 0, 0, -65559, 0, 0, -65558, 0, 0, -131094, 0, 0, -131093, 0, 0, -131092, 0, 0, -131091, 0, 0, -131090, 0, 0, -131089, 0, 0)
 
 [node name="Player" parent="." instance=ExtResource("1_45ikk")]
-position = Vector2(919, -3)
+unique_name_in_owner = true
+position = Vector2(-436, 108)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(0, -6)
@@ -1009,24 +1076,6 @@ position = Vector2(183, 88)
 [node name="Potion_Red" parent="Potions" instance=ExtResource("15_45wnh")]
 position = Vector2(247, -8)
 
-[node name="Potion_Blue2" parent="Potions" instance=ExtResource("12_mvhip")]
-position = Vector2(-457, 104)
-
-[node name="Potion_Red2" parent="Potions" instance=ExtResource("15_45wnh")]
-position = Vector2(-471, 104)
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="RETRO_VHS_POSTPROCESS_FX" type="ColorRect" parent="CanvasLayer"]
-unique_name_in_owner = true
-visible = false
-material = SubResource("ShaderMaterial_g3a4y")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
 [node name="Blocks" type="Node" parent="."]
 
 [node name="QuestionBlock" parent="Blocks" instance=ExtResource("19_k07dt")]
@@ -1076,3 +1125,6 @@ position = Vector2(-378, -8)
 rotation = 3.14159
 spring_power = 800
 spring_color = 3
+
+[connection signal="body_entered" from="GameManager/EndLevel" to="GameManager/EndLevel" method="_on_body_entered"]
+[connection signal="body_entered" from="GameManager/CheckPoint1" to="GameManager/CheckPoint1" method="_on_body_entered"]

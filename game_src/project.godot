@@ -17,6 +17,7 @@ config/icon="res://assets/sprites/icon.svg"
 
 [autoload]
 
+Global="*res://scripts/global.gd"
 Music="*res://scenes/music.tscn"
 Functions="*res://scripts/functions.gd"
 

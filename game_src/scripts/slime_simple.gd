@@ -47,7 +47,8 @@ func set_speed():
 	
 func die():
 	set_physics_process(false)
-	$SlimeCollision.queue_free()
+	if $SlimeCollision:
+		$SlimeCollision.queue_free()
 	$AnimationPlayer.play("destroy")
 
 func _on_destroy_zone_body_entered(body):

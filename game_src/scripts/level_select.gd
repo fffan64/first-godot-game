@@ -1,6 +1,8 @@
 extends Control
 class_name LevelSelect
 
+var parameters: Dictionary # This needs to be here so the scene can receive parameters
+
 @onready var current_level: LevelIcon = $"1"
 var parent_world_select: Node
 var move_tween: Tween

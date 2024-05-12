@@ -1,7 +1,5 @@
 extends Node
 
-var score = 0
-
 @onready var ui = %UI
 @onready var debug_stats = %DebugStats
 @onready var score_label = $ScoreLabel
@@ -9,12 +7,19 @@ var score = 0
 @onready var double_jump_icon = %"DoubleJump icon"
 @onready var dash_icon = %"Dash icon"
 
-var hasDoubleJump = false
-var hasDash = false
-
 func _ready():
 	ui.show()
-	coin_hud_label.text = str(score)
+	coin_hud_label.text = str(Global.score)
+	
+	if Global.hasDoubleJump:
+		double_jump_icon.visible = true
+	if Global.hasDash:
+		dash_icon.visible = true
+		
+	if (Global.Level1.checkpoint != null):
+		%Player.global_position = $CheckPoint1.global_position
+	else:
+		%Player.global_position = $StartLevel.global_position
 
 func _process(delta):
 	if Input.is_action_just_pressed("debug_info"):
@@ -24,17 +29,17 @@ func _process(delta):
 
 
 func add_point():
-	score += 1
-	coin_hud_label.text = str(score)
-	score_label.text = "You collected " + str(score) + " coins."
+	Global.score += 1
+	coin_hud_label.text = str(Global.score)
+	score_label.text = "You collected " + str(Global.score) + " coins."
 
 func add_potion_blue():
 	double_jump_icon.visible = true
-	hasDoubleJump = true
+	Global.hasDoubleJump = true
 
 func add_potion_red():
 	dash_icon.visible = true
-	hasDash = true
+	Global.hasDash = true
 
 func spawn_item_pickup(scenePathArray: Array, pos):
 	var scene = load(scenePathArray.pick_random())
