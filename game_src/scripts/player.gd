@@ -1,29 +1,31 @@
 class_name Player
 extends CharacterBody2D
 
-const SPEED = 130.0
-const JUMP_VELOCITY = -300.0
+@export var SPEED = 130.0
+@export var JUMP_VELOCITY = -300.0
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
-var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 
-var DASH_SPEED = 260.0
+@export var DASH_SPEED = 260.0
 var dashing = false
 var can_dash = true
 
 var jump_count = 0
+@export var MAX_JUMPS = 2
 var max_jumps = 2
 
-var wall_jump_pushback = 800
-var wall_slide_gravity = 50
+@export var wall_jump_pushback = 800
+@export var wall_slide_gravity = 50
 
 var is_wall_sliding_left = false
 var is_wall_sliding_right = false
 
 var is_ground_pound = false
-var GROUND_POUND_FALL_SPEED = 1000.0
+@export var GROUND_POUND_FALL_SPEED = 1000.0
 
-@onready var game_manager = %GameManager
+@onready var ui = %UI
+
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var jump_sound = $JumpSound
 @onready var walk_sound = $WalkSound
@@ -33,8 +35,6 @@ var GROUND_POUND_FALL_SPEED = 1000.0
 @onready var dead_sound = $DeadSound
 
 @onready var timer = $Timer
-@onready var retro_vhs_postprocess_fx = %RETRO_VHS_POSTPROCESS_FX
-@onready var debug_stats = %DebugStats
 
 @export var ghost_node: PackedScene
 @onready var ghost_timer = $Ghost_timer
@@ -42,18 +42,12 @@ var GROUND_POUND_FALL_SPEED = 1000.0
 var canPlayWalkSound = true
 
 func _ready():
-	debug_stats.add_property(self, "velocity", "")
-	debug_stats.add_property(self, "is_on_floor", "")
-	debug_stats.add_property(self, "is_on_wall", "")
-	debug_stats.add_property(self, "dashing", "")
-	debug_stats.add_property(self, "is_wall_sliding_left", "")
-	debug_stats.add_property(self, "is_wall_sliding_right", "")
-	debug_stats.add_property(self, "is_ground_pound", "")
+	register_debug_stats()
+	Events.slime_simple_died.connect(_on_slime_simple_died)
 
 func _physics_process(delta):
 	var input_dir: Vector2 = input()
 	
-	others()
 	move(input_dir)
 	jump(delta)
 	ground_pound(delta)
@@ -114,7 +108,7 @@ func jump(delta):
 
 	# Handle jump.
 	if Global.hasDoubleJump == true:
-		max_jumps = 2
+		max_jumps = MAX_JUMPS
 	else:
 		max_jumps = 1
 	
@@ -216,10 +210,6 @@ func add_ghost():
 	ghost.set_property(position, $AnimatedSprite2D.scale, direction)
 	get_tree().current_scene.add_child(ghost)
 
-func others():
-	if Input.is_action_just_pressed("shaderVHS"):
-		retro_vhs_postprocess_fx.visible = not retro_vhs_postprocess_fx.visible
-
 func _on_timer_timeout():
 	canPlayWalkSound = true
 
@@ -231,6 +221,11 @@ func _on_dash_timer_timeout():
 func _on_dash_timer_again_timeout():
 	can_dash = true
 
+func _on_slime_simple_died():
+	if is_ground_pound:
+		animation_player.play("GroundPoundLand")
+	velocity.y = -200.0
+	jump_sound.play()
 
 func _on_ghost_timer_timeout():
 	add_ghost()
@@ -253,3 +248,13 @@ func spring(power: float, direction: float) -> void:
 func die():
 	dead_sound.play()
 	get_node("CollisionShape2D").queue_free()
+
+func register_debug_stats():
+	if ui.debug_stats:
+		ui.debug_stats.add_property(self, "velocity", "")
+		ui.debug_stats.add_property(self, "is_on_floor", "")
+		ui.debug_stats.add_property(self, "is_on_wall", "")
+		ui.debug_stats.add_property(self, "dashing", "")
+		ui.debug_stats.add_property(self, "is_wall_sliding_left", "")
+		ui.debug_stats.add_property(self, "is_wall_sliding_right", "")
+		ui.debug_stats.add_property(self, "is_ground_pound", "")

@@ -16,6 +16,7 @@ var completion_level = {
 	},
 }
 
+var fx_retro_vhs = preload("res://scenes/FX/shader_retro_vhs.tscn").instantiate()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -27,8 +28,28 @@ func _ready():
 		Global.hasDoubleJump = data.hasDoubleJump
 		Global.score = data.score
 		Global.completion_level = data.completion_level
-
+		
+	Events.coin_picked.connect(_on_coin_picked)
+	Events.potion_blue_picked.connect(_on_potion_blue_picked)
+	Events.potion_red_picked.connect(_on_potion_red_picked)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
+
+func _input(event):
+	if event.is_action_pressed("shaderVHS"):
+		print_debug(fx_retro_vhs.is_inside_tree())
+		if fx_retro_vhs.is_inside_tree():
+			fx_retro_vhs.visible = not fx_retro_vhs.visible
+		else:
+			get_tree().root.add_child(fx_retro_vhs)
+
+func _on_coin_picked(amount: int):
+	score += 1
+
+func _on_potion_blue_picked():
+	hasDoubleJump = true
+	
+func _on_potion_red_picked():
+	hasDash = true

@@ -3,7 +3,6 @@ extends Area2D
 enum State {UNBUMPED, BUMPED}
 var state: int = State.UNBUMPED
 var original_position: Vector2
-@onready var game_manager = %GameManager
 
 enum BlockColor {BROWN, LIGHT_BROWN, LIGHT_RED, GREY}
 @export var block_color: BlockColor = BlockColor.BROWN:
@@ -50,8 +49,7 @@ func bump_block(bump_down = false):
 	var spawnPos = self.global_position + Vector2(0, -30)
 	if bump_down:
 		spawnPos = self.global_position + Vector2(0, 10)
-	print(spawnPos)
-	game_manager.spawn_item_pickup(
+	Functions.spawn_item_pickup(
 		[	"res://scenes/coin.tscn",
 			"res://scenes/potion_blue.tscn", 
 			"res://scenes/potion_red.tscn"

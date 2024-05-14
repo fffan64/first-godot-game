@@ -1,7 +1,7 @@
 extends Area2D
+class_name Killzone
 
 @onready var timer = $Timer
-@onready var dead_sound = $DeadSound
 
 func _on_body_entered(body):
 	if body is Player:

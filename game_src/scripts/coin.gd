@@ -1,7 +1,8 @@
 extends Area2D
+class_name Coin
 
 @onready var animation_player = $AnimationPlayer
 
 func _on_body_entered(body):
-	body.game_manager.add_point()
+	Events.coin_picked.emit(1)
 	animation_player.play("pickup")

@@ -28,3 +28,39 @@ func load_data():
 			return data
 	else:
 		return null
+
+func is_in_completion_level(world: String, level: String) -> bool:
+	if world in Global.completion_level:
+		if level in Global.completion_level[world]:
+			return true
+	return false
+
+func get_checkpoint(world, level):
+	var world_num: = "world" + str(world)
+	var level_num: = "level" + str(level)
+	if is_in_completion_level(world_num, level_num):
+		return Global.completion_level[world_num][level_num].checkpoint
+	return null
+
+func set_checkpoint(world, level, checkpoint):
+	var world_num: = "world" + str(world)
+	var level_num: = "level" + str(level)
+	Global.completion_level[world_num][level_num].checkpoint = checkpoint
+
+func get_is_level_cleared(world, level):
+	var world_num: = "world" + str(world)
+	var level_num: = "level" + str(level)
+	if is_in_completion_level(world_num, level_num):
+		return Global.completion_level[world_num][level_num].cleared
+	return null
+
+func set_level_cleared(world, level, cleared = true):
+	var world_num: = "world" + str(world)
+	var level_num: = "level" + str(level)
+	Global.completion_level[world_num][level_num].cleared = cleared
+
+func spawn_item_pickup(scenePathArray: Array, pos):
+	var scene = load(scenePathArray.pick_random())
+	var sceneInstance = scene.instantiate()
+	sceneInstance.global_position = pos
+	get_tree().current_scene.add_child(sceneInstance)

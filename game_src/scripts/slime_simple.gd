@@ -1,7 +1,7 @@
 class_name Slime_Simple
 extends CharacterBody2D
 
-var SPEED = 60.0
+@export var SPEED = 60.0
 
 @export var facing_right = true
 @onready var ray_cast_right = $RayCastRight
@@ -22,7 +22,6 @@ func _physics_process(delta):
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y += gravity * delta
-
 
 	if ray_cast_right.is_colliding():
 		flip()
@@ -46,6 +45,7 @@ func set_speed():
 		SPEED = abs(SPEED) * -1
 	
 func die():
+	Events.slime_simple_died.emit()
 	set_physics_process(false)
 	if $SlimeCollision:
 		$SlimeCollision.queue_free()
@@ -56,7 +56,3 @@ func _on_destroy_zone_body_entered(body):
 		var angleAttack = rad_to_deg(body.get_angle_to(self.position))
 		if angleAttack > 10 and angleAttack < 170:
 			die()
-			if body.is_ground_pound:
-				body.animation_player.play("GroundPoundLand")
-			body.velocity.y = -200.0
-			body.jump_sound.play()

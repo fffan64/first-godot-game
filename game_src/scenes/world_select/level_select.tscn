@@ -56,7 +56,7 @@ offset_left = 128.0
 offset_top = 448.0
 offset_right = 192.0
 offset_bottom = 512.0
-next_scene_path = "res://scenes/game.tscn"
+next_scene_path = "res://scenes/world1_level1.tscn"
 next_level_right = NodePath("../2")
 
 [node name="2" parent="." node_paths=PackedStringArray("next_level_up", "next_level_left", "next_level_right") instance=ExtResource("1_tp32g")]
