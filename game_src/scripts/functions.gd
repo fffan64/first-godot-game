@@ -34,6 +34,15 @@ func is_in_completion_level(world: String, level: String) -> bool:
 		if level in Global.completion_level[world]:
 			return true
 	return false
+	
+func create_in_completion_level(world: String, level: String) -> void:
+	if world not in Global.completion_level:
+		Global.completion_level[world] = {
+			level: { "checkpoint": null, "cleared": false },
+		}
+	else:
+		if level not in Global.completion_level[world]:
+			Global.completion_level[world][level] = { "checkpoint": null, "cleared": false }
 
 func get_checkpoint(world, level):
 	var world_num: = "world" + str(world)
@@ -45,6 +54,7 @@ func get_checkpoint(world, level):
 func set_checkpoint(world, level, checkpoint):
 	var world_num: = "world" + str(world)
 	var level_num: = "level" + str(level)
+	create_in_completion_level(world_num, level_num)
 	Global.completion_level[world_num][level_num].checkpoint = checkpoint
 
 func get_is_level_cleared(world, level):
@@ -57,7 +67,8 @@ func get_is_level_cleared(world, level):
 func set_level_cleared(world, level, cleared = true):
 	var world_num: = "world" + str(world)
 	var level_num: = "level" + str(level)
-	Global.completion_level[world_num][level_num].cleared = cleared
+	create_in_completion_level(world_num, level_num)
+	Global.completion_level[world_num] [level_num].cleared = cleared
 
 func spawn_item_pickup(scenePathArray: Array, pos):
 	var scene = load(scenePathArray.pick_random())
