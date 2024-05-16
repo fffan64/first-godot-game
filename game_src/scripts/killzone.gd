@@ -12,4 +12,6 @@ func _on_body_entered(body):
 
 func _on_timer_timeout():
 	Engine.time_scale = 1.0
+	TransitionScreen.transition()
+	await TransitionScreen.on_fade_in_out_finished
 	get_tree().reload_current_scene()

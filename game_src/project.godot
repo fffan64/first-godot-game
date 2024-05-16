@@ -21,6 +21,7 @@ Global="*res://scripts/global.gd"
 Events="*res://scripts/events.gd"
 Music="*res://scenes/music.tscn"
 Functions="*res://scripts/functions.gd"
+TransitionScreen="*res://scenes/fade_in_out.tscn"
 
 [display]
 

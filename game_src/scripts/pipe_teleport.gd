@@ -11,9 +11,11 @@ func _process(delta):
 	if pipeTeleportTo == null:
 		return
 	if Input.is_action_just_pressed("move_down") and playerOnTop != null:
-		print_debug('GO IN PIPE !!!')
-		print_debug(pipeTeleportTo)
+		get_tree().paused = true
+		TransitionScreen.transition()
+		await TransitionScreen.on_fade_in_out_finished
 		playerOnTop.position = pipeTeleportTo.position + Vector2(0, -10)
+		get_tree().paused = false
 
 func _on_body_exited(body):
 	playerOnTop = null

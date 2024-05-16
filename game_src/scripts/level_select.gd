@@ -86,6 +86,8 @@ func _input(event):
 		tween_icon()
 
 	if event.is_action_pressed("dash"):
+		TransitionScreen.transition()
+		await TransitionScreen.on_fade_in_out_finished
 		get_tree().root.add_child(parent_world_select)
 		get_tree().current_scene = parent_world_select
 		get_tree().root.remove_child(self)
@@ -93,6 +95,8 @@ func _input(event):
 	if event.is_action_pressed("jump"):
 		if current_level.next_scene_path:
 			Global.current_level_name = current_level.name
+			TransitionScreen.transition()
+			await TransitionScreen.on_fade_in_out_finished
 			Functions.load_screen_to_scene(current_level.next_scene_path)
 
 func tween_icon():

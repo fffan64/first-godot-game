@@ -7,6 +7,8 @@ extends CharacterBody2D
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 
+var is_dead = false
+
 @export var DASH_SPEED = 260.0
 var dashing = false
 var can_dash = true
@@ -42,17 +44,19 @@ var is_ground_pound = false
 var canPlayWalkSound = true
 
 func _ready():
+	is_dead = false
 	register_debug_stats()
 	Events.slime_simple_died.connect(_on_slime_simple_died)
 
 func _physics_process(delta):
 	var input_dir: Vector2 = input()
 	
-	move(input_dir)
-	jump(delta)
-	ground_pound(delta)
-	wall_slide(delta)
-	dash(input_dir)
+	if not is_dead:
+		jump(delta)
+		ground_pound(delta)
+		wall_slide(delta)
+		dash(input_dir)
+	move(input_dir, delta)
 	animate(input_dir)
 	
 	# Since there could be multiple collisions, we will need to loop through them
@@ -70,7 +74,12 @@ func input() -> Vector2:
 	input_dir = input_dir.normalized()
 	return input_dir
 
-func move(direction):
+func move(direction, delta):
+	# Add the gravity.
+	if not is_on_floor():
+		if not is_ground_pound:
+			velocity.y += gravity * delta
+			
 	var velocityCalc = 0
 	if dashing:
 		velocityCalc = direction.x * DASH_SPEED
@@ -98,11 +107,6 @@ func move(direction):
 	move_and_slide()
 
 func jump(delta):
-	# Add the gravity.
-	if not is_on_floor():
-		if not is_ground_pound:
-			velocity.y += gravity * delta
-		
 	if is_on_floor():
 		jump_count = 0
 
@@ -246,6 +250,7 @@ func spring(power: float, direction: float) -> void:
 	velocity.y = -sin(direction) * power
 
 func die():
+	is_dead = true
 	dead_sound.play()
 	get_node("CollisionShape2D").queue_free()
 

@@ -14,6 +14,7 @@ var swiping = false
 var thresholdSwipe = 10
 
 func _ready():
+	TransitionScreen.transition_enter()
 	$PlayerIcon.global_position = worlds[current_world].global_position
 	(worlds[current_world] as Control).process_mode = Node.PROCESS_MODE_INHERIT
 
@@ -77,6 +78,8 @@ func _input(event):
 	
 	if event.is_action_pressed("jump"):
 		if worlds[current_world].level_select_scene:
+			TransitionScreen.transition()
+			await TransitionScreen.on_fade_in_out_finished
 			Global.current_world_name = worlds[current_world].name
 			worlds[current_world].level_select_scene.parent_world_select = self
 			get_tree().root.add_child(worlds[current_world].level_select_scene)
