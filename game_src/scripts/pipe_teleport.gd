@@ -12,8 +12,8 @@ func _process(delta):
 		return
 	if Input.is_action_just_pressed("move_down") and playerOnTop != null:
 		get_tree().paused = true
-		TransitionScreen.transition()
-		await TransitionScreen.on_fade_in_out_finished
+		#TransitionScreen.transition()
+		#await TransitionScreen.on_fade_in_out_finished
 		playerOnTop.position = pipeTeleportTo.position + Vector2(0, -10)
 		get_tree().paused = false
 

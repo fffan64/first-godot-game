@@ -39,7 +39,6 @@ func _process(delta):
 
 func _input(event):
 	if event.is_action_pressed("shaderVHS"):
-		print_debug(fx_retro_vhs.is_inside_tree())
 		if fx_retro_vhs.is_inside_tree():
 			fx_retro_vhs.visible = not fx_retro_vhs.visible
 		else:
