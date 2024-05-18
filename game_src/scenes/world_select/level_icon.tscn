@@ -1,15 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://bu5yetb4nw650"]
+[gd_scene load_steps=5 format=3 uid="uid://bu5yetb4nw650"]
 
 [ext_resource type="Script" path="res://scripts/level_icon.gd" id="1_7k1qq"]
 [ext_resource type="FontFile" uid="uid://dam3qndfjagyb" path="res://assets/fonts/PixelOperator8.ttf" id="2_rwiul"]
-
-[sub_resource type="Gradient" id="Gradient_2lrwr"]
-offsets = PackedFloat32Array(0)
-colors = PackedColorArray(0, 0, 0, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_myu55"]
-gradient = SubResource("Gradient_2lrwr")
-width = 64
+[ext_resource type="Texture2D" uid="uid://daujyynaqiwrk" path="res://assets/sprites/pattern/tile_0039.png" id="3_0j8ce"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fyfsy"]
 
@@ -33,11 +26,12 @@ theme_override_font_sizes/font_size = 16
 text = "Level 1"
 
 [node name="TextureRect" type="TextureRect" parent="."]
+self_modulate = Color(1, 0.580392, 0, 1)
 layout_mode = 0
 offset_right = 64.0
 offset_bottom = 64.0
 mouse_filter = 2
-texture = SubResource("GradientTexture1D_myu55")
+texture = ExtResource("3_0j8ce")
 
 [node name="Control" type="Control" parent="."]
 anchors_preset = 0

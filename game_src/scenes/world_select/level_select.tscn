@@ -1,8 +1,9 @@
-[gd_scene load_steps=19 format=3 uid="uid://d2lev4hrwxw3u"]
+[gd_scene load_steps=20 format=3 uid="uid://d2lev4hrwxw3u"]
 
 [ext_resource type="Script" path="res://scripts/level_select.gd" id="1_jfgc1"]
 [ext_resource type="PackedScene" uid="uid://bu5yetb4nw650" path="res://scenes/world_select/level_icon.tscn" id="1_tp32g"]
 [ext_resource type="Shader" path="res://shaders/highlightHard.gdshader" id="2_8tgp8"]
+[ext_resource type="Texture2D" uid="uid://bnd2xx26u7ihf" path="res://assets/sprites/pattern/tile_0015.png" id="2_wccpl"]
 [ext_resource type="Texture2D" uid="uid://cajbwcjoy46i" path="res://assets/sprites/knight.png" id="3_cjqo2"]
 [ext_resource type="Shader" path="res://shaders/scroll.gdshader" id="3_qr6c6"]
 [ext_resource type="Script" path="res://scripts/animated_texture_rect.gd" id="4_sw7vh"]
@@ -86,6 +87,114 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0.197845, 0.483589, 1)
+
+[node name="Line1" type="Line2D" parent="."]
+position = Vector2(136, 54)
+scale = Vector2(0.603774, 0.869565)
+points = PackedVector2Array(39.75, 487.6, 357.75, 414)
+width = 40.0
+default_color = Color(0.919874, 0.761171, 0, 1)
+texture = ExtResource("2_wccpl")
+texture_mode = 1
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Line2" type="Line2D" parent="."]
+position = Vector2(320, -104)
+scale = Vector2(0.603774, 0.869565)
+points = PackedVector2Array(53, 377.2, 53, 598)
+width = 40.0
+default_color = Color(0.919874, 0.761171, 0, 1)
+texture = ExtResource("2_wccpl")
+texture_mode = 1
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Line3" type="Line2D" parent="."]
+position = Vector2(320, -104)
+scale = Vector2(0.603774, 0.869565)
+points = PackedVector2Array(371, 671.6, 53, 598)
+width = 40.0
+default_color = Color(0.919874, 0.761171, 0, 1)
+texture = ExtResource("2_wccpl")
+texture_mode = 1
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Line4" type="Line2D" parent="."]
+position = Vector2(320, -104)
+scale = Vector2(0.603774, 0.869565)
+points = PackedVector2Array(371, 671.6, 689, 524.4)
+width = 40.0
+default_color = Color(0.919874, 0.761171, 0, 1)
+texture = ExtResource("2_wccpl")
+texture_mode = 1
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Line5" type="Line2D" parent="."]
+position = Vector2(320, -104)
+scale = Vector2(0.603774, 0.869565)
+points = PackedVector2Array(1007, 377.2, 689, 524.4)
+width = 40.0
+default_color = Color(0.919874, 0.761171, 0, 1)
+texture = ExtResource("2_wccpl")
+texture_mode = 1
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Line6" type="Line2D" parent="."]
+position = Vector2(320, -104)
+scale = Vector2(0.603774, 0.869565)
+points = PackedVector2Array(1007, 671.6, 689, 524.4)
+width = 40.0
+default_color = Color(0.919874, 0.761171, 0, 1)
+texture = ExtResource("2_wccpl")
+texture_mode = 1
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Line7" type="Line2D" parent="."]
+position = Vector2(320, -104)
+scale = Vector2(0.603774, 0.869565)
+points = PackedVector2Array(1007, 671.6, 1219, 524.4)
+width = 40.0
+default_color = Color(0.919874, 0.761171, 0, 1)
+texture = ExtResource("2_wccpl")
+texture_mode = 1
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Line8" type="Line2D" parent="."]
+position = Vector2(320, -104)
+scale = Vector2(0.603774, 0.869565)
+points = PackedVector2Array(1007, 377.2, 1219, 524.4)
+width = 40.0
+default_color = Color(0.919874, 0.761171, 0, 1)
+texture = ExtResource("2_wccpl")
+texture_mode = 1
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Line9" type="Line2D" parent="."]
+position = Vector2(320, -104)
+scale = Vector2(0.603774, 0.869565)
+points = PackedVector2Array(1007, 377.2, 1007, 671.6)
+width = 40.0
+default_color = Color(0.919874, 0.761171, 0, 1)
+texture = ExtResource("2_wccpl")
+texture_mode = 1
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 1

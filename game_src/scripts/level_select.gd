@@ -103,7 +103,6 @@ func tween_icon():
 	move_tween = get_tree().create_tween()
 	move_tween.tween_property($PlayerIcon, "position", current_level.global_position, 0.5).set_trans(Tween.TRANS_SINE)
 
-
 func _on_texture_button_pressed():
 	var event = InputEventAction.new()
 	event.action = "dash"

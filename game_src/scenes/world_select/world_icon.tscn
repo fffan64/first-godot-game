@@ -1,16 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://b7xv5el5incc"]
+[gd_scene load_steps=6 format=3 uid="uid://b7xv5el5incc"]
 
 [ext_resource type="Script" path="res://scripts/world_icon.gd" id="1_4h7ba"]
 [ext_resource type="FontFile" uid="uid://dam3qndfjagyb" path="res://assets/fonts/PixelOperator8.ttf" id="1_rvssp"]
 [ext_resource type="PackedScene" uid="uid://d2lev4hrwxw3u" path="res://scenes/world_select/level_select.tscn" id="2_evr1k"]
-
-[sub_resource type="Gradient" id="Gradient_2lrwr"]
-offsets = PackedFloat32Array(0)
-colors = PackedColorArray(0, 0, 0, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_myu55"]
-gradient = SubResource("Gradient_2lrwr")
-width = 64
+[ext_resource type="Texture2D" uid="uid://ddvyv3a1itb1e" path="res://assets/sprites/pattern/tile_0036.png" id="4_aplj3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o4dfr"]
 
@@ -33,11 +26,12 @@ theme_override_font_sizes/font_size = 16
 text = "World 1"
 
 [node name="TextureRect" type="TextureRect" parent="."]
+self_modulate = Color(1, 0.580392, 0, 1)
 layout_mode = 0
 offset_right = 64.0
 offset_bottom = 64.0
 mouse_filter = 2
-texture = SubResource("GradientTexture1D_myu55")
+texture = ExtResource("4_aplj3")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 1

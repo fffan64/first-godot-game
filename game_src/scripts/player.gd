@@ -117,7 +117,6 @@ func jump(delta):
 		max_jumps = 1
 	
 	if Input.is_action_just_pressed("jump"):
-		
 		if jump_count < max_jumps and !is_on_wall():
 			velocity.y = JUMP_VELOCITY
 			jump_count += 1
