@@ -1,10 +1,28 @@
-[gd_scene load_steps=11 format=3 uid="uid://ctqw23nwrtrnv"]
+[gd_scene load_steps=21 format=3 uid="uid://ctqw23nwrtrnv"]
 
 [ext_resource type="Script" path="res://scripts/world_select.gd" id="1_mhxpq"]
 [ext_resource type="PackedScene" uid="uid://b7xv5el5incc" path="res://scenes/world_select/world_icon.tscn" id="1_mu24f"]
+[ext_resource type="PackedScene" uid="uid://cob5gwbx56hw7" path="res://scenes/swipe_controller.tscn" id="2_24s5x"]
+[ext_resource type="Shader" path="res://shaders/scroll.gdshader" id="2_y3pn4"]
+[ext_resource type="Texture2D" uid="uid://bkx3sw1x0v1sd" path="res://assets/sprites/tile_0025.png" id="3_p5nym"]
 [ext_resource type="PackedScene" uid="uid://dcyy4clc45qd4" path="res://scenes/world_select/level_select_2.tscn" id="4_8tes3"]
 [ext_resource type="Texture2D" uid="uid://cajbwcjoy46i" path="res://assets/sprites/knight.png" id="5_ifq1d"]
+[ext_resource type="Shader" path="res://shaders/highlight1.gdshader" id="6_syl8g"]
+[ext_resource type="Shader" path="res://shaders/highlightHard.gdshader" id="6_wg7xj"]
 [ext_resource type="Script" path="res://scripts/animated_texture_rect.gd" id="6_xqe6l"]
+[ext_resource type="FontFile" uid="uid://durllno7hjbwe" path="res://assets/fonts/Adventurer.ttf" id="10_fcuq3"]
+[ext_resource type="Texture2D" uid="uid://jd50uvl6nl7m" path="res://assets/sprites/switch_left.png" id="12_cm8i0"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_i8w2p"]
+shader = ExtResource("6_wg7xj")
+shader_parameter/highlight_color = Color(1, 1, 1, 1)
+shader_parameter/frequency = 0.35
+shader_parameter/highlight_speed = 6.0
+shader_parameter/highlight_width = 15.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_x4roj"]
+shader = ExtResource("2_y3pn4")
+shader_parameter/speed = 0.5
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_w6hob"]
 atlas = ExtResource("5_ifq1d")
@@ -42,6 +60,17 @@ animations = [{
 "speed": 15.0
 }]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mghw6"]
+shader = ExtResource("6_syl8g")
+shader_parameter/shine_color = Color(1, 1, 1, 0.25)
+shader_parameter/line_width = 0.1
+shader_parameter/angle = 0.785398
+shader_parameter/speed = 1.0
+shader_parameter/wait_cycles = 1.5
+shader_parameter/height = 10.0
+shader_parameter/frequency = 0.35
+shader_parameter/speed_wavy = 3.0
+
 [node name="WorldSelect" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -50,6 +79,84 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_mhxpq")
+
+[node name="SwipeController" parent="." instance=ExtResource("2_24s5x")]
+layout_mode = 1
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0.197845, 0.483589, 1)
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+grow_horizontal = 2
+
+[node name="Pattern3" type="ColorRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -1.89368
+offset_top = -384.0
+offset_right = 498.106
+offset_bottom = 116.0
+grow_horizontal = 2
+rotation = 0.785398
+scale = Vector2(1.08076, 1.08076)
+color = Color(0, 0, 0, 1)
+
+[node name="Pattern2" type="ColorRect" parent="Control"]
+material = SubResource("ShaderMaterial_i8w2p")
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -1.89368
+offset_top = -384.0
+offset_right = 498.106
+offset_bottom = 116.0
+grow_horizontal = 2
+rotation = 0.785398
+scale = Vector2(1.06451, 1.06451)
+color = Color(0.910468, 0.836782, 0, 1)
+
+[node name="Pattern4" type="ColorRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -1.89368
+offset_top = -384.0
+offset_right = 498.106
+offset_bottom = 116.0
+grow_horizontal = 2
+rotation = 0.785398
+scale = Vector2(1.01423, 1.01423)
+color = Color(0, 0, 0, 1)
+
+[node name="Pattern" type="TextureRect" parent="Control"]
+self_modulate = Color(0.580549, 0.00099621, 0.705967, 1)
+material = SubResource("ShaderMaterial_x4roj")
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -1.89368
+offset_top = -384.0
+offset_right = 498.106
+offset_bottom = 116.0
+grow_horizontal = 2
+rotation = 0.785398
+texture = ExtResource("3_p5nym")
+stretch_mode = 1
 
 [node name="1" parent="." instance=ExtResource("1_mu24f")]
 offset_left = 108.0
@@ -101,3 +208,43 @@ autoplay = true
 Animation = "default"
 Frame = 0
 "Speed Scale" = 1.0
+
+[node name="Label3" type="RichTextLabel" parent="."]
+material = SubResource("ShaderMaterial_mghw6")
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -431.0
+offset_top = 80.0
+offset_right = 431.0
+offset_bottom = 180.0
+grow_horizontal = 2
+theme_override_colors/default_color = Color(0.701961, 0.00392157, 0.984314, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0.882402, 0.575904, 1.15514e-06, 1)
+theme_override_constants/shadow_offset_x = 5
+theme_override_constants/shadow_offset_y = 5
+theme_override_constants/shadow_outline_size = 20
+theme_override_constants/outline_size = 8
+theme_override_fonts/normal_font = ExtResource("10_fcuq3")
+theme_override_fonts/bold_font = ExtResource("10_fcuq3")
+theme_override_fonts/italics_font = ExtResource("10_fcuq3")
+theme_override_fonts/bold_italics_font = ExtResource("10_fcuq3")
+theme_override_fonts/mono_font = ExtResource("10_fcuq3")
+theme_override_font_sizes/normal_font_size = 100
+theme_override_font_sizes/bold_font_size = 100
+theme_override_font_sizes/italics_font_size = 100
+theme_override_font_sizes/bold_italics_font_size = 100
+theme_override_font_sizes/mono_font_size = 100
+bbcode_enabled = true
+text = "[center][wave amp=2 freq=10
+]World Selection[/wave][/center]"
+
+[node name="TextureButton" type="TouchScreenButton" parent="."]
+position = Vector2(32, 32)
+texture_normal = ExtResource("12_cm8i0")
+action = "dash"
+visibility_mode = 1
+
+[connection signal="pressed" from="TextureButton" to="." method="_on_texture_button_pressed"]

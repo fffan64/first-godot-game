@@ -1,10 +1,37 @@
-[gd_scene load_steps=11 format=3 uid="uid://d2lev4hrwxw3u"]
+[gd_scene load_steps=19 format=3 uid="uid://d2lev4hrwxw3u"]
 
 [ext_resource type="Script" path="res://scripts/level_select.gd" id="1_jfgc1"]
 [ext_resource type="PackedScene" uid="uid://bu5yetb4nw650" path="res://scenes/world_select/level_icon.tscn" id="1_tp32g"]
+[ext_resource type="Shader" path="res://shaders/highlightHard.gdshader" id="2_8tgp8"]
 [ext_resource type="Texture2D" uid="uid://cajbwcjoy46i" path="res://assets/sprites/knight.png" id="3_cjqo2"]
+[ext_resource type="Shader" path="res://shaders/scroll.gdshader" id="3_qr6c6"]
 [ext_resource type="Script" path="res://scripts/animated_texture_rect.gd" id="4_sw7vh"]
+[ext_resource type="Texture2D" uid="uid://bkx3sw1x0v1sd" path="res://assets/sprites/tile_0025.png" id="4_uwjwd"]
 [ext_resource type="Texture2D" uid="uid://jd50uvl6nl7m" path="res://assets/sprites/switch_left.png" id="5_8u0hj"]
+[ext_resource type="Shader" path="res://shaders/highlight1.gdshader" id="5_13gpp"]
+[ext_resource type="FontFile" uid="uid://durllno7hjbwe" path="res://assets/fonts/Adventurer.ttf" id="6_c6l72"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d58hn"]
+shader = ExtResource("2_8tgp8")
+shader_parameter/highlight_color = Color(1, 1, 1, 1)
+shader_parameter/frequency = 0.35
+shader_parameter/highlight_speed = 6.0
+shader_parameter/highlight_width = 15.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tjdwd"]
+shader = ExtResource("3_qr6c6")
+shader_parameter/speed = 0.5
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oheor"]
+shader = ExtResource("5_13gpp")
+shader_parameter/shine_color = Color(1, 1, 1, 0.25)
+shader_parameter/line_width = 0.1
+shader_parameter/angle = 0.785398
+shader_parameter/speed = 1.0
+shader_parameter/wait_cycles = 1.5
+shader_parameter/height = 10.0
+shader_parameter/frequency = 0.35
+shader_parameter/speed_wavy = 3.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_w6hob"]
 atlas = ExtResource("3_cjqo2")
@@ -50,6 +77,113 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_jfgc1")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0.197845, 0.483589, 1)
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+grow_horizontal = 2
+
+[node name="Pattern3" type="ColorRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -1.89368
+offset_top = -384.0
+offset_right = 498.106
+offset_bottom = 116.0
+grow_horizontal = 2
+rotation = 0.785398
+scale = Vector2(1.08076, 1.08076)
+color = Color(0, 0, 0, 1)
+
+[node name="Pattern2" type="ColorRect" parent="Control"]
+material = SubResource("ShaderMaterial_d58hn")
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -1.89368
+offset_top = -384.0
+offset_right = 498.106
+offset_bottom = 116.0
+grow_horizontal = 2
+rotation = 0.785398
+scale = Vector2(1.06451, 1.06451)
+color = Color(0.910468, 0.836782, 0, 1)
+
+[node name="Pattern4" type="ColorRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -1.89368
+offset_top = -384.0
+offset_right = 498.106
+offset_bottom = 116.0
+grow_horizontal = 2
+rotation = 0.785398
+scale = Vector2(1.01423, 1.01423)
+color = Color(0, 0, 0, 1)
+
+[node name="Pattern" type="TextureRect" parent="Control"]
+self_modulate = Color(0.580549, 0.00099621, 0.705967, 1)
+material = SubResource("ShaderMaterial_tjdwd")
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -1.89368
+offset_top = -384.0
+offset_right = 498.106
+offset_bottom = 116.0
+grow_horizontal = 2
+rotation = 0.785398
+texture = ExtResource("4_uwjwd")
+stretch_mode = 1
+
+[node name="Label3" type="RichTextLabel" parent="."]
+material = SubResource("ShaderMaterial_oheor")
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -431.0
+offset_top = 48.0
+offset_right = 431.0
+offset_bottom = 148.0
+grow_horizontal = 2
+theme_override_colors/default_color = Color(0.701961, 0.00392157, 0.984314, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0.882402, 0.575904, 1.15514e-06, 1)
+theme_override_constants/shadow_offset_x = 5
+theme_override_constants/shadow_offset_y = 5
+theme_override_constants/shadow_outline_size = 20
+theme_override_constants/outline_size = 8
+theme_override_fonts/normal_font = ExtResource("6_c6l72")
+theme_override_fonts/bold_font = ExtResource("6_c6l72")
+theme_override_fonts/italics_font = ExtResource("6_c6l72")
+theme_override_fonts/bold_italics_font = ExtResource("6_c6l72")
+theme_override_fonts/mono_font = ExtResource("6_c6l72")
+theme_override_font_sizes/normal_font_size = 80
+theme_override_font_sizes/bold_font_size = 80
+theme_override_font_sizes/italics_font_size = 80
+theme_override_font_sizes/bold_italics_font_size = 80
+theme_override_font_sizes/mono_font_size = 80
+bbcode_enabled = true
+text = "[center][wave amp=2 freq=10
+]Level Selection[/wave][/center]"
 
 [node name="1" parent="." node_paths=PackedStringArray("next_level_right") instance=ExtResource("1_tp32g")]
 offset_left = 128.0
