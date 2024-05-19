@@ -2,8 +2,15 @@ extends CanvasLayer
 
 @export_file("*.tscn") var nex_scene_path: String
 @export var parameters: Dictionary # Temporarily store params to be passed to target scene
+@onready var diamond = $Control/diamond
+
+var tween
 
 func _ready():
+	tween = create_tween().set_loops()
+	tween.parallel().tween_property(diamond, "rotation_degrees", 90, 1.0).as_relative()
+	tween.parallel().tween_property(diamond, "scale", Vector2(0.7, 0.7), 1.0).set_trans(Tween.TRANS_BOUNCE).set_ease(Tween.EASE_OUT)
+	tween.chain().tween_property(diamond, "scale", Vector2(0.8, 0.8), 1.0)
 	ResourceLoader.load_threaded_request(nex_scene_path)
 	
 func _process(delta):

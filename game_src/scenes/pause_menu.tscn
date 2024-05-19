@@ -268,7 +268,8 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = -384.0
-offset_bottom = -384.0
+offset_right = 2304.0
+offset_bottom = 912.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -472,6 +473,55 @@ theme_override_font_sizes/bold_italics_font_size = 100
 theme_override_font_sizes/mono_font_size = 100
 bbcode_enabled = true
 text = "RESUME"
+
+[node name="CenterContainer3" type="HBoxContainer" parent="CenterContainer/VBoxContainer/Control/CenterContainer2/Control/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer/Control/CenterContainer2/Control/VBoxContainer/CenterContainer3"]
+layout_mode = 2
+
+[node name="Selector" type="Label" parent="CenterContainer/VBoxContainer/Control/CenterContainer2/Control/VBoxContainer/CenterContainer3/HBoxContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_outline_size = 2
+theme_override_fonts/font = ExtResource("8_5q07m")
+theme_override_font_sizes/font_size = 64
+text = ">"
+
+[node name="Control2" type="Control" parent="CenterContainer/VBoxContainer/Control/CenterContainer2/Control/VBoxContainer/CenterContainer3/HBoxContainer"]
+layout_mode = 2
+
+[node name="LabelReload" type="RichTextLabel" parent="CenterContainer/VBoxContainer/Control/CenterContainer2/Control/VBoxContainer/CenterContainer3/HBoxContainer/Control2"]
+material = SubResource("ShaderMaterial_ogjt3")
+clip_contents = false
+layout_mode = 2
+offset_left = -5.0
+offset_right = 255.0
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0.27877, 0.378969, 1, 1)
+theme_override_constants/shadow_offset_x = 5
+theme_override_constants/shadow_offset_y = 5
+theme_override_constants/shadow_outline_size = 20
+theme_override_constants/outline_size = 8
+theme_override_fonts/normal_font = ExtResource("9_dajsl")
+theme_override_fonts/bold_font = ExtResource("9_dajsl")
+theme_override_fonts/italics_font = ExtResource("9_dajsl")
+theme_override_fonts/bold_italics_font = ExtResource("9_dajsl")
+theme_override_fonts/mono_font = ExtResource("9_dajsl")
+theme_override_font_sizes/normal_font_size = 60
+theme_override_font_sizes/bold_font_size = 100
+theme_override_font_sizes/italics_font_size = 100
+theme_override_font_sizes/bold_italics_font_size = 100
+theme_override_font_sizes/mono_font_size = 100
+bbcode_enabled = true
+text = "RESTART"
 
 [node name="CenterContainer2" type="HBoxContainer" parent="CenterContainer/VBoxContainer/Control/CenterContainer2/Control/VBoxContainer"]
 layout_mode = 2
