@@ -8,6 +8,7 @@ extends CharacterBody2D
 var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 var is_dead = false
+var is_invincible = false
 
 @export var DASH_SPEED = 260.0
 var dashing = false
@@ -40,6 +41,8 @@ var is_ground_pound = false
 
 @export var ghost_node: PackedScene
 @onready var ghost_timer = $Ghost_timer
+
+@onready var invincible_timer = $Invincible_timer
 
 var canPlayWalkSound = true
 
@@ -234,6 +237,7 @@ func _on_ghost_timer_timeout():
 	add_ghost()
 
 func _start_ground_pound():
+	is_invincible = true
 	is_ground_pound = true
 	velocity = Vector2.ZERO
 	animation_player.play("GroundPoundingIn")
@@ -242,6 +246,7 @@ func _ground_pound_move():
 	velocity = Vector2(0, GROUND_POUND_FALL_SPEED)
 	
 func _end_ground_pound():
+	invincible_timer.start()
 	is_ground_pound = false
 
 func spring(power: float, direction: float) -> void:
@@ -249,9 +254,12 @@ func spring(power: float, direction: float) -> void:
 	velocity.y = -sin(direction) * power
 
 func die():
-	is_dead = true
-	dead_sound.play()
-	get_node("CollisionShape2D").queue_free()
+	if !is_invincible:
+		is_dead = true
+		dead_sound.play()
+		get_node("CollisionShape2D").queue_free()
+	else:
+		print_debug("Not this time, i'm invincible !")
 
 func register_debug_stats():
 	if ui.debug_stats:
@@ -261,4 +269,9 @@ func register_debug_stats():
 		ui.debug_stats.add_property(self, "dashing", "")
 		ui.debug_stats.add_property(self, "is_wall_sliding_left", "")
 		ui.debug_stats.add_property(self, "is_wall_sliding_right", "")
+		ui.debug_stats.add_property(self, "is_invincible", "")
 		ui.debug_stats.add_property(self, "is_ground_pound", "")
+
+
+func _on_invincible_timer_timeout():
+	is_invincible = false

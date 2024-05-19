@@ -536,6 +536,7 @@ position_smoothing_enabled = true
 
 [node name="Killzone" parent="." instance=ExtResource("9_70ogt")]
 position = Vector2(108, 160)
+ignore_invincible_player = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone"]
 shape = SubResource("WorldBoundaryShape2D_lpspq")

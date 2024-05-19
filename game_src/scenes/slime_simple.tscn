@@ -41,8 +41,8 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_o7xk1"]
-size = Vector2(10, 12)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b0uc4"]
+size = Vector2(8, 12)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gfoj8"]
 size = Vector2(14, 12)
@@ -186,7 +186,7 @@ frame_progress = 0.995695
 
 [node name="SlimeCollision" type="CollisionShape2D" parent="."]
 position = Vector2(0, -6)
-shape = SubResource("RectangleShape2D_o7xk1")
+shape = SubResource("RectangleShape2D_b0uc4")
 
 [node name="Killzone" parent="." instance=ExtResource("3_bsnmq")]
 
@@ -220,5 +220,6 @@ libraries = {
 
 [node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
 position = Vector2(1, -9)
+scale = Vector2(9.8, 9)
 
 [connection signal="body_entered" from="DestroyZone" to="." method="_on_destroy_zone_body_entered"]
