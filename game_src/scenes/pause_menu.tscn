@@ -50,6 +50,57 @@ shader_parameter/height = 10.0
 shader_parameter/frequency = 0.35
 shader_parameter/speed_wavy = 3.0
 
+[sub_resource type="Animation" id="Animation_b3oau"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -384)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CenterContainer/VBoxContainer/CenterContainer/Control/Label3:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-480, -546)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AudioStreamPlayer2D:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CenterContainer/VBoxContainer/Control/CenterContainer2:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 18)]
+}
+
 [sub_resource type="Animation" id="Animation_rm7ot"]
 resource_name = "pause_in"
 step = 0.01
@@ -100,57 +151,6 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1, 1, 0.450625, 1),
 "update": 0,
 "values": [Vector2(0, 338), Vector2(0, 18), Vector2(0, 58), Vector2(0, 18)]
-}
-
-[sub_resource type="Animation" id="Animation_b3oau"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Control:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, -384)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("CenterContainer/VBoxContainer/CenterContainer/Control/Label3:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-480, -546)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("AudioStreamPlayer2D:playing")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("CenterContainer/VBoxContainer/Control/CenterContainer2:position")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 18)]
 }
 
 [sub_resource type="Animation" id="Animation_w8hey"]
@@ -230,29 +230,6 @@ _data = {
 process_mode = 2
 script = ExtResource("1_yr2fy")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="Control" type="Control" parent="CanvasLayer"]
-layout_mode = 3
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -192.0
-offset_top = -200.0
-offset_right = -64.0
-offset_bottom = -72.0
-grow_horizontal = 0
-grow_vertical = 0
-
-[node name="TouchScreenButton" type="TouchScreenButton" parent="CanvasLayer/Control"]
-texture_normal = ExtResource("2_why2v")
-action = "jump"
-visibility_mode = 1
-
-[node name="SwipeController" parent="." instance=ExtResource("3_adg6p")]
-
 [node name="ColorRect" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_g23xm")
 anchors_preset = 15
@@ -261,6 +238,29 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0.196078, 0.482353, 1)
+
+[node name="SwipeController" parent="." instance=ExtResource("3_adg6p")]
+
+[node name="Jump button" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -289.0
+offset_top = -176.0
+offset_right = -157.0
+offset_bottom = -49.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="Jump button"]
+position = Vector2(-36, -36)
+scale = Vector2(1.5, 1.5)
+texture_normal = ExtResource("2_why2v")
+action = "jump"
+visibility_mode = 1
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
