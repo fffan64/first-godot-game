@@ -15,6 +15,8 @@ func _ready():
 	
 func _process(delta):
 	if ResourceLoader.load_threaded_get_status(nex_scene_path) == ResourceLoader.THREAD_LOAD_LOADED:
+		#TransitionScreen.transition()
+		#await TransitionScreen.on_fade_in_out_finished
 		set_process(false)
 		await get_tree().create_timer(1).timeout
 		var new_scene: PackedScene = ResourceLoader.load_threaded_get(nex_scene_path)

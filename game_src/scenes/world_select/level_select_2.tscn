@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://dcyy4clc45qd4"]
+[gd_scene load_steps=12 format=3 uid="uid://dcyy4clc45qd4"]
 
 [ext_resource type="Script" path="res://scripts/level_select.gd" id="1_3v5go"]
 [ext_resource type="PackedScene" uid="uid://bu5yetb4nw650" path="res://scenes/world_select/level_icon.tscn" id="2_7ao5m"]
 [ext_resource type="Texture2D" uid="uid://cajbwcjoy46i" path="res://assets/sprites/knight.png" id="3_pif2v"]
 [ext_resource type="Script" path="res://scripts/animated_texture_rect.gd" id="4_c7wob"]
 [ext_resource type="Texture2D" uid="uid://jd50uvl6nl7m" path="res://assets/sprites/switch_left.png" id="5_irq55"]
+[ext_resource type="AudioStream" uid="uid://27werrxboiwp" path="res://assets/sounds/explosion_shock_down.wav" id="6_ew3k3"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_w6hob"]
 atlas = ExtResource("3_pif2v")
@@ -86,3 +87,7 @@ position = Vector2(32, 32)
 texture_normal = ExtResource("5_irq55")
 action = "dash"
 visibility_mode = 1
+
+[node name="SoundValid" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_ew3k3")
+bus = &"SFX"

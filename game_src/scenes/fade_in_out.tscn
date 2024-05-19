@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://djm5tnwgpc7am"]
+[gd_scene load_steps=8 format=3 uid="uid://djm5tnwgpc7am"]
 
 [ext_resource type="Script" path="res://scripts/fade_in_out.gd" id="1_afvoh"]
+[ext_resource type="Shader" path="res://shaders/fade_in_out.gdshader" id="2_lt573"]
 
 [sub_resource type="Animation" id="Animation_x38la"]
 length = 0.001
@@ -27,6 +28,30 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ColorRect:material:shader_parameter/position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ColorRect:material:shader_parameter/in_out")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
 }
 
 [sub_resource type="Animation" id="Animation_ncpjy"]
@@ -55,6 +80,30 @@ tracks/1/keys = {
 "update": 1,
 "values": [true, false]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ColorRect:material:shader_parameter/in_out")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ColorRect:material:shader_parameter/position")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-1.5, 1.0]
+}
 
 [sub_resource type="Animation" id="Animation_03uvj"]
 resource_name = "fade_out"
@@ -82,6 +131,30 @@ tracks/1/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ColorRect:material:shader_parameter/position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, -1.5]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ColorRect:material:shader_parameter/in_out")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7gs2p"]
 _data = {
@@ -90,6 +163,14 @@ _data = {
 "fade_out": SubResource("Animation_03uvj")
 }
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_48eei"]
+shader = ExtResource("2_lt573")
+shader_parameter/in_color = Color(1, 0.196078, 0.482353, 1)
+shader_parameter/out_color = Color(1, 0.196078, 0.482353, 1)
+shader_parameter/in_out = 0.0
+shader_parameter/position = 1.0
+shader_parameter/size = Vector2(64, 64)
+
 [node name="FadeInOut" type="CanvasLayer"]
 script = ExtResource("1_afvoh")
 
@@ -97,10 +178,10 @@ script = ExtResource("1_afvoh")
 libraries = {
 "": SubResource("AnimationLibrary_7gs2p")
 }
-speed_scale = 3.0
 
 [node name="ColorRect" type="ColorRect" parent="."]
 visible = false
+material = SubResource("ShaderMaterial_48eei")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

@@ -3,6 +3,7 @@ class_name LevelSelect
 
 var parameters: Dictionary # This needs to be here so the scene can receive parameters
 
+@onready var sound_valid = $SoundValid
 @onready var current_level: LevelIcon = $"1"
 var parent_world_select: Node
 var move_tween: Tween
@@ -86,6 +87,7 @@ func _input(event):
 		tween_icon()
 
 	if event.is_action_pressed("dash"):
+		sound_valid.play()
 		TransitionScreen.transition()
 		await TransitionScreen.on_fade_in_out_finished
 		get_tree().root.add_child(parent_world_select)
@@ -94,6 +96,7 @@ func _input(event):
 		
 	if event.is_action_pressed("jump"):
 		if current_level.next_scene_path:
+			sound_valid.play()
 			Global.current_level_name = current_level.name
 			TransitionScreen.transition()
 			await TransitionScreen.on_fade_in_out_finished

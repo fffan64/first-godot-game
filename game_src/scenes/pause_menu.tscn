@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://bymuvvhhf2ve4"]
+[gd_scene load_steps=23 format=3 uid="uid://bymuvvhhf2ve4"]
 
 [ext_resource type="Script" path="res://scripts/pause_menu.gd" id="1_yr2fy"]
 [ext_resource type="Texture2D" uid="uid://x4xg4eq44yb" path="res://assets/sprites/switch_button_a.png" id="2_why2v"]
@@ -12,6 +12,7 @@
 [ext_resource type="FontFile" uid="uid://durllno7hjbwe" path="res://assets/fonts/Adventurer.ttf" id="9_dajsl"]
 [ext_resource type="AudioStream" uid="uid://dqma1m5smg5hc" path="res://assets/sounds/blipSelect.wav" id="10_ojuwc"]
 [ext_resource type="AudioStream" uid="uid://c8mu2cnqudd0u" path="res://assets/sounds/click.wav" id="12_kyksd"]
+[ext_resource type="AudioStream" uid="uid://27werrxboiwp" path="res://assets/sounds/explosion_shock_down.wav" id="13_vu4l3"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g23xm"]
 shader = ExtResource("4_8gxtm")
@@ -268,8 +269,7 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = -384.0
-offset_right = 2304.0
-offset_bottom = 912.0
+offset_bottom = -384.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -586,5 +586,10 @@ bus = &"SFX"
 libraries = {
 "": SubResource("AnimationLibrary_l0hcr")
 }
+
+[node name="SoundValid" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("13_vu4l3")
+bus = &"SFX"
 
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]

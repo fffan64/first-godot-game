@@ -2,11 +2,19 @@ extends Control
 
 var parameters: Dictionary # This needs to be here so the scene can receive parameters
 
+@export var music = preload("res://assets/music/Distance of Moon and Earth.ogg")
+
+@onready var sound_valid = $SoundValid
+
 @onready var worlds: Array = [$"1", $"2", $"3", $"4", $"5"]
 var current_world: int = 0
 var move_tween: Tween
 
 func _ready():
+	print_debug(Music.stream)
+	if Music.stream != music:
+		Music.stream = music
+		Music.play()
 	TransitionScreen.transition_enter()
 	$PlayerIcon.global_position = worlds[current_world].global_position
 	(worlds[current_world] as Control).process_mode = Node.PROCESS_MODE_INHERIT
@@ -29,6 +37,7 @@ func _input(event):
 	
 	if event.is_action_pressed("jump"):
 		if worlds[current_world].level_select_scene:
+			sound_valid.play()
 			TransitionScreen.transition()
 			await TransitionScreen.on_fade_in_out_finished
 			Global.current_world_name = worlds[current_world].name
@@ -38,6 +47,7 @@ func _input(event):
 			get_tree().root.remove_child(self)
 			
 	if event.is_action_pressed("dash"):
+		sound_valid.play()
 		TransitionScreen.transition()
 		await TransitionScreen.on_fade_in_out_finished
 		Functions.load_screen_to_scene("res://scenes/main_menu.tscn")

@@ -1,6 +1,8 @@
 extends Node
 
 func load_screen_to_scene(target: String, parameters: Dictionary = {}) -> void:
+	#TransitionScreen.transition()
+	#await TransitionScreen.on_fade_in_out_finished
 	var loading_screen = preload("res://scenes/loading_screen.tscn").instantiate()
 	loading_screen.nex_scene_path = target
 	loading_screen.parameters = parameters # Pass params

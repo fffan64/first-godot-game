@@ -4,6 +4,7 @@ extends CanvasLayer
 @onready var selector2 = $CenterContainer/VBoxContainer/Control/CenterContainer2/Control/VBoxContainer/CenterContainer3/HBoxContainer/Selector
 @onready var selector3 = $CenterContainer/VBoxContainer/Control/CenterContainer2/Control/VBoxContainer/CenterContainer2/HBoxContainer/Selector
 
+@onready var sound_valid = $SoundValid
 @onready var select_sound = $SelectSound
 @onready var animation_player = $AnimationPlayer
 @onready var label_resume = $CenterContainer/VBoxContainer/Control/CenterContainer2/Control/VBoxContainer/CenterContainer/HBoxContainer/Control2/LabelResume
@@ -34,11 +35,17 @@ func _physics_process(delta):
 	
 func handle_selection(_current_selection):
 	if _current_selection == 0:
+		sound_valid.play()
 		animation_player.play("pause_out")
 	elif _current_selection == 1:
+		sound_valid.play()
 		animation_player.play("pause_out")
+		TransitionScreen.transition()
+		await TransitionScreen.on_fade_in_out_finished
 		get_tree().reload_current_scene()
 	elif _current_selection == 2:
+		sound_valid.play()
+		Music.stop()
 		animation_player.play("pause_out")
 		TransitionScreen.transition()
 		await TransitionScreen.on_fade_in_out_finished

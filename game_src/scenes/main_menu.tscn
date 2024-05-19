@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://2ulfxwq84tfi"]
+[gd_scene load_steps=22 format=3 uid="uid://2ulfxwq84tfi"]
 
 [ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_22ot5"]
 [ext_resource type="FontFile" uid="uid://yq5bsvv3n0sd" path="res://font_adventurer.tres" id="1_pgbmu"]
@@ -7,10 +7,16 @@
 [ext_resource type="Texture2D" uid="uid://x4xg4eq44yb" path="res://assets/sprites/switch_button_a.png" id="2_cfk4x"]
 [ext_resource type="Shader" path="res://shaders/highlightHard.gdshader" id="2_gtve5"]
 [ext_resource type="Shader" path="res://shaders/scroll.gdshader" id="3_matxe"]
+[ext_resource type="Shader" path="res://shaders/speed_lines.gdshader" id="4_wrqbv"]
 [ext_resource type="Texture2D" uid="uid://bkx3sw1x0v1sd" path="res://assets/sprites/tile_0025.png" id="4_yhtx7"]
 [ext_resource type="FontFile" uid="uid://durllno7hjbwe" path="res://assets/fonts/Adventurer.ttf" id="7_6bpo0"]
 [ext_resource type="AudioStream" uid="uid://27werrxboiwp" path="res://assets/sounds/explosion_shock_down.wav" id="10_uh2lf"]
 [ext_resource type="AudioStream" uid="uid://c8mu2cnqudd0u" path="res://assets/sounds/click.wav" id="11_s5lcb"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_l5qan"]
+shader = ExtResource("4_wrqbv")
+shader_parameter/speedScale = 0.2
+shader_parameter/clipPosition = -1.115
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_h4vpt"]
 shader = ExtResource("2_gtve5")
@@ -146,7 +152,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(1.93, 1.99),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(-480, -506), Vector2(-480, -94)]
+"values": [Vector2(-480, -506), Vector2(-480, -202)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -202,6 +208,11 @@ layout_mode = 2
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 2
 color = Color(0, 0.196078, 0.482353, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_l5qan")
+layout_mode = 2
+color = Color(0.997297, 0.858041, 0.420678, 1)
 
 [node name="Control2" type="Control" parent="."]
 layout_mode = 2
@@ -311,10 +322,10 @@ anchor_bottom = 0.5
 offset_left = -480.0
 offset_top = -94.0
 offset_right = 480.0
-offset_bottom = 52.0
+offset_bottom = 108.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_colors/default_color = Color(0.701961, 0.00392157, 0.984314, 1)
+theme_override_colors/default_color = Color(0.870588, 0, 0.537255, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0.882402, 0.575904, 1.15514e-06, 1)
 theme_override_constants/shadow_offset_x = 5
@@ -333,7 +344,8 @@ theme_override_font_sizes/bold_italics_font_size = 100
 theme_override_font_sizes/mono_font_size = 100
 bbcode_enabled = true
 text = "[center][tornado radius=2 amp=2 freq=5
-]Super Knight World[/tornado][/center]"
+]Super Knight
+World[/tornado][/center]"
 
 [node name="Control" type="Control" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
@@ -520,4 +532,8 @@ bus = &"SFX"
 [node name="SelectSound" type="AudioStreamPlayer2D" parent="."]
 process_mode = 3
 stream = ExtResource("11_s5lcb")
+bus = &"SFX"
+
+[node name="SoundValid" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_uh2lf")
 bus = &"SFX"

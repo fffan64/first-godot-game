@@ -1,8 +1,8 @@
 [gd_scene load_steps=2 format=3 uid="uid://dpigta7lo6ec0"]
 
-[ext_resource type="AudioStream" uid="uid://cngsirpew25vc" path="res://assets/music/time_for_adventure.mp3" id="1_ipudv"]
+[ext_resource type="AudioStream" uid="uid://dmuf2oqo0d85m" path="res://assets/music/Distance of Moon and Earth.ogg" id="1_jeb5u"]
 
-[node name="Music" type="AudioStreamPlayer2D"]
-stream = ExtResource("1_ipudv")
+[node name="Music" type="AudioStreamPlayer"]
+stream = ExtResource("1_jeb5u")
 autoplay = true
 bus = &"Music"

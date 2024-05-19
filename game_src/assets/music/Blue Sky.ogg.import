@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://be8q5ta2ljd56"
+path="res://.godot/imported/Blue Sky.ogg-f729eda524fef97657eadbf43d0f5686.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/music/Blue Sky.ogg"
+dest_files=["res://.godot/imported/Blue Sky.ogg-f729eda524fef97657eadbf43d0f5686.oggvorbisstr"]
+
+[params]
+
+loop=true
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
