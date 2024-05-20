@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://d2lev4hrwxw3u"]
+[gd_scene load_steps=22 format=3 uid="uid://d2lev4hrwxw3u"]
 
 [ext_resource type="Script" path="res://scripts/level_select.gd" id="1_jfgc1"]
 [ext_resource type="PackedScene" uid="uid://bu5yetb4nw650" path="res://scenes/world_select/level_icon.tscn" id="1_tp32g"]
@@ -12,6 +12,7 @@
 [ext_resource type="Shader" path="res://shaders/highlight1.gdshader" id="5_13gpp"]
 [ext_resource type="FontFile" uid="uid://durllno7hjbwe" path="res://assets/fonts/Adventurer.ttf" id="6_c6l72"]
 [ext_resource type="AudioStream" uid="uid://27werrxboiwp" path="res://assets/sounds/explosion_shock_down.wav" id="12_tp06c"]
+[ext_resource type="AudioStream" uid="uid://c8hda063dub54" path="res://assets/sounds/move.wav" id="13_vyjes"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_d58hn"]
 shader = ExtResource("2_8tgp8")
@@ -89,120 +90,13 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0.197845, 0.483589, 1)
 
-[node name="Line1" type="Line2D" parent="."]
-position = Vector2(136, 54)
-scale = Vector2(0.603774, 0.869565)
-points = PackedVector2Array(39.75, 487.6, 357.75, 414)
-width = 40.0
-default_color = Color(0.919874, 0.761171, 0, 1)
-texture = ExtResource("2_wccpl")
-texture_mode = 1
-joint_mode = 2
-begin_cap_mode = 2
-end_cap_mode = 2
-
-[node name="Line2" type="Line2D" parent="."]
-position = Vector2(320, -104)
-scale = Vector2(0.603774, 0.869565)
-points = PackedVector2Array(53, 377.2, 53, 598)
-width = 40.0
-default_color = Color(0.919874, 0.761171, 0, 1)
-texture = ExtResource("2_wccpl")
-texture_mode = 1
-joint_mode = 2
-begin_cap_mode = 2
-end_cap_mode = 2
-
-[node name="Line3" type="Line2D" parent="."]
-position = Vector2(320, -104)
-scale = Vector2(0.603774, 0.869565)
-points = PackedVector2Array(371, 671.6, 53, 598)
-width = 40.0
-default_color = Color(0.919874, 0.761171, 0, 1)
-texture = ExtResource("2_wccpl")
-texture_mode = 1
-joint_mode = 2
-begin_cap_mode = 2
-end_cap_mode = 2
-
-[node name="Line4" type="Line2D" parent="."]
-position = Vector2(320, -104)
-scale = Vector2(0.603774, 0.869565)
-points = PackedVector2Array(371, 671.6, 689, 524.4)
-width = 40.0
-default_color = Color(0.919874, 0.761171, 0, 1)
-texture = ExtResource("2_wccpl")
-texture_mode = 1
-joint_mode = 2
-begin_cap_mode = 2
-end_cap_mode = 2
-
-[node name="Line5" type="Line2D" parent="."]
-position = Vector2(320, -104)
-scale = Vector2(0.603774, 0.869565)
-points = PackedVector2Array(1007, 377.2, 689, 524.4)
-width = 40.0
-default_color = Color(0.919874, 0.761171, 0, 1)
-texture = ExtResource("2_wccpl")
-texture_mode = 1
-joint_mode = 2
-begin_cap_mode = 2
-end_cap_mode = 2
-
-[node name="Line6" type="Line2D" parent="."]
-position = Vector2(320, -104)
-scale = Vector2(0.603774, 0.869565)
-points = PackedVector2Array(1007, 671.6, 689, 524.4)
-width = 40.0
-default_color = Color(0.919874, 0.761171, 0, 1)
-texture = ExtResource("2_wccpl")
-texture_mode = 1
-joint_mode = 2
-begin_cap_mode = 2
-end_cap_mode = 2
-
-[node name="Line7" type="Line2D" parent="."]
-position = Vector2(320, -104)
-scale = Vector2(0.603774, 0.869565)
-points = PackedVector2Array(1007, 671.6, 1219, 524.4)
-width = 40.0
-default_color = Color(0.919874, 0.761171, 0, 1)
-texture = ExtResource("2_wccpl")
-texture_mode = 1
-joint_mode = 2
-begin_cap_mode = 2
-end_cap_mode = 2
-
-[node name="Line8" type="Line2D" parent="."]
-position = Vector2(320, -104)
-scale = Vector2(0.603774, 0.869565)
-points = PackedVector2Array(1007, 377.2, 1219, 524.4)
-width = 40.0
-default_color = Color(0.919874, 0.761171, 0, 1)
-texture = ExtResource("2_wccpl")
-texture_mode = 1
-joint_mode = 2
-begin_cap_mode = 2
-end_cap_mode = 2
-
-[node name="Line9" type="Line2D" parent="."]
-position = Vector2(320, -104)
-scale = Vector2(0.603774, 0.869565)
-points = PackedVector2Array(1007, 377.2, 1007, 671.6)
-width = 40.0
-default_color = Color(0.919874, 0.761171, 0, 1)
-texture = ExtResource("2_wccpl")
-texture_mode = 1
-joint_mode = 2
-begin_cap_mode = 2
-end_cap_mode = 2
-
 [node name="Control" type="Control" parent="."]
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Pattern3" type="ColorRect" parent="Control"]
 layout_mode = 1
@@ -293,9 +187,131 @@ theme_override_font_sizes/bold_italics_font_size = 80
 theme_override_font_sizes/mono_font_size = 80
 bbcode_enabled = true
 text = "[center][wave amp=2 freq=10
-]Level Selection[/wave][/center]"
+]World 1[/wave][/center]"
 
-[node name="1" parent="." node_paths=PackedStringArray("next_level_right") instance=ExtResource("1_tp32g")]
+[node name="LevelMap" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -576.0
+offset_top = -324.0
+offset_right = -576.0
+offset_bottom = -324.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Line1" type="Line2D" parent="LevelMap"]
+position = Vector2(136, 54)
+scale = Vector2(0.603774, 0.869565)
+points = PackedVector2Array(39.75, 487.6, 357.75, 414)
+width = 40.0
+default_color = Color(0.919874, 0.761171, 0, 1)
+texture = ExtResource("2_wccpl")
+texture_mode = 1
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Line2" type="Line2D" parent="LevelMap"]
+position = Vector2(320, -104)
+scale = Vector2(0.603774, 0.869565)
+points = PackedVector2Array(53, 377.2, 53, 598)
+width = 40.0
+default_color = Color(0.919874, 0.761171, 0, 1)
+texture = ExtResource("2_wccpl")
+texture_mode = 1
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Line3" type="Line2D" parent="LevelMap"]
+position = Vector2(320, -104)
+scale = Vector2(0.603774, 0.869565)
+points = PackedVector2Array(371, 671.6, 53, 598)
+width = 40.0
+default_color = Color(0.919874, 0.761171, 0, 1)
+texture = ExtResource("2_wccpl")
+texture_mode = 1
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Line4" type="Line2D" parent="LevelMap"]
+position = Vector2(320, -104)
+scale = Vector2(0.603774, 0.869565)
+points = PackedVector2Array(371, 671.6, 689, 524.4)
+width = 40.0
+default_color = Color(0.919874, 0.761171, 0, 1)
+texture = ExtResource("2_wccpl")
+texture_mode = 1
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Line5" type="Line2D" parent="LevelMap"]
+position = Vector2(320, -104)
+scale = Vector2(0.603774, 0.869565)
+points = PackedVector2Array(1007, 377.2, 689, 524.4)
+width = 40.0
+default_color = Color(0.919874, 0.761171, 0, 1)
+texture = ExtResource("2_wccpl")
+texture_mode = 1
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Line6" type="Line2D" parent="LevelMap"]
+position = Vector2(320, -104)
+scale = Vector2(0.603774, 0.869565)
+points = PackedVector2Array(1007, 671.6, 689, 524.4)
+width = 40.0
+default_color = Color(0.919874, 0.761171, 0, 1)
+texture = ExtResource("2_wccpl")
+texture_mode = 1
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Line7" type="Line2D" parent="LevelMap"]
+position = Vector2(320, -104)
+scale = Vector2(0.603774, 0.869565)
+points = PackedVector2Array(1007, 671.6, 1219, 524.4)
+width = 40.0
+default_color = Color(0.919874, 0.761171, 0, 1)
+texture = ExtResource("2_wccpl")
+texture_mode = 1
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Line8" type="Line2D" parent="LevelMap"]
+position = Vector2(320, -104)
+scale = Vector2(0.603774, 0.869565)
+points = PackedVector2Array(1007, 377.2, 1219, 524.4)
+width = 40.0
+default_color = Color(0.919874, 0.761171, 0, 1)
+texture = ExtResource("2_wccpl")
+texture_mode = 1
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Line9" type="Line2D" parent="LevelMap"]
+position = Vector2(320, -104)
+scale = Vector2(0.603774, 0.869565)
+points = PackedVector2Array(1007, 377.2, 1007, 671.6)
+width = 40.0
+default_color = Color(0.919874, 0.761171, 0, 1)
+texture = ExtResource("2_wccpl")
+texture_mode = 1
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="1" parent="LevelMap" node_paths=PackedStringArray("next_level_right") instance=ExtResource("1_tp32g")]
 offset_left = 128.0
 offset_top = 448.0
 offset_right = 192.0
@@ -303,7 +319,7 @@ offset_bottom = 512.0
 next_scene_path = "res://scenes/world1_level1.tscn"
 next_level_right = NodePath("../2")
 
-[node name="2" parent="." node_paths=PackedStringArray("next_level_up", "next_level_left", "next_level_right") instance=ExtResource("1_tp32g")]
+[node name="2" parent="LevelMap" node_paths=PackedStringArray("next_level_up", "next_level_left", "next_level_right") instance=ExtResource("1_tp32g")]
 offset_left = 320.0
 offset_top = 384.0
 offset_right = 384.0
@@ -314,7 +330,7 @@ next_level_up = NodePath("../2B")
 next_level_left = NodePath("../1")
 next_level_right = NodePath("../3")
 
-[node name="2B" parent="." node_paths=PackedStringArray("next_level_down") instance=ExtResource("1_tp32g")]
+[node name="2B" parent="LevelMap" node_paths=PackedStringArray("next_level_down") instance=ExtResource("1_tp32g")]
 offset_left = 320.0
 offset_top = 192.0
 offset_right = 384.0
@@ -322,7 +338,7 @@ offset_bottom = 256.0
 level_name = "2B"
 next_level_down = NodePath("../2")
 
-[node name="3" parent="." node_paths=PackedStringArray("next_level_left", "next_level_right") instance=ExtResource("1_tp32g")]
+[node name="3" parent="LevelMap" node_paths=PackedStringArray("next_level_left", "next_level_right") instance=ExtResource("1_tp32g")]
 offset_left = 512.0
 offset_top = 448.0
 offset_right = 576.0
@@ -331,7 +347,7 @@ level_name = "3"
 next_level_left = NodePath("../2")
 next_level_right = NodePath("../4")
 
-[node name="4" parent="." node_paths=PackedStringArray("next_level_up", "next_level_down", "next_level_left", "next_level_right") instance=ExtResource("1_tp32g")]
+[node name="4" parent="LevelMap" node_paths=PackedStringArray("next_level_up", "next_level_down", "next_level_left", "next_level_right") instance=ExtResource("1_tp32g")]
 offset_left = 704.0
 offset_top = 320.0
 offset_right = 768.0
@@ -342,7 +358,7 @@ next_level_down = NodePath("../6")
 next_level_left = NodePath("../3")
 next_level_right = NodePath("../5")
 
-[node name="5" parent="." node_paths=PackedStringArray("next_level_down", "next_level_left", "next_level_right") instance=ExtResource("1_tp32g")]
+[node name="5" parent="LevelMap" node_paths=PackedStringArray("next_level_down", "next_level_left", "next_level_right") instance=ExtResource("1_tp32g")]
 offset_left = 896.0
 offset_top = 192.0
 offset_right = 960.0
@@ -352,7 +368,7 @@ next_level_down = NodePath("../6")
 next_level_left = NodePath("../4")
 next_level_right = NodePath("../7")
 
-[node name="6" parent="." node_paths=PackedStringArray("next_level_up", "next_level_left", "next_level_right") instance=ExtResource("1_tp32g")]
+[node name="6" parent="LevelMap" node_paths=PackedStringArray("next_level_up", "next_level_left", "next_level_right") instance=ExtResource("1_tp32g")]
 offset_left = 896.0
 offset_top = 448.0
 offset_right = 960.0
@@ -362,7 +378,7 @@ next_level_up = NodePath("../5")
 next_level_left = NodePath("../4")
 next_level_right = NodePath("../7")
 
-[node name="7" parent="." node_paths=PackedStringArray("next_level_up", "next_level_down", "next_level_left") instance=ExtResource("1_tp32g")]
+[node name="7" parent="LevelMap" node_paths=PackedStringArray("next_level_up", "next_level_down", "next_level_left") instance=ExtResource("1_tp32g")]
 offset_left = 1024.0
 offset_top = 320.0
 offset_right = 1088.0
@@ -395,6 +411,10 @@ visibility_mode = 1
 
 [node name="SoundValid" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("12_tp06c")
+bus = &"SFX"
+
+[node name="MovingToLevelSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("13_vyjes")
 bus = &"SFX"
 
 [connection signal="pressed" from="TextureButton" to="." method="_on_texture_button_pressed"]

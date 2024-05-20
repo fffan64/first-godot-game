@@ -1,11 +1,40 @@
-[gd_scene load_steps=12 format=3 uid="uid://dcyy4clc45qd4"]
+[gd_scene load_steps=22 format=3 uid="uid://n7q5qetop3kt"]
 
 [ext_resource type="Script" path="res://scripts/level_select.gd" id="1_3v5go"]
 [ext_resource type="PackedScene" uid="uid://bu5yetb4nw650" path="res://scenes/world_select/level_icon.tscn" id="2_7ao5m"]
+[ext_resource type="Shader" path="res://shaders/highlightHard.gdshader" id="2_tnhsx"]
+[ext_resource type="Shader" path="res://shaders/scroll.gdshader" id="3_ig0vx"]
 [ext_resource type="Texture2D" uid="uid://cajbwcjoy46i" path="res://assets/sprites/knight.png" id="3_pif2v"]
+[ext_resource type="Texture2D" uid="uid://bkx3sw1x0v1sd" path="res://assets/sprites/tile_0025.png" id="4_blx03"]
 [ext_resource type="Script" path="res://scripts/animated_texture_rect.gd" id="4_c7wob"]
 [ext_resource type="Texture2D" uid="uid://jd50uvl6nl7m" path="res://assets/sprites/switch_left.png" id="5_irq55"]
+[ext_resource type="Shader" path="res://shaders/highlight1.gdshader" id="5_yghad"]
 [ext_resource type="AudioStream" uid="uid://27werrxboiwp" path="res://assets/sounds/explosion_shock_down.wav" id="6_ew3k3"]
+[ext_resource type="FontFile" uid="uid://durllno7hjbwe" path="res://assets/fonts/Adventurer.ttf" id="6_gblv1"]
+[ext_resource type="Texture2D" uid="uid://bih6i0u5aqjnx" path="res://assets/sprites/pattern/tile_0014.png" id="7_j7n7k"]
+[ext_resource type="AudioStream" uid="uid://c8hda063dub54" path="res://assets/sounds/move.wav" id="13_n8upx"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d58hn"]
+shader = ExtResource("2_tnhsx")
+shader_parameter/highlight_color = Color(1, 1, 1, 1)
+shader_parameter/frequency = 0.35
+shader_parameter/highlight_speed = 6.0
+shader_parameter/highlight_width = 15.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tjdwd"]
+shader = ExtResource("3_ig0vx")
+shader_parameter/speed = 0.5
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oheor"]
+shader = ExtResource("5_yghad")
+shader_parameter/shine_color = Color(1, 1, 1, 0.25)
+shader_parameter/line_width = 0.1
+shader_parameter/angle = 0.785398
+shader_parameter/speed = 1.0
+shader_parameter/wait_cycles = 1.5
+shader_parameter/height = 10.0
+shader_parameter/frequency = 0.35
+shader_parameter/speed_wavy = 3.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_w6hob"]
 atlas = ExtResource("3_pif2v")
@@ -23,7 +52,7 @@ region = Rect2(64, 0, 32, 32)
 atlas = ExtResource("3_pif2v")
 region = Rect2(96, 0, 32, 32)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_f2i5n"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_q8xkt"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -52,31 +81,323 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_3v5go")
 
-[node name="1" parent="." node_paths=PackedStringArray("next_level_right") instance=ExtResource("2_7ao5m")]
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0.197845, 0.483589, 1)
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Pattern3" type="ColorRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -1.89368
+offset_top = -384.0
+offset_right = 498.106
+offset_bottom = 116.0
+grow_horizontal = 2
+rotation = 0.785398
+scale = Vector2(1.08076, 1.08076)
+color = Color(0, 0, 0, 1)
+
+[node name="Pattern2" type="ColorRect" parent="Control"]
+material = SubResource("ShaderMaterial_d58hn")
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -1.89368
+offset_top = -384.0
+offset_right = 498.106
+offset_bottom = 116.0
+grow_horizontal = 2
+rotation = 0.785398
+scale = Vector2(1.06451, 1.06451)
+color = Color(0.910468, 0.836782, 0, 1)
+
+[node name="Pattern4" type="ColorRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -1.89368
+offset_top = -384.0
+offset_right = 498.106
+offset_bottom = 116.0
+grow_horizontal = 2
+rotation = 0.785398
+scale = Vector2(1.01423, 1.01423)
+color = Color(0, 0, 0, 1)
+
+[node name="Pattern" type="TextureRect" parent="Control"]
+self_modulate = Color(0.580549, 0.00099621, 0.705967, 1)
+material = SubResource("ShaderMaterial_tjdwd")
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -1.89368
+offset_top = -384.0
+offset_right = 498.106
+offset_bottom = 116.0
+grow_horizontal = 2
+rotation = 0.785398
+texture = ExtResource("4_blx03")
+stretch_mode = 1
+
+[node name="Label3" type="RichTextLabel" parent="."]
+material = SubResource("ShaderMaterial_oheor")
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -431.0
+offset_top = 48.0
+offset_right = 431.0
+offset_bottom = 148.0
+grow_horizontal = 2
+theme_override_colors/default_color = Color(0.870588, 0, 0.537255, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0.882402, 0.575904, 1.15514e-06, 1)
+theme_override_constants/shadow_offset_x = 5
+theme_override_constants/shadow_offset_y = 5
+theme_override_constants/shadow_outline_size = 20
+theme_override_constants/outline_size = 8
+theme_override_fonts/normal_font = ExtResource("6_gblv1")
+theme_override_fonts/bold_font = ExtResource("6_gblv1")
+theme_override_fonts/italics_font = ExtResource("6_gblv1")
+theme_override_fonts/bold_italics_font = ExtResource("6_gblv1")
+theme_override_fonts/mono_font = ExtResource("6_gblv1")
+theme_override_font_sizes/normal_font_size = 80
+theme_override_font_sizes/bold_font_size = 80
+theme_override_font_sizes/italics_font_size = 80
+theme_override_font_sizes/bold_italics_font_size = 80
+theme_override_font_sizes/mono_font_size = 80
+bbcode_enabled = true
+text = "[center][wave amp=2 freq=10
+]World 2[/wave][/center]"
+
+[node name="LevelMap" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -576.0
+offset_top = -324.0
+offset_right = -576.0
+offset_bottom = -324.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Line1" type="Line2D" parent="LevelMap"]
+position = Vector2(136, 54)
+scale = Vector2(0.603774, 0.869565)
+points = PackedVector2Array(39.75, 487.6, 357.75, 414)
+width = 40.0
+default_color = Color(0.919874, 0.761171, 0, 1)
+texture = ExtResource("7_j7n7k")
+texture_mode = 1
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Line2" type="Line2D" parent="LevelMap"]
+position = Vector2(320, -104)
+scale = Vector2(0.603774, 0.869565)
+points = PackedVector2Array(53, 377.2, 53, 598)
+width = 40.0
+default_color = Color(0.919874, 0.761171, 0, 1)
+texture = ExtResource("7_j7n7k")
+texture_mode = 1
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Line3" type="Line2D" parent="LevelMap"]
+position = Vector2(320, -104)
+scale = Vector2(0.603774, 0.869565)
+points = PackedVector2Array(371, 671.6, 53, 598)
+width = 40.0
+default_color = Color(0.919874, 0.761171, 0, 1)
+texture = ExtResource("7_j7n7k")
+texture_mode = 1
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Line4" type="Line2D" parent="LevelMap"]
+position = Vector2(320, -104)
+scale = Vector2(0.603774, 0.869565)
+points = PackedVector2Array(371, 671.6, 689, 524.4)
+width = 40.0
+default_color = Color(0.919874, 0.761171, 0, 1)
+texture = ExtResource("7_j7n7k")
+texture_mode = 1
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Line5" type="Line2D" parent="LevelMap"]
+position = Vector2(320, -104)
+scale = Vector2(0.603774, 0.869565)
+points = PackedVector2Array(1007, 377.2, 689, 524.4)
+width = 40.0
+default_color = Color(0.919874, 0.761171, 0, 1)
+texture = ExtResource("7_j7n7k")
+texture_mode = 1
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Line6" type="Line2D" parent="LevelMap"]
+position = Vector2(320, -104)
+scale = Vector2(0.603774, 0.869565)
+points = PackedVector2Array(1007, 671.6, 689, 524.4)
+width = 40.0
+default_color = Color(0.919874, 0.761171, 0, 1)
+texture = ExtResource("7_j7n7k")
+texture_mode = 1
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Line7" type="Line2D" parent="LevelMap"]
+position = Vector2(320, -104)
+scale = Vector2(0.603774, 0.869565)
+points = PackedVector2Array(1007, 671.6, 1219, 524.4)
+width = 40.0
+default_color = Color(0.919874, 0.761171, 0, 1)
+texture = ExtResource("7_j7n7k")
+texture_mode = 1
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Line8" type="Line2D" parent="LevelMap"]
+position = Vector2(320, -104)
+scale = Vector2(0.603774, 0.869565)
+points = PackedVector2Array(1007, 377.2, 1219, 524.4)
+width = 40.0
+default_color = Color(0.919874, 0.761171, 0, 1)
+texture = ExtResource("7_j7n7k")
+texture_mode = 1
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Line9" type="Line2D" parent="LevelMap"]
+position = Vector2(320, -104)
+scale = Vector2(0.603774, 0.869565)
+points = PackedVector2Array(1007, 377.2, 1007, 671.6)
+width = 40.0
+default_color = Color(0.919874, 0.761171, 0, 1)
+texture = ExtResource("7_j7n7k")
+texture_mode = 1
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="1" parent="LevelMap" node_paths=PackedStringArray("next_level_right") instance=ExtResource("2_7ao5m")]
 offset_left = 128.0
 offset_top = 448.0
 offset_right = 192.0
 offset_bottom = 512.0
+next_scene_path = "res://scenes/world1_level1.tscn"
 next_level_right = NodePath("../2")
 
-[node name="2" parent="." node_paths=PackedStringArray("next_level_left") instance=ExtResource("2_7ao5m")]
+[node name="2" parent="LevelMap" node_paths=PackedStringArray("next_level_up", "next_level_left", "next_level_right") instance=ExtResource("2_7ao5m")]
 offset_left = 320.0
 offset_top = 384.0
 offset_right = 384.0
 offset_bottom = 448.0
 level_name = "2"
+next_scene_path = "res://scenes/world1_level2.tscn"
+next_level_up = NodePath("../2B")
 next_level_left = NodePath("../1")
+next_level_right = NodePath("../3")
+
+[node name="2B" parent="LevelMap" node_paths=PackedStringArray("next_level_down") instance=ExtResource("2_7ao5m")]
+offset_left = 320.0
+offset_top = 192.0
+offset_right = 384.0
+offset_bottom = 256.0
+level_name = "2B"
+next_level_down = NodePath("../2")
+
+[node name="3" parent="LevelMap" node_paths=PackedStringArray("next_level_left", "next_level_right") instance=ExtResource("2_7ao5m")]
+offset_left = 512.0
+offset_top = 448.0
+offset_right = 576.0
+offset_bottom = 512.0
+level_name = "3"
+next_level_left = NodePath("../2")
+next_level_right = NodePath("../4")
+
+[node name="4" parent="LevelMap" node_paths=PackedStringArray("next_level_up", "next_level_down", "next_level_left", "next_level_right") instance=ExtResource("2_7ao5m")]
+offset_left = 704.0
+offset_top = 320.0
+offset_right = 768.0
+offset_bottom = 384.0
+level_name = "4"
+next_level_up = NodePath("../5")
+next_level_down = NodePath("../6")
+next_level_left = NodePath("../3")
+next_level_right = NodePath("../5")
+
+[node name="5" parent="LevelMap" node_paths=PackedStringArray("next_level_down", "next_level_left", "next_level_right") instance=ExtResource("2_7ao5m")]
+offset_left = 896.0
+offset_top = 192.0
+offset_right = 960.0
+offset_bottom = 256.0
+level_name = "5"
+next_level_down = NodePath("../6")
+next_level_left = NodePath("../4")
+next_level_right = NodePath("../7")
+
+[node name="6" parent="LevelMap" node_paths=PackedStringArray("next_level_up", "next_level_left", "next_level_right") instance=ExtResource("2_7ao5m")]
+offset_left = 896.0
+offset_top = 448.0
+offset_right = 960.0
+offset_bottom = 512.0
+level_name = "6"
+next_level_up = NodePath("../5")
+next_level_left = NodePath("../4")
+next_level_right = NodePath("../7")
+
+[node name="7" parent="LevelMap" node_paths=PackedStringArray("next_level_up", "next_level_down", "next_level_left") instance=ExtResource("2_7ao5m")]
+offset_left = 1024.0
+offset_top = 320.0
+offset_right = 1088.0
+offset_bottom = 384.0
+level_name = "7"
+next_level_up = NodePath("../5")
+next_level_down = NodePath("../6")
+next_level_left = NodePath("../5")
 
 [node name="PlayerIcon" type="TextureRect" parent="."]
 layout_mode = 0
 offset_right = 64.0
 offset_bottom = 64.0
+scale = Vector2(2, 2)
 pivot_offset = Vector2(32, 32)
 mouse_filter = 2
 texture = SubResource("AtlasTexture_w6hob")
-expand_mode = 2
 script = ExtResource("4_c7wob")
-sprites = SubResource("SpriteFrames_f2i5n")
+sprites = SubResource("SpriteFrames_q8xkt")
 autoplay = true
 Animation = "default"
 Frame = 0
@@ -91,3 +412,9 @@ visibility_mode = 1
 [node name="SoundValid" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_ew3k3")
 bus = &"SFX"
+
+[node name="MovingToLevelSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("13_n8upx")
+bus = &"SFX"
+
+[connection signal="pressed" from="TextureButton" to="." method="_on_texture_button_pressed"]

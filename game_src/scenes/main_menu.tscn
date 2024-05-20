@@ -218,10 +218,12 @@ color = Color(0.997297, 0.858041, 0.420678, 1)
 layout_mode = 2
 
 [node name="Control" type="Control" parent="Control2"]
-layout_mode = 2
-anchors_preset = 0
-offset_right = 1152.0
-offset_bottom = 648.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Pattern3" type="ColorRect" parent="Control2/Control"]
 layout_mode = 1

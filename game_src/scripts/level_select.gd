@@ -3,8 +3,9 @@ class_name LevelSelect
 
 var parameters: Dictionary # This needs to be here so the scene can receive parameters
 
+@onready var moving_to_level_sound = $MovingToLevelSound
 @onready var sound_valid = $SoundValid
-@onready var current_level: LevelIcon = $"1"
+@onready var current_level: LevelIcon = $"LevelMap/1"
 var parent_world_select: Node
 var move_tween: Tween
 
@@ -16,8 +17,12 @@ var swiping = false
 var thresholdSwipe = 10
 
 func _ready():
+	get_tree().get_root().size_changed.connect(resize)
 	$PlayerIcon.global_position = current_level.global_position
 	current_level.process_mode = Node.PROCESS_MODE_INHERIT
+
+func resize():
+	$PlayerIcon.global_position = current_level.global_position
 
 func _process(delta):
 	if Input.is_action_just_pressed("press"):
@@ -69,21 +74,25 @@ func _input(event):
 		current_level.process_mode = Node.PROCESS_MODE_DISABLED
 		current_level = current_level.next_level_left
 		current_level.process_mode = Node.PROCESS_MODE_INHERIT
+		moving_to_level_sound.play()
 		tween_icon()
 	if event.is_action_pressed("move_right") and current_level.next_level_right:
 		current_level.process_mode = Node.PROCESS_MODE_DISABLED
 		current_level = current_level.next_level_right
 		current_level.process_mode = Node.PROCESS_MODE_INHERIT
+		moving_to_level_sound.play()
 		tween_icon()
 	if event.is_action_pressed("move_up") and current_level.next_level_up:
 		current_level.process_mode = Node.PROCESS_MODE_DISABLED
 		current_level = current_level.next_level_up
 		current_level.process_mode = Node.PROCESS_MODE_INHERIT
+		moving_to_level_sound.play()
 		tween_icon()
 	if event.is_action_pressed("move_down") and current_level.next_level_down:
 		current_level.process_mode = Node.PROCESS_MODE_DISABLED
 		current_level = current_level.next_level_down
 		current_level.process_mode = Node.PROCESS_MODE_INHERIT
+		moving_to_level_sound.play()
 		tween_icon()
 
 	if event.is_action_pressed("dash"):
