@@ -1,40 +1,42 @@
-[gd_scene load_steps=16 format=3 uid="uid://dsyakl5yoxx8d"]
+[gd_scene load_steps=19 format=3 uid="uid://b0bytebkv3ipd"]
 
-[ext_resource type="Script" path="res://scripts/slime_simple.gd" id="1_xt2jx"]
-[ext_resource type="Texture2D" uid="uid://c14waahdgucam" path="res://assets/sprites/slime_green.png" id="2_jv8af"]
-[ext_resource type="PackedScene" uid="uid://ba78272pqwtmf" path="res://scenes/killzone.tscn" id="3_bsnmq"]
-[ext_resource type="AudioStream" uid="uid://dqnwo8d1ljeel" path="res://assets/sounds/hurt.wav" id="5_gi4xn"]
+[ext_resource type="Script" path="res://scripts/slime_double.gd" id="1_jr5el"]
+[ext_resource type="Texture2D" uid="uid://byi4lletuhol7" path="res://assets/sprites/slime_purple.png" id="2_2u8hs"]
+[ext_resource type="PackedScene" uid="uid://ba78272pqwtmf" path="res://scenes/killzone.tscn" id="3_ukcbl"]
+[ext_resource type="PackedScene" uid="uid://bttig8hfecwo2" path="res://scenes/hurtbox_component.tscn" id="4_07lde"]
+[ext_resource type="AudioStream" uid="uid://dqnwo8d1ljeel" path="res://assets/sounds/hurt.wav" id="4_onjst"]
+[ext_resource type="PackedScene" uid="uid://d3gll0k6rbcpb" path="res://scenes/health_component.tscn" id="5_p273j"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_1opcb"]
-atlas = ExtResource("2_jv8af")
+[sub_resource type="AtlasTexture" id="AtlasTexture_3kucx"]
+atlas = ExtResource("2_2u8hs")
 region = Rect2(0, 24, 24, 24)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_k5n6u"]
-atlas = ExtResource("2_jv8af")
+[sub_resource type="AtlasTexture" id="AtlasTexture_5xq5e"]
+atlas = ExtResource("2_2u8hs")
 region = Rect2(24, 24, 24, 24)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_dd3c3"]
-atlas = ExtResource("2_jv8af")
+[sub_resource type="AtlasTexture" id="AtlasTexture_73ivy"]
+atlas = ExtResource("2_2u8hs")
 region = Rect2(48, 24, 24, 24)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_qkfm2"]
-atlas = ExtResource("2_jv8af")
+[sub_resource type="AtlasTexture" id="AtlasTexture_5fxgm"]
+atlas = ExtResource("2_2u8hs")
 region = Rect2(72, 24, 24, 24)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_hiave"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_1opcb")
+"texture": SubResource("AtlasTexture_3kucx")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_k5n6u")
+"texture": SubResource("AtlasTexture_5xq5e")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_dd3c3")
+"texture": SubResource("AtlasTexture_73ivy")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_qkfm2")
+"texture": SubResource("AtlasTexture_5fxgm")
 }],
 "loop": true,
 "name": &"default",
@@ -47,7 +49,7 @@ size = Vector2(8, 12)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gfoj8"]
 size = Vector2(14, 12)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_jdejn"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3sj30"]
 size = Vector2(20, 6)
 
 [sub_resource type="Animation" id="Animation_78y6f"]
@@ -79,7 +81,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("DestroyZone/CollisionShape2D:disabled")
+tracks/2/path = NodePath("HurtboxComponent/CollisionShape2D:disabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -130,7 +132,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("DestroyZone/CollisionShape2D:disabled")
+tracks/2/path = NodePath("HurtboxComponent/CollisionShape2D:disabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -172,23 +174,26 @@ _data = {
 "destroy": SubResource("Animation_cx1g3")
 }
 
-[node name="Slime" type="CharacterBody2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j0ena"]
+size = Vector2(176, 16)
+
+[node name="Slime_Double" type="CharacterBody2D"]
 collision_layer = 4
 collision_mask = 5
-script = ExtResource("1_xt2jx")
+script = ExtResource("1_jr5el")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -12)
 sprite_frames = SubResource("SpriteFrames_hiave")
 autoplay = "default"
-frame = 3
-frame_progress = 0.995695
+frame = 2
+frame_progress = 0.864288
 
 [node name="SlimeCollision" type="CollisionShape2D" parent="."]
 position = Vector2(0, -6)
 shape = SubResource("RectangleShape2D_b0uc4")
 
-[node name="Killzone" parent="." instance=ExtResource("3_bsnmq")]
+[node name="Killzone" parent="." instance=ExtResource("3_ukcbl")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone"]
 position = Vector2(0, -6)
@@ -203,15 +208,15 @@ collision_mask = 5
 position = Vector2(10, -7)
 target_position = Vector2(0, 15)
 
-[node name="DestroyZone" type="Area2D" parent="."]
-collision_mask = 2
+[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("4_07lde")]
+health_component = NodePath("../HealthComponent")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DestroyZone"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
 position = Vector2(0, -15)
-shape = SubResource("RectangleShape2D_jdejn")
+shape = SubResource("RectangleShape2D_3sj30")
 
 [node name="DeadSlimeSound" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("5_gi4xn")
+stream = ExtResource("4_onjst")
 bus = &"SFX"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -223,4 +228,14 @@ libraries = {
 position = Vector2(1, -9)
 scale = Vector2(9.8, 9)
 
-[connection signal="body_entered" from="DestroyZone" to="." method="_on_destroy_zone_body_entered"]
+[node name="HealthComponent" parent="." instance=ExtResource("5_p273j")]
+
+[node name="DetectPlayer" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectPlayer"]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_j0ena")
+debug_color = Color(0.611911, 0.534741, 0.171173, 0.42)
+
+[connection signal="body_entered" from="DetectPlayer" to="." method="_on_detect_player_body_entered"]

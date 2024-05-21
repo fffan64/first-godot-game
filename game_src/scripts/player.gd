@@ -49,7 +49,7 @@ var canPlayWalkSound = true
 func _ready():
 	is_dead = false
 	register_debug_stats()
-	Events.slime_simple_died.connect(_on_slime_simple_died)
+	Events.bounce_off_enemy.connect(_on_bounce_off_enemy)
 
 func _physics_process(delta):
 	var input_dir: Vector2 = input()
@@ -227,10 +227,10 @@ func _on_dash_timer_timeout():
 func _on_dash_timer_again_timeout():
 	can_dash = true
 
-func _on_slime_simple_died():
+func _on_bounce_off_enemy(amount: float = -200):
 	if is_ground_pound:
 		animation_player.play("GroundPoundLand")
-	velocity.y = -200.0
+	velocity.y = amount
 	jump_sound.play()
 
 func _on_ghost_timer_timeout():
@@ -262,15 +262,16 @@ func die():
 		print_debug("Not this time, i'm invincible !")
 
 func register_debug_stats():
-	if ui.debug_stats:
-		ui.debug_stats.add_property(self, "velocity", "")
-		ui.debug_stats.add_property(self, "is_on_floor", "")
-		ui.debug_stats.add_property(self, "is_on_wall", "")
-		ui.debug_stats.add_property(self, "dashing", "")
-		ui.debug_stats.add_property(self, "is_wall_sliding_left", "")
-		ui.debug_stats.add_property(self, "is_wall_sliding_right", "")
-		ui.debug_stats.add_property(self, "is_invincible", "")
-		ui.debug_stats.add_property(self, "is_ground_pound", "")
+	if ui:
+		if ui.debug_stats:
+			ui.debug_stats.add_property(self, "velocity", "")
+			ui.debug_stats.add_property(self, "is_on_floor", "")
+			ui.debug_stats.add_property(self, "is_on_wall", "")
+			ui.debug_stats.add_property(self, "dashing", "")
+			ui.debug_stats.add_property(self, "is_wall_sliding_left", "")
+			ui.debug_stats.add_property(self, "is_wall_sliding_right", "")
+			ui.debug_stats.add_property(self, "is_invincible", "")
+			ui.debug_stats.add_property(self, "is_ground_pound", "")
 
 
 func _on_invincible_timer_timeout():

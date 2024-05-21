@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://c6ub1o3cqaqel"]
+[gd_scene load_steps=30 format=3 uid="uid://c6ub1o3cqaqel"]
 
 [ext_resource type="Script" path="res://scripts/world1_level1.gd" id="1_1f75c"]
 [ext_resource type="PackedScene" uid="uid://bfnhhhrb7yplf" path="res://scenes/ui_marker_checkpoints/ui.tscn" id="2_88a2x"]
@@ -20,6 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://cd18r4n8uer70" path="res://scenes/breakable_block.tscn" id="18_dv7fj"]
 [ext_resource type="PackedScene" uid="uid://cveuyresxwj0r" path="res://scenes/pipe_teleport.tscn" id="19_4n6q8"]
 [ext_resource type="PackedScene" uid="uid://cos1138ylowtd" path="res://scenes/spring_mushroom.tscn" id="20_64wcm"]
+[ext_resource type="PackedScene" uid="uid://b0bytebkv3ipd" path="res://scenes/slime_double.tscn" id="21_l0ala"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kcb00"]
 texture = ExtResource("7_hnvem")
@@ -643,9 +644,6 @@ text = "Great job!"
 
 [node name="Slimes" type="Node" parent="."]
 
-[node name="Slime3" parent="Slimes" instance=ExtResource("14_3bxmc")]
-position = Vector2(-354, 64)
-
 [node name="Slime6" parent="Slimes" instance=ExtResource("14_3bxmc")]
 position = Vector2(982, 13)
 
@@ -727,10 +725,14 @@ facing_right = false
 
 [node name="Slime5" parent="Slimes" instance=ExtResource("14_3bxmc")]
 position = Vector2(574, -85)
-check_edge = false
+SPEED = 90.0
 
 [node name="Slime4" parent="Slimes" instance=ExtResource("14_3bxmc")]
 position = Vector2(-438, 37)
+
+[node name="Slime_Double" parent="Slimes" instance=ExtResource("21_l0ala")]
+position = Vector2(-346, 52)
+coefVelocityX = 2.0
 
 [node name="Potions" type="Node" parent="."]
 
