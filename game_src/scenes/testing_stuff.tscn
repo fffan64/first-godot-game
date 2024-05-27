@@ -1,5 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://cmmxa7xbjsh2f"]
+[gd_scene load_steps=7 format=3 uid="uid://cmmxa7xbjsh2f"]
 
+[ext_resource type="PackedScene" uid="uid://bfnhhhrb7yplf" path="res://scenes/ui_marker_checkpoints/ui.tscn" id="1_lgu6p"]
 [ext_resource type="PackedScene" uid="uid://bl8sf65vlv8oa" path="res://scenes/player.tscn" id="1_oxffn"]
 [ext_resource type="Texture2D" uid="uid://cemtlles5d4pj" path="res://assets/sprites/world_tileset.png" id="2_k5sjg"]
 [ext_resource type="PackedScene" uid="uid://b0bytebkv3ipd" path="res://scenes/slime_double.tscn" id="3_xcxm1"]
@@ -418,6 +419,10 @@ physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_kcb00")
 
 [node name="Node2D" type="Node"]
+
+[node name="UI" parent="." instance=ExtResource("1_lgu6p")]
+unique_name_in_owner = true
+visible = true
 
 [node name="Player" parent="." instance=ExtResource("1_oxffn")]
 position = Vector2(592, -104)

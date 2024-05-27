@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://bl8sf65vlv8oa"]
+[gd_scene load_steps=55 format=3 uid="uid://bl8sf65vlv8oa"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_bxcsj"]
 [ext_resource type="Texture2D" uid="uid://cajbwcjoy46i" path="res://assets/sprites/knight.png" id="1_x7wmx"]
@@ -7,7 +7,18 @@
 [ext_resource type="AudioStream" uid="uid://b8u22da6yn0pn" path="res://assets/sounds/tap.wav" id="4_l58x2"]
 [ext_resource type="AudioStream" uid="uid://dqnwo8d1ljeel" path="res://assets/sounds/hurt.wav" id="4_wweeb"]
 [ext_resource type="AudioStream" uid="uid://0hoicmtpmwew" path="res://assets/sounds/ground_pound.wav" id="7_r46ec"]
+[ext_resource type="PackedScene" uid="uid://d3gll0k6rbcpb" path="res://scenes/health_component.tscn" id="8_3x26n"]
 [ext_resource type="AudioStream" uid="uid://c8mu2cnqudd0u" path="res://assets/sounds/click.wav" id="8_l0t5c"]
+[ext_resource type="Script" path="res://scripts/core/fsm.gd" id="9_t7dai"]
+[ext_resource type="Script" path="res://scripts/player/states/idle_state.gd" id="10_bbbfr"]
+[ext_resource type="Script" path="res://scripts/player/states/run_state.gd" id="11_omj3b"]
+[ext_resource type="Script" path="res://scripts/player/states/jump_state.gd" id="12_ku28p"]
+[ext_resource type="Script" path="res://scripts/player/states/dead_state.gd" id="13_1tcp4"]
+[ext_resource type="Script" path="res://scripts/player/states/fall_state.gd" id="13_k1mpx"]
+[ext_resource type="Script" path="res://scripts/player/states/action/dash_action_state.gd" id="14_7675s"]
+[ext_resource type="Script" path="res://scripts/player/states/action/idle_action_state.gd" id="14_rotc5"]
+[ext_resource type="Script" path="res://scripts/player/states/wallslide_state.gd" id="15_3uq2u"]
+[ext_resource type="Script" path="res://scripts/player/states/groundpound_state.gd" id="16_j77d5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0qexi"]
 atlas = ExtResource("1_x7wmx")
@@ -267,30 +278,13 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector2(1, 1), Vector2(1.92175, 0.347399), Vector2(1.13319, 0.667566), Vector2(1.13319, 0.667566), Vector2(1, 1)]
 }
-tracks/2/type = "method"
+tracks/2/type = "audio"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath(".")
+tracks/2/path = NodePath("GroundPoundSound")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.05),
-"transitions": PackedFloat32Array(1, 1),
-"values": [{
-"args": [null, null],
-"method": &"createJumpParticles"
-}, {
-"args": [],
-"method": &"_end_ground_pound"
-}]
-}
-tracks/3/type = "audio"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("GroundPoundSound")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
 "clips": [{
 "end_offset": 0.0,
 "start_offset": 0.0,
@@ -298,18 +292,46 @@ tracks/3/keys = {
 }],
 "times": PackedFloat32Array(0)
 }
-tracks/3/use_blend = true
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("AnimatedSprite2D:rotation")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
+tracks/2/use_blend = true
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AnimatedSprite2D:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
 "times": PackedFloat32Array(0.4),
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [0.0]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("FSM/GroundPound")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.05),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_end_ground_pound"
+}]
+}
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [null, null],
+"method": &"createJumpParticles"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_8o0cs"]
@@ -331,7 +353,7 @@ tracks/0/keys = {
 tracks/1/type = "method"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath(".")
+tracks/1/path = NodePath("FSM/GroundPound")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -394,7 +416,6 @@ z_index = 5
 collision_layer = 2
 collision_mask = 7
 script = ExtResource("1_bxcsj")
-ghost_node = ExtResource("2_epedm")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -12)
@@ -422,18 +443,6 @@ bus = &"SFX"
 [node name="GroundPoundSound" type="AudioStreamPlayer" parent="."]
 bus = &"SFX"
 
-[node name="Timer" type="Timer" parent="."]
-wait_time = 0.2
-
-[node name="Dash_timer" type="Timer" parent="."]
-wait_time = 0.5
-
-[node name="Dash_timer_again" type="Timer" parent="."]
-wait_time = 1.2
-
-[node name="Ghost_timer" type="Timer" parent="."]
-wait_time = 0.05
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_1bxad")
@@ -447,12 +456,66 @@ bus = &"SFX"
 stream = ExtResource("4_wweeb")
 bus = &"SFX"
 
-[node name="Invincible_timer" type="Timer" parent="."]
+[node name="HealthComponent" parent="." instance=ExtResource("8_3x26n")]
+
+[node name="FSM" type="Node" parent="."]
+script = ExtResource("9_t7dai")
+
+[node name="Idle" type="Node" parent="FSM"]
+script = ExtResource("10_bbbfr")
+
+[node name="Run" type="Node" parent="FSM"]
+script = ExtResource("11_omj3b")
+
+[node name="Timer" type="Timer" parent="FSM/Run"]
+wait_time = 0.2
+
+[node name="Jump" type="Node" parent="FSM"]
+script = ExtResource("12_ku28p")
+
+[node name="Fall" type="Node" parent="FSM"]
+script = ExtResource("13_k1mpx")
+
+[node name="Dead" type="Node" parent="FSM"]
+script = ExtResource("13_1tcp4")
+
+[node name="DeadTimer" type="Timer" parent="FSM/Dead"]
+one_shot = true
+
+[node name="WallSlide" type="Node" parent="FSM"]
+script = ExtResource("15_3uq2u")
+
+[node name="GroundPound" type="Node" parent="FSM"]
+script = ExtResource("16_j77d5")
+
+[node name="Invincible_timer" type="Timer" parent="FSM/GroundPound"]
 wait_time = 0.4
 one_shot = true
 
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
-[connection signal="timeout" from="Dash_timer" to="." method="_on_dash_timer_timeout"]
-[connection signal="timeout" from="Dash_timer_again" to="." method="_on_dash_timer_again_timeout"]
-[connection signal="timeout" from="Ghost_timer" to="." method="_on_ghost_timer_timeout"]
-[connection signal="timeout" from="Invincible_timer" to="." method="_on_invincible_timer_timeout"]
+[node name="FSM_Actions" type="Node" parent="."]
+script = ExtResource("9_t7dai")
+
+[node name="Idle" type="Node" parent="FSM_Actions"]
+script = ExtResource("14_rotc5")
+
+[node name="Dash" type="Node" parent="FSM_Actions"]
+script = ExtResource("14_7675s")
+ghost_node = ExtResource("2_epedm")
+
+[node name="Dash_timer" type="Timer" parent="FSM_Actions/Dash"]
+wait_time = 0.5
+one_shot = true
+
+[node name="Dash_timer_again" type="Timer" parent="FSM_Actions/Dash"]
+wait_time = 1.2
+one_shot = true
+
+[node name="Ghost_timer" type="Timer" parent="FSM_Actions/Dash"]
+wait_time = 0.05
+
+[connection signal="timeout" from="FSM/Run/Timer" to="FSM/Run" method="_on_timer_timeout"]
+[connection signal="timeout" from="FSM/Dead/DeadTimer" to="FSM/Dead" method="_on_dead_timer_timeout"]
+[connection signal="timeout" from="FSM/GroundPound/Invincible_timer" to="FSM/GroundPound" method="_on_invincible_timer_timeout"]
+[connection signal="timeout" from="FSM_Actions/Dash/Dash_timer" to="FSM_Actions/Dash" method="_on_dash_timer_timeout"]
+[connection signal="timeout" from="FSM_Actions/Dash/Dash_timer_again" to="FSM_Actions/Dash" method="_on_dash_timer_again_timeout"]
+[connection signal="timeout" from="FSM_Actions/Dash/Ghost_timer" to="FSM_Actions/Dash" method="_on_ghost_timer_timeout"]

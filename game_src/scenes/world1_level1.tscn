@@ -527,6 +527,8 @@ layer_1/tile_data = PackedInt32Array(262147, 0, 0, 262148, 0, 0, 393217, 0, 0, 3
 [node name="Player" parent="." instance=ExtResource("8_v2pt0")]
 unique_name_in_owner = true
 position = Vector2(-436, 108)
+SPEED = 160.0
+JUMP_VELOCITY = -280.0
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(0, -6)
@@ -538,6 +540,7 @@ position_smoothing_enabled = true
 [node name="Killzone" parent="." instance=ExtResource("9_70ogt")]
 position = Vector2(108, 160)
 ignore_invincible_player = true
+damage = 999
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone"]
 shape = SubResource("WorldBoundaryShape2D_lpspq")
