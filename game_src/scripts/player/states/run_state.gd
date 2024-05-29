@@ -6,6 +6,7 @@ var canPlayWalkSound = true
 
 func enter():
 	object.animated_sprite.play("run")
+	object.jump_count = 0
 	
 func physics_update(delta):
 	var input_dir: Vector2 = object.input()
@@ -35,8 +36,8 @@ func physics_update(delta):
 		timer.start()
 		
 	# Update character movement velocity
-	object.velocity.x = input_dir.x * object.SPEED
-	object.move_and_slide()
+	object.velocity.x = move_toward(object.velocity.x, input_dir.normalized().x * object.SPEED, object.ACCEL)
+	#object.velocity.x = input_dir.x * object.SPEED
 
 func _on_timer_timeout():
 	canPlayWalkSound = true

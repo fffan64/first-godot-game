@@ -6,18 +6,12 @@ func enter():
 func physics_update(delta):
 	var input_dir: Vector2 = object.input()
 	
-	
-	
-	if not object.is_on_floor():
-		if not object.is_ground_pound:
-			object.velocity.y += object.gravity * delta
-	
-	
-	
 	if Input.is_action_just_pressed("jump"):
 		return change_state("jump")
 	
 	##### TRANSITIONS
+	if Input.is_action_just_pressed("move_down") and not object.is_on_floor() and not object.is_ground_pound:
+		return change_state("groundpound")
 	# Check transition to 'wallslide' state
 	if object.velocity.x == 0 and input_dir.x != 0 and !object.is_on_floor() and object.is_on_wall():
 		return change_state("wallslide")
@@ -37,6 +31,6 @@ func physics_update(delta):
 	#####
 	
 	# Update character movement velocity
-	object.velocity.x = input_dir.x * object.SPEED
+	#object.velocity.x = input_dir.x * object.SPEED
+	object.velocity.x = move_toward(object.velocity.x, input_dir.normalized().x * object.SPEED, object.ACCEL)
 	
-	object.move_and_slide()

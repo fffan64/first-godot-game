@@ -12,13 +12,9 @@ func enter():
 func physics_update(delta):
 	var input_dir: Vector2 = object.input()
 	# Update character movement velocity
-	object.velocity.x = input_dir.x * object.SPEED
+	#object.velocity.x = input_dir.x * object.SPEED
+	object.velocity.x = move_toward(object.velocity.x, input_dir.normalized().x * object.SPEED, object.ACCEL)
 	
-	if not object.is_on_floor():
-		if not object.is_ground_pound:
-			object.velocity.y += object.gravity * delta
-			
-	object.move_and_slide()
 
 func _on_dead_timer_timeout():
 	Engine.time_scale = 1.0

@@ -32,10 +32,11 @@ func physics_update(delta):
 	
 	# Update character movement velocity
 	object.velocity.x = input_dir.x * DASH_SPEED
-	object.move_and_slide()
+	#object.velocity.x = move_toward(object.velocity.x, input_dir.normalized().x * DASH_SPEED, object.ACCEL)
+	
 
 func exit():
-	object.animated_sprite.play(previous_anim)
+	object.animated_sprite.play(object.fsm.current_state)
 
 func add_ghost():
 	var input_dir: Vector2 = object.input()

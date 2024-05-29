@@ -6,6 +6,7 @@ class_name GroundPoundState
 @onready var invincible_timer = $Invincible_timer
 
 func enter():
+	object.damage_attack = 3
 	object.is_invincible = true
 	object.is_ground_pound = true
 	object.velocity = Vector2.ZERO
@@ -14,21 +15,19 @@ func enter():
 func physics_update(delta):
 	var input_dir: Vector2 = object.input()
 	
-	object.move_and_slide()
-	
 	if object.is_ground_pound:
 		for i in object.get_slide_collision_count(): _collide(object.get_slide_collision(i))
 	else:
 		##### TRANSITIONS
+		# Check transition to 'Jump' state
+		if object.is_on_floor() and Input.is_action_just_pressed("jump"):
+			return change_state("jump")
 		# Check transition to 'Idle' state
-		if input_dir.x == 0 and object.is_on_floor():
+		elif input_dir.x == 0 and object.is_on_floor():
 			return change_state("idle")
 		# Check transition to 'Run' state
-		if input_dir.x != 0 and object.is_on_floor():
+		elif input_dir.x != 0 and object.is_on_floor():
 			return change_state("run")
-		# Check transition to 'Jump' state
-		elif object.is_on_floor() and Input.is_action_just_pressed("jump"):
-			return change_state("jump")
 		# Check transition to 'Fall' state
 		elif !object.is_on_floor():
 			return change_state("fall")

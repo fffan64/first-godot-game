@@ -2,7 +2,9 @@ extends State
 
 func enter():
 	if object.jump_count < object.max_jumps:
-		object.animated_sprite.play("jump")
+		if object.fsm_actions.current_state != "dash":
+			object.animated_sprite.play("jump")
+		
 		object.velocity.y = object.JUMP_VELOCITY
 		object.jump_count += 1
 		object.jump_sound.play()
@@ -10,10 +12,6 @@ func enter():
 
 func physics_update(delta):
 	var input_dir: Vector2 = object.input()
-	
-	if not object.is_on_floor():
-		if not object.is_ground_pound:
-			object.velocity.y += object.gravity * delta
 
 	if object.is_on_floor():
 		object.jump_count = 0
@@ -49,6 +47,6 @@ func physics_update(delta):
 	#####
 	
 	# Update character movement velocity
-	object.velocity.x = input_dir.x * object.SPEED
+	#object.velocity.x = input_dir.x * object.SPEED
+	object.velocity.x = move_toward(object.velocity.x, input_dir.normalized().x * object.SPEED, object.ACCEL)
 	
-	object.move_and_slide()

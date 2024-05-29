@@ -2,13 +2,10 @@ extends State
 
 func enter():
 	object.animated_sprite.play("idle")
+	object.jump_count = 0
 	
 func physics_update(delta):
 	var input_dir: Vector2 = object.input()
-
-	object.velocity = object.velocity.move_toward(Vector2.ZERO, object.SPEED)
-	object.move_and_slide()
-	
 	
 	##### TRANSITIONS
 	# Check transition to 'Run' state

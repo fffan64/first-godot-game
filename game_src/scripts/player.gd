@@ -3,6 +3,8 @@ extends CharacterBody2D
 
 @export var max_hp = 3
 @export var SPEED = 130.0
+@export var FRICTION = 8.0
+@export var ACCEL = 20.0
 @export var JUMP_VELOCITY = -300.0
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
@@ -15,6 +17,8 @@ var jump_count = 0
 var max_jumps = 2
 
 var is_ground_pound = false
+
+var damage_attack = 1
 
 @onready var fsm = $FSM
 @onready var fsm_actions = $FSM_Actions
@@ -48,15 +52,20 @@ func _on_died():
 	fsm.change_state("dead")
 
 func _physics_process(delta):
-	var input_dir: Vector2 = input()
-	
 	fsm.physics_update(delta)
 	fsm_actions.physics_update(delta)
+	
+	# Apply gravity force and update character movement velocity
+	velocity.x = move_toward(velocity.x, 0, FRICTION)
+	if !is_on_floor():
+		velocity.y += gravity * delta 
+	move_and_slide()
 
 func input() -> Vector2:
 	var input_dir = Vector2.ZERO
 	input_dir.x = Input.get_axis("move_left", "move_right")
-	input_dir.y = Input.get_axis("move_up", "move_down")
+	#input_dir.y = Input.get_axis("move_up", "move_down")
+	input_dir.y = 0.0
 	input_dir = input_dir.normalized()
 	return input_dir
 

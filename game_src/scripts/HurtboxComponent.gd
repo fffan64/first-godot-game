@@ -7,5 +7,5 @@ func _on_body_entered(body):
 		#var angleAttack = rad_to_deg(body.get_angle_to(self.position))
 		#if angleAttack > 10 and angleAttack < 170:
 		if health_component:
-			health_component.damage(1)
+			health_component.damage(body.damage_attack)
 		Events.bounce_off_enemy.emit()
