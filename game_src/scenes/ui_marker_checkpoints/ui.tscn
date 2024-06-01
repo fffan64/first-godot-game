@@ -1,7 +1,6 @@
 [gd_scene load_steps=25 format=3 uid="uid://bfnhhhrb7yplf"]
 
 [ext_resource type="Script" path="res://scripts/ui_in_level.gd" id="1_2hjqr"]
-[ext_resource type="PackedScene" uid="uid://dmr0fcamx7t56" path="res://addons/virtual_joystick/virtual_joystick_scene.tscn" id="2_a7xl1"]
 [ext_resource type="Texture2D" uid="uid://x4xg4eq44yb" path="res://assets/sprites/switch_button_a.png" id="3_av81f"]
 [ext_resource type="Texture2D" uid="uid://chc6m47edg258" path="res://assets/sprites/switch_button_plus.png" id="3_mr043"]
 [ext_resource type="Texture2D" uid="uid://c3jg5lbn2aplx" path="res://assets/sprites/switch_button_b.png" id="4_o7kj7"]
@@ -11,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://clslrwdb48pea" path="res://assets/sprites/coin.png" id="8_dauko"]
 [ext_resource type="FontFile" uid="uid://dam3qndfjagyb" path="res://assets/fonts/PixelOperator8.ttf" id="9_estkn"]
 [ext_resource type="Script" path="res://scripts/debug_stats.gd" id="10_m7fke"]
+[ext_resource type="PackedScene" uid="uid://367e54ykby5i" path="res://scenes/dpad.tscn" id="12_4cbkx"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5srhb"]
 atlas = ExtResource("8_dauko")
@@ -108,15 +108,7 @@ animations = [{
 visible = false
 script = ExtResource("1_2hjqr")
 
-[node name="Virtual joystick left" parent="." instance=ExtResource("2_a7xl1")]
-offset_top = -474.0
-offset_right = 466.0
-joystick_mode = 1
-visibility_mode = 2
-action_left = "move_left"
-action_right = "move_right"
-action_up = "move_up"
-action_down = "move_down"
+[node name="Dpad" parent="." instance=ExtResource("12_4cbkx")]
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -131,6 +123,7 @@ grow_horizontal = 2
 [node name="TouchScreenButton" type="TouchScreenButton" parent="Control"]
 position = Vector2(112, 0)
 texture_normal = ExtResource("3_mr043")
+passby_press = true
 action = "pause"
 visibility_mode = 1
 
@@ -152,6 +145,7 @@ grow_vertical = 0
 position = Vector2(-36, -36)
 scale = Vector2(1.5, 1.5)
 texture_normal = ExtResource("3_av81f")
+passby_press = true
 action = "jump"
 visibility_mode = 1
 
@@ -173,6 +167,7 @@ grow_vertical = 0
 position = Vector2(-36, -36)
 scale = Vector2(1.5, 1.5)
 texture_normal = ExtResource("4_o7kj7")
+passby_press = true
 action = "dash"
 visibility_mode = 1
 
@@ -190,6 +185,7 @@ grow_horizontal = 2
 position = Vector2(-81, 22)
 scale = Vector2(0.640625, 0.640625)
 texture_normal = ExtResource("5_ef75g")
+passby_press = true
 action = "shaderVHS"
 visibility_mode = 1
 
