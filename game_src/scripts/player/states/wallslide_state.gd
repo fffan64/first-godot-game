@@ -27,9 +27,10 @@ func physics_update(delta):
 	if object.is_on_floor():
 		return change_state("idle")
 	### Check transition to 'Jump' state
-	elif object.is_on_wall() and Input.is_action_just_pressed("jump") and input_dir.x != 0 and input_dir.normalized().x != input_dir_enter.normalized().x:
+	elif object.is_on_wall() and Input.is_action_just_pressed("jump"):
 		object.velocity.y = object.JUMP_VELOCITY * 2.0
-		object.velocity.x = input_dir.normalized().x * wall_jump_pushback
+		var wall_normal_norm_x = object.get_wall_normal().normalized().x
+		object.velocity.x = wall_normal_norm_x * wall_jump_pushback
 		return change_state("jump")
 	# Check transition to 'Fall' state
 	elif (!object.is_on_wall() 
